@@ -3,13 +3,15 @@ import ImageTransformer from "@/components/ImageTransformer";
 import VideoTransformer from "@/components/VideoTransformer";
 import BgAnimation from "@/components/BgAnimation";
 import "./aura.css"
+import { TypingEffect } from "@/components/typing-effect";
+import Link from "next/link";
 
 export default function AuraPage() {
   return (
-    <div className="bg-black w-full h-full m-0">
+    <div className="bg-black w-full h-full m-0 my-10">
       {/* <BgAnimation /> */}
 
-      <section id="intro" className="mb-16 w-[80%] mx-auto">
+      <section id="intro" className="mb-16 w-[80%] mx-auto bg-zinc-900/80">
         <div className="jsx-dacab4d66063e19 mb-8 binary-rain">
           <div className="jsx-dacab4d66063e19 bg-zinc-900 px-4 py-2 flex items-center justify-between rounded-t-lg border-b border-zinc-800">
             <div className="jsx-dacab4d66063e19 flex items-center space-x-2">
@@ -43,39 +45,76 @@ export default function AuraPage() {
                   ></path>
                 </svg>
               </button>
-              <div className="jsx-dacab4d66063e19 hidden md:flex items-center space-x-4 font-mono text-sm">
-                <a
-                  className="text-green-400 hover:text-green-300 transition-colors"
+              <nav className="flex gap-6 text-sm">
+                <Link
                   href="/"
+                  className="text-cyber-green hover:cyber-text-glow transition-colors"
                 >
-                  <span className="jsx-dacab4d66063e19 text-gray-400">$</span>{" "}
-                  home
-                </a>
-                <a
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                  $ home
+                </Link>
+                <Link
                   href="/aura"
+                  className="text-cyber-blue hover:cyber-text-glow transition-colors border-b border-cyber-blue"
                 >
-                  <span className="jsx-dacab4d66063e19 text-gray-400">$</span>{" "}
-                  aura
-                </a>
-                <a
-                  className="text-yellow-400 hover:text-yellow-300 transition-colors"
-                  href="/command-registry"
+                  $ aura
+                </Link>
+                <Link
+                  href="/cmds"
+                  className="text-cyber-yellow hover:cyber-text-glow transition-colors"
                 >
-                  <span className="jsx-dacab4d66063e19 text-gray-400">$</span>{" "}
-                  cmds
-                </a>
-                <a
-                  className="text-purple-400 hover:text-purple-300 transition-colors"
+                  $ cmds
+                </Link>
+                <Link
                   href="/docs"
+                  className="text-cyber-magenta hover:cyber-text-glow transition-colors"
                 >
-                  <span className="jsx-dacab4d66063e19 text-gray-400">$</span>{" "}
-                  docs
-                </a>
-              </div>
+                  $ docs
+                </Link>
+              </nav>
             </div>
           </div>
         </div>
+        <section className="flex flex-col items-center text-center mb-16 z-10">
+          {/* ASCII Art AURA */}
+          <div className="relative mb-8 w-full max-w-6xl overflow-hidden">
+            <pre
+              className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-blue-500/40 whitespace-pre"
+              style={{
+                filter: "blur(1.2px)",
+                transform: "translateX(0.5px) translateY(-0.5px)",
+              }}
+            >
+              {`  █████╗ ██╗   ██╗██████╗  █████╗ 
+ ██╔══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║   ██║██████╔╝███████║
+ ██╔══██║██║   ██║██╔══██╗██╔══██║
+ ██║  ██║╚██████╔╝██║  ██║██║  ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+            </pre>
+            <pre
+              className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-sky-400/40 whitespace-pre"
+              style={{
+                filter: "blur(1.2px)",
+                transform: "translateX(-0.5px) translateY(0.5px)",
+              }}
+            >
+              {`  █████╗ ██╗   ██╗██████╗  █████╗ 
+ ██╔══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║   ██║██████╔╝███████║
+ ██╔══██║██║   ██║██╔══██╗██╔══██║
+ ██║  ██║╚██████╔╝██║  ██║██║  ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+            </pre>
+            <pre className="relative text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue via-cyber-blue to-cyber-blue cyber-text-glow whitespace-pre">
+              {`  █████╗ ██╗   ██╗██████╗  █████╗ 
+ ██╔══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║   ██║██████╔╝███████║
+ ██╔══██║██║   ██║██╔══██╗██╔══██║
+ ██║  ██║╚██████╔╝██║  ██║██║  ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+            </pre>
+          </div>
+        </section>
       </section>
 
       <section className="mb-16 w-[80%] mx-auto">
@@ -462,9 +501,9 @@ export default function AuraPage() {
       <section>
         <footer className="pb-8">
           <div className="text-center">
-            <span className="text-gray-400">
-              © 2025 Polysys Inc. All rights reserved.
-            </span>
+            <p>
+              © {new Date().getFullYear()} Polysys.Inc. All rights reserved.
+            </p>
           </div>
         </footer>
       </section>

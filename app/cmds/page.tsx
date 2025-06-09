@@ -131,9 +131,8 @@ export default function CmdsPage() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center mb-16 z-10 w-full max-w-6xl">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter mb-6">
-          <span className="text-cyber-blue">{">"}</span>{" "}
-          <GlitchText text="Features" className="text-cyber-text cyber-text-glow" glitchInterval={5000} />
+      <h1 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
+          <GlitchText text="> Features" glitchInterval={7000} />
         </h1>
 
         <p className="text-cyber-muted text-center max-w-2xl mb-12">

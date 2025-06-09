@@ -106,10 +106,9 @@ export default function DocsPage() {
         <main className="flex-1 p-8 z-10 relative">
           {/* Hero Section */}
           <section className="mb-12">
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-6">
-              <span className="text-cyber-blue">{">"}</span>{" "}
-              <GlitchText text="Eigencode" className="text-cyber-text cyber-text-glow" glitchInterval={5000} />
-            </h1>
+          <h2 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
+          <GlitchText text="> Eigencode" glitchInterval={7000} />
+        </h2>
 
             <p className="text-cyber-text text-lg mb-8 max-w-2xl">
               An intelligent CLI tool for code generation, analysis, and optimization powered by advanced machine

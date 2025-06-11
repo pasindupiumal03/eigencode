@@ -16,7 +16,9 @@ export default function ImageGenForm() {
   const [imageSize, setImageSize] = useState<
     "Square" | "Landscape" | "Portrait"
   >("Square");
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(
+    "https://www.youtube.com/"
+  );
   const [loading, setLoading] = useState(false);
   const [showExamplePrompts, setShowExamplePrompts] = useState(false);
 
@@ -753,11 +755,11 @@ export default function ImageGenForm() {
               )}
             </div>
 
-            {(!loading && imageUrl) && (
+            {!loading && imageUrl && (
               <div className="mt-4 space-y-3">
                 <div className="flex flex-wrap gap-2">
                   <button
-                    // onClick={handleDownload}
+                    onClick={() => window.open(imageUrl)}
                     className="flex-1 py-2 px-4 bg-blue-700 hover:bg-blue-600 rounded text-white transition-colors flex items-center justify-center"
                   >
                     <svg
@@ -778,8 +780,12 @@ export default function ImageGenForm() {
                   </button>
 
                   <button
-                    // onClick={handleCopyURL}
-                    className="py-2 px-4 bg-zinc-700 hover:bg-zinc-600 rounded text-white transition-colors flex items-center justify-center relative"
+                    onClick={() => {
+                      if (imageUrl) {
+                        navigator.clipboard.writeText(imageUrl);
+                      }
+                    }}
+                    className="py-2 px-4 bg-zinc-700 hover:bg-zinc-600 active:bg-zinc-800 rounded text-white transition-colors flex items-center justify-center relative"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -24,19 +24,28 @@ export default function AuraPage() {
           </span>
         </div>
         <nav className="flex gap-6 text-sm">
-          <Link href="/" className="text-cyber-green hover:cyber-text-glow transition-colors">
+          <Link
+            href="/"
+            className="text-cyber-green hover:cyber-text-glow transition-colors"
+          >
             $ home
           </Link>
           <Link
             href="/aura"
-            className="text-cyber-blue hover:cyber-text-glow transition-colors border-b border-cyber-blue"
+            className="text-cyber-blue hover:cyber-text-glow transition-colors"
           >
             $ aura
           </Link>
-          <Link href="/cmds" className="text-cyber-yellow hover:cyber-text-glow transition-colors">
+          <Link
+            href="/cmds"
+            className="text-cyber-yellow hover:cyber-text-glow transition-colors"
+          >
             $ cmds
           </Link>
-          <Link href="/docs" className="text-cyber-magenta hover:cyber-text-glow transition-colors">
+          <Link
+            href="/docs"
+            className="text-cyber-magenta hover:cyber-text-glow transition-colors"
+          >
             $ docs
           </Link>
         </nav>
@@ -85,7 +94,8 @@ export default function AuraPage() {
         </div>
 
         <p className="text-cyber-muted text-center max-w-2xl mb-12">
-          The metaphysical foundation and recursive architecture of the Eigencode universe.
+          The metaphysical foundation and recursive architecture of the
+          Eigencode universe.
         </p>
       </section>
 
@@ -93,10 +103,15 @@ export default function AuraPage() {
       <section className="w-full max-w-6xl mb-16 z-10">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
-          <GlitchText text="Eigencode Mythos" className="text-cyber-blue" glitchInterval={7000} />
+          <GlitchText
+            text="Eigencode Mythos"
+            className="text-cyber-blue"
+            glitchInterval={7000}
+          />
         </h2>
         <p className="text-cyber-text mb-8 max-w-3xl">
-          The metaphysical foundation and recursive architecture of the Eigencode universe.
+          The metaphysical foundation and recursive architecture of the
+          Eigencode universe.
         </p>
 
         <div className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group cursor-pointer">
@@ -121,9 +136,16 @@ export default function AuraPage() {
               <div className="absolute inset-0 blur-lg bg-cyber-blue/20 rounded-full opacity-70"></div>
             </div>
             <div className="flex-1">
-              <h3 className="font-bold mb-2 font-mono cube-glow text-xl">The Cube Mythos Bible</h3>
-              <p className="text-cyber-muted">The ontological foundation, core laws, and metaphysics of the Cube.</p>
-              <div className="mt-4 text-xs text-cyber-blue/70 italic">Click to explore</div>
+              <h3 className="font-bold mb-2 font-mono cube-glow text-xl">
+                The Cube Mythos Bible
+              </h3>
+              <p className="text-cyber-muted">
+                The ontological foundation, core laws, and metaphysics of the
+                Cube.
+              </p>
+              <div className="mt-4 text-xs text-cyber-blue/70 italic">
+                Click to explore
+              </div>
             </div>
           </div>
         </div>
@@ -133,11 +155,15 @@ export default function AuraPage() {
       <section className="w-full max-w-6xl mb-16 z-10">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
-          <GlitchText text="AI Image Generator" className="text-cyber-blue" glitchInterval={8000} />
+          <GlitchText
+            text="AI Image Generator"
+            className="text-cyber-blue"
+            glitchInterval={8000}
+          />
         </h2>
         <p className="text-cyber-text mb-6 max-w-3xl">
-          Generate unique AI images with our signature eigencode style. Create branded visuals for your projects, social
-          media, or personal use.
+          Generate unique AI images with our signature eigencode style. Create
+          branded visuals for your projects, social media, or personal use.
         </p>
         <div className="cyber-box p-6">
           <ImageGenForm />
@@ -148,11 +174,15 @@ export default function AuraPage() {
       <section className="w-full max-w-6xl mb-16 z-10">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
-          <GlitchText text="Aura Image Transformer" className="text-cyber-blue" glitchInterval={6000} />
+          <GlitchText
+            text="Aura Image Transformer"
+            className="text-cyber-blue"
+            glitchInterval={6000}
+          />
         </h2>
         <p className="text-cyber-text mb-6 max-w-3xl">
-          Transform your images with the eigencode aura. Upload an image and apply our signature blue futuristic filters
-          with glitch effects.
+          Transform your images with the eigencode aura. Upload an image and
+          apply our signature blue futuristic filters with glitch effects.
         </p>
         <div className="cyber-box p-6">
           <ImageTransformer />
@@ -163,11 +193,15 @@ export default function AuraPage() {
       <section className="w-full max-w-6xl mb-16 z-10">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
-          <GlitchText text="Aura Video Transformer" className="text-cyber-blue" glitchInterval={9000} />
+          <GlitchText
+            text="Aura Video Transformer"
+            className="text-cyber-blue"
+            glitchInterval={9000}
+          />
         </h2>
         <p className="text-cyber-text mb-6 max-w-3xl">
-          Transform your videos with the eigencode aura. Upload a video and apply our signature blue futuristic filters
-          with glitch effects.
+          Transform your videos with the eigencode aura. Upload a video and
+          apply our signature blue futuristic filters with glitch effects.
         </p>
         <VideoTransformer />
       </section>
@@ -176,9 +210,15 @@ export default function AuraPage() {
       <section className="w-full max-w-6xl mb-16 z-10">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
-          <GlitchText text="Eigencode Video Gallery" className="text-cyber-blue" glitchInterval={5000} />
+          <GlitchText
+            text="Eigencode Video Gallery"
+            className="text-cyber-blue"
+            glitchInterval={5000}
+          />
         </h2>
-        <p className="text-cyber-text mb-6">Watch our latest videos showcasing eigencode concepts and innovations.</p>
+        <p className="text-cyber-text mb-6">
+          Watch our latest videos showcasing eigencode concepts and innovations.
+        </p>
 
         <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-colors cursor-pointer group">
           <div className="flex items-center justify-between">
@@ -188,7 +228,12 @@ export default function AuraPage() {
               </h3>
             </div>
             <button className="text-cyber-blue hover:text-cyber-green transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
                 <path
                   fillRule="evenodd"
                   d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
@@ -204,11 +249,17 @@ export default function AuraPage() {
       <section className="w-full max-w-6xl mb-16 z-10" id="art-gallery">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
-          <GlitchText text="Eigencode Art Gallery" className="text-cyber-blue" glitchInterval={4000} />
+          <GlitchText
+            text="Eigencode Art Gallery"
+            className="text-cyber-blue"
+            glitchInterval={4000}
+          />
         </h2>
-        <p className="text-cyber-text mb-8">Explore our curated collections of eigencode-inspired artwork.</p>
+        <p className="text-cyber-text mb-8">
+          Explore our curated collections of eigencode-inspired artwork.
+        </p>
 
-        <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           {[
             "Sacred Terminal",
             "Corporate Propaganda",
@@ -230,7 +281,12 @@ export default function AuraPage() {
                   {title}
                 </h3>
                 <button className="text-cyber-blue hover:text-cyber-green transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
                     <path
                       fillRule="evenodd"
                       d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
@@ -244,7 +300,9 @@ export default function AuraPage() {
         </div>
 
         <div className="text-center mt-8">
-          <p className="text-cyber-muted text-sm py-4 font-mono">~ Eigencode Art Gallery ~</p>
+          <p className="text-cyber-muted text-sm py-4 font-mono">
+            ~ Eigencode Art Gallery ~
+          </p>
         </div>
       </section>
 
@@ -257,5 +315,5 @@ export default function AuraPage() {
         <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
       </footer>
     </div>
-  )
+  );
 }

@@ -1,10 +1,18 @@
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
-import { Github, X, Send, MessageCircle, Code, Zap, FileText, Puzzle } from "lucide-react"
+import { Github, Twitter, Send, MessageCircle, Code, Zap, FileText, Puzzle } from "lucide-react"
 import { MatrixBackground } from "@/components/matrix-background"
 import { TerminalWindow } from "@/components/terminal-window"
 import { GlitchText } from "@/components/glitch-text"
 import { TypingEffect } from "@/components/typing-effect"
+import { FaXTwitter } from "react-icons/fa6";
+import { FaChartLine } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa6";
+import { FaTelegramPlane } from "react-icons/fa";
+
+
+
+
 
 export default function Component() {
   return (
@@ -105,17 +113,17 @@ export default function Component() {
 
         {/* Social Icons */}
         <div className="flex gap-6 mb-16">
-          <Link href="#" aria-label="GitHub" className="group">
-            <Github className="w-7 h-7 text-cyber-text group-hover:text-cyber-green transition-colors duration-300" />
+          <Link href="https://dexscreener.com/solana/drafcw4wfvstiecs3k3strqafvdfpakpxqbae7vlxwva" aria-label="FaChartLine" className="group">
+            <FaChartLine className="w-7 h-7 text-cyber-text group-hover:text-cyber-green transition-colors duration-300" />
           </Link>
-          <Link href="#" aria-label="X (Twitter)" className="group">
-            <X className="w-7 h-7 text-cyber-text group-hover:text-cyber-blue transition-colors duration-300" />
+          <Link href="https://x.com/eigencode_dev" aria-label="FaXTwitter" className="group">
+            <FaXTwitter className="w-7 h-7 text-cyber-text group-hover:text-cyber-blue transition-colors duration-300" />
           </Link>
-          <Link href="#" aria-label="Telegram" className="group">
-            <Send className="w-7 h-7 text-cyber-text group-hover:text-cyber-magenta transition-colors duration-300" />
+          <Link href="https://discord.com/invite/eigencode" aria-label="FaDiscord" className="group">
+            <FaDiscord className="w-7 h-7 text-cyber-text group-hover:text-cyber-magenta transition-colors duration-300" />
           </Link>
-          <Link href="#" aria-label="Discord" className="group">
-            <MessageCircle className="w-7 h-7 text-cyber-text group-hover:text-cyber-yellow transition-colors duration-300" />
+          <Link href="https://t.me/eigencode" aria-label="FaTelegramPlane" className="group">
+            <FaTelegramPlane className="w-7 h-7 text-cyber-text group-hover:text-cyber-yellow transition-colors duration-300" />
           </Link>
         </div>
       </section>

@@ -8,6 +8,10 @@ import { TypingEffect } from "@/components/typing-effect"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { FaCodeBranch } from "react-icons/fa6";
+import { FaArrowsLeftRight } from "react-icons/fa6";
+
+
 
 export default function CmdsPage() {
   const [activeTab, setActiveTab] = useState("avail")
@@ -114,7 +118,7 @@ export default function CmdsPage() {
           </Link>
           <Link
             href="/cmds"
-            className="text-cyber-yellow hover:cyber-text-glow transition-colors border-b border-cyber-yellow"
+            className="text-cyber-yellow hover:cyber-text-glow transition-colors"
           >
             $ cmds
           </Link>
@@ -146,13 +150,13 @@ export default function CmdsPage() {
               value="avail"
               className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-green data-[state=active]:text-cyber-green rounded-none px-4 py-2"
             >
-              <span className="text-cyber-green mr-2">{"<>"}</span> avail
+              <FaArrowsLeftRight   className="text-cyber-green mr-2" aria-label="Arrows Left Right" /> avail
             </TabsTrigger>
             <TabsTrigger
               value="roadmap"
               className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-magenta data-[state=active]:text-cyber-magenta rounded-none px-4 py-2"
             >
-              <span className="text-cyber-magenta mr-2">{"🗺"}</span> roadmap
+              <FaCodeBranch className="text-cyber-magenta mr-2" aria-label="Code Branch" /> roadmap
             </TabsTrigger>
           </TabsList>
 

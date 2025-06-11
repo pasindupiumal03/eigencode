@@ -27,9 +27,7 @@ export default function CmdsPage() {
       tags: ["programming", "efficiency", "full-pack"],
       category: "analysis",
       usage: "$ eigencode open",
-      examples: [
-        "# Open Eigencode in the current directory\n$ eigencode open .",
-      ],
+      examples: ["# Open Eigencode in the current directory\n$ eigencode open ."],
     },
     {
       name: "setup",
@@ -40,9 +38,7 @@ export default function CmdsPage() {
       tags: ["configuration"],
       category: "utility",
       usage: "$ eigencode setup",
-      examples: [
-        "# Start the setup process\n$ eigencode setup",
-      ],
+      examples: ["# Start the setup process\n$ eigencode setup"],
     },
     {
       name: "explain",
@@ -81,9 +77,7 @@ export default function CmdsPage() {
       tags: [],
       category: "analysis",
       usage: "$ eigencode dependency_graph",
-      examples: [
-        "# Generate dependency graph\n$ eigencode dependency_graph .",
-      ],
+      examples: ["# Generate dependency graph\n$ eigencode dependency_graph ."],
     },
     {
       name: "init",

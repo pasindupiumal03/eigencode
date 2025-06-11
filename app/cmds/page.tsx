@@ -8,63 +8,112 @@ import { TypingEffect } from "@/components/typing-effect"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { FaCodeBranch } from "react-icons/fa6";
-import { FaArrowsLeftRight } from "react-icons/fa6";
-
-
+import { FaCodeBranch } from "react-icons/fa6"
+import { FaArrowsLeftRight } from "react-icons/fa6"
+import CommandDetailsModal from "@/components/CommandDetailsModal"
 
 export default function CmdsPage() {
   const [activeTab, setActiveTab] = useState("avail")
+  const [selectedCommand, setSelectedCommand] = useState<any>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const commands = [
-    {
-      name: "setup",
-      status: "complete",
-      description: "Setup the AI configuration you want Eigencode to use",
-      tags: ["configuration"],
-      category: "utility",
-    },
     {
       name: "open",
       status: "complete",
       description: "Open the Eigencode in your working directory or a file",
+      detailedDescription:
+        "Launch Eigencode interface in your current working directory or open a specific file for AI-assisted coding. This command starts the interactive session.",
       tags: ["programming", "efficiency", "full-pack"],
-      category: "utility",
-    },
-    {
-      name: "init",
-      status: "planned",
-      description: "Initialize new projects using Eigencode",
-      tags: ["injection possibility"],
-      category: "utility",
-    },
-    {
-      name: "fix",
-      status: "planned",
-      description: "Analyze error and codebase to make fixes",
-      tags: [],
       category: "analysis",
+      usage: "$ eigencode open",
+      examples: [
+        "# Open Eigencode in the current directory\n$ eigencode open .",
+      ],
+    },
+    {
+      name: "setup",
+      status: "complete",
+      description: "Setup the AI configuration you want Eigencode to use",
+      detailedDescription:
+        "Configure Eigencode with your preferred AI provider and settings. This command initializes the configuration file and sets up authentication for AI services.",
+      tags: ["configuration"],
+      category: "utility",
+      usage: "$ eigencode setup",
+      examples: [
+        "# Start the setup process\n$ eigencode setup",
+      ],
     },
     {
       name: "explain",
       status: "complete",
       description: "Get AI-powered explanation of code",
+      detailedDescription:
+        "Generate detailed explanations of code functionality, algorithms, and design patterns. Perfect for understanding complex codebases or learning new concepts.",
       tags: [],
       category: "documentation",
-    },
-    {
-      name: "dependency_graph",
-      status: "in progress",
-      description: "Generate and visualize module dependencies",
-      tags: [],
-      category: "analysis",
+      usage: "$ eigencode explain [file-path]",
+      examples: [
+        "# Get a detailed explanation of a complex function\n$ eigencode explain explain src/algorithm.rs:optimize_path --depth=detailed",
+      ],
     },
     {
       name: "chat",
       status: "complete",
       description: "Use Eigencode without supplying additional context",
+      detailedDescription:
+        "Start an interactive chat session with AI for general programming questions, code reviews, and development guidance without needing to specify files or context.",
       tags: [],
-      category: "utility",
+      category: "analysis",
+      usage: "$ eigencode chat",
+      examples: [
+        "# Start interactive chat\n$ eigencode chat",
+        '# Chat with specific topic\n$ eigencode chat --topic "React hooks"',
+        '# Chat with code snippet\n$ eigencode chat --code "const [state, setState] = useState()"',
+      ],
+    },
+    {
+      name: "dependency_graph",
+      status: "in progress",
+      description: "Generate and visualize module dependencies",
+      detailedDescription:
+        "Create visual dependency graphs of your project modules and packages. Helps identify circular dependencies, unused modules, and optimization opportunities.",
+      tags: [],
+      category: "analysis",
+      usage: "$ eigencode dependency_graph",
+      examples: [
+        "# Generate dependency graph\n$ eigencode dependency_graph .",
+      ],
+    },
+    {
+      name: "init",
+      status: "planned",
+      description: "Initialize new projects using Eigencode",
+      detailedDescription:
+        "Create new projects with AI-generated boilerplate code and structure. This command will set up project templates based on your requirements.",
+      tags: ["injection possibility"],
+      category: "refactoring",
+      usage: "$ eigencode init [project-name]",
+      examples: [
+        "# Initialize a new project\n$ eigencode init my-app",
+        "# Initialize with specific template\n$ eigencode init my-app --template react",
+        "# Initialize with AI-generated structure\n$ eigencode init my-app --ai-generate",
+      ],
+    },
+    {
+      name: "fix",
+      status: "planned",
+      description: "Analyze error and codebase to make fixes",
+      detailedDescription:
+        "Automatically detect and fix errors in your codebase using AI analysis. This command scans for bugs, performance issues, and code quality problems.",
+      tags: [],
+      category: "optimization",
+      usage: "$ eigencode fix [file-path]",
+      examples: [
+        "# Fix errors in current directory\n$ eigencode fix",
+        "# Fix specific file\n$ eigencode fix src/component.js",
+        "# Fix with specific error type\n$ eigencode fix --type syntax",
+      ],
     },
   ]
 
@@ -94,6 +143,16 @@ export default function CmdsPage() {
     }
   }
 
+  const handleCommandClick = (command: any) => {
+    setSelectedCommand(command)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedCommand(null)
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <MatrixBackground />
@@ -116,10 +175,7 @@ export default function CmdsPage() {
           <Link href="/aura" className="text-cyber-blue hover:cyber-text-glow transition-colors">
             $ aura
           </Link>
-          <Link
-            href="/cmds"
-            className="text-cyber-yellow hover:cyber-text-glow transition-colors"
-          >
+          <Link href="/cmds" className="text-cyber-yellow hover:cyber-text-glow transition-colors ">
             $ cmds
           </Link>
           <Link href="/docs" className="text-cyber-magenta hover:cyber-text-glow transition-colors">
@@ -135,7 +191,7 @@ export default function CmdsPage() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center mb-16 z-10 w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
+        <h1 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
           <GlitchText text="> Features" glitchInterval={7000} />
         </h1>
 
@@ -150,7 +206,7 @@ export default function CmdsPage() {
               value="avail"
               className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-green data-[state=active]:text-cyber-green rounded-none px-4 py-2"
             >
-              <FaArrowsLeftRight   className="text-cyber-green mr-2" aria-label="Arrows Left Right" /> avail
+              <FaArrowsLeftRight className="text-cyber-green mr-2" aria-label="Arrows Left Right" /> avail
             </TabsTrigger>
             <TabsTrigger
               value="roadmap"
@@ -214,7 +270,8 @@ export default function CmdsPage() {
               {commands.map((command) => (
                 <div
                   key={command.name}
-                  className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group"
+                  className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group cursor-pointer"
+                  onClick={() => handleCommandClick(command)}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
@@ -454,6 +511,8 @@ export default function CmdsPage() {
         </div>
         <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
       </footer>
+      {/* Command Details Modal */}
+      <CommandDetailsModal isOpen={isModalOpen} onClose={handleCloseModal} command={selectedCommand} />
     </div>
   )
 }

@@ -1,14 +1,11 @@
 import Link from "next/link"
-import { MatrixBackground } from "@/components/matrix-background"
 import { TerminalWindow } from "@/components/terminal-window"
-import { GlitchText } from "@/components/glitch-text"
 import { Button } from "@/components/ui/button"
-import { FileText, Zap } from "lucide-react"
+import { FileText, Zap, Download, Code2 } from "lucide-react"
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-cyber-black">
-      <MatrixBackground />
+    <div className="min-h-screen bg-cyber-black">
       <div className="scanline" />
 
       {/* Header */}
@@ -30,11 +27,11 @@ export default function DocsPage() {
           {/* Terminal Window in Sidebar */}
           <TerminalWindow title="eigencode" className="mb-8">
             <div className="text-xs">
-              <div className="text-cyber-green mb-2">$ eigencode --help</div>
-              <div className="text-cyber-text mb-1">Eigencode CLI v0.5.0</div>
+              <div className="text-cyber-green mb-2">$ eigencode</div>
+              <div className="text-cyber-text mb-1">Eigencode CLI v0.9.0</div>
               <div className="text-cyber-text mb-1">Intelligent code generation and</div>
               <div className="text-cyber-text mb-3">analysis</div>
-              <div className="text-cyber-green mb-2">$ eigencode open</div>
+              <div className="text-cyber-green mb-2">$ eigencode open .</div>
               <div className="text-cyber-text mb-1">Analyzing project structure...</div>
               <div className="text-cyber-text mb-1">Found 127 files across 14</div>
               <div className="text-cyber-text mb-1">directories</div>
@@ -85,7 +82,7 @@ export default function DocsPage() {
             </div>
             <nav className="space-y-2">
               <Link
-                href="#commands"
+                href="/cmds"
                 className="flex items-center gap-2 text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
               >
                 <span className="text-cyber-magenta">⚡</span>
@@ -105,152 +102,117 @@ export default function DocsPage() {
         {/* Main Content */}
         <main className="flex-1 p-8 z-10 relative">
           {/* Hero Section */}
-          <section className="mb-12">
-          <h2 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
-          <GlitchText text="> Eigencode" glitchInterval={7000} />
-        </h2>
+          <section className="mb-12 text-center">
+            <h1 className="text-4xl font-bold mb-6 text-cyber-blue">
+              <span className="text-cyber-blue">{">"}</span> Eigencode
+            </h1>
 
-            <p className="text-cyber-text text-lg mb-8 max-w-2xl">
+            <p className="text-cyber-text text-lg mb-8 max-w-2xl mx-auto">
               An intelligent CLI tool for code generation, analysis, and optimization powered by advanced machine
               learning models.
             </p>
 
-            <div className="flex gap-4 mb-8">
-              <Button className="cyber-button-primary">
+            <div className="flex gap-4 justify-center mb-8">
+              <Button className="cyber-button-primary flex items-center gap-2">
+                <Download className="w-4 h-4" />
                 <span className="relative z-10">Get Started</span>
               </Button>
-              <Button variant="outline" className="cyber-button-secondary">
+              <Button variant="outline" className="cyber-button-secondary flex items-center gap-2">
+                <Code2 className="w-4 h-4" />
                 <span className="relative z-10">Commands</span>
               </Button>
             </div>
           </section>
 
-          {/* Getting Started Section */}
-          <section id="getting-started" className="mb-12">
-            <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
-              <span className="text-cyber-blue">{">"}</span>
-              <GlitchText text="Getting Started" className="text-cyber-blue" glitchInterval={7000} />
-            </h2>
+          {/* Content Cards */}
+          <div className="grid gap-8">
+            {/* Getting Started Card */}
+            <div className="bg-cyber-dark/50 border border-cyber-blue/20 rounded-lg p-6 backdrop-blur-sm">
+              <h2 className="text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
+                <span className="text-cyber-blue">{">"}</span>
+                Getting Started
+              </h2>
 
-            <p className="text-cyber-text mb-4">
-              Eigencode is an intelligent code generation CLI that helps developers analyze and optimize their
-              codebases. With powerful AI-driven features, Eigencode can assist with code analysis, refactoring, and
-              optimization.
-            </p>
+              <p className="text-cyber-text mb-4">
+                Eigencode is an intelligent code generation CLI that helps developers analyze and optimize their
+                codebases. With powerful AI-driven features, Eigencode can assist with code analysis, refactoring, and
+                optimization.
+              </p>
 
-            <p className="text-cyber-text mb-6">
-              This documentation will guide you through installation, configuration, and usage of the Eigencode CLI.
-            </p>
+              <p className="text-cyber-text mb-6">
+                This documentation will guide you through installation, configuration, and usage of the Eigencode CLI.
+              </p>
 
-            <Link href="#installation" className="text-cyber-blue hover:text-cyber-green transition-colors">
-              Learn more →
-            </Link>
-          </section>
+              <Link href="#installation" className="text-cyber-blue hover:text-cyber-green transition-colors">
+                Learn more →
+              </Link>
+            </div>
 
-          {/* Installation Section */}
-          <section id="installation" className="mb-12">
-            <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
-              <span className="text-cyber-blue">{">"}</span>
-              <GlitchText text="Installation" className="text-cyber-blue" glitchInterval={8000} />
-            </h2>
+            {/* Installation Card */}
+            <div className="bg-cyber-dark/50 border border-cyber-blue/20 rounded-lg p-6 backdrop-blur-sm">
+              <h2 className="text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
+                <Download className="w-5 h-5 text-cyber-blue" />
+                Installation
+              </h2>
 
-            <p className="text-cyber-text mb-6">
-              Paste following command in your terminal to install Eigencode on UNIX-like systems:
-            </p>
+              <p className="text-cyber-text mb-6">
+                Paste following command in your terminal to install Eigencode on UNIX-like systems:
+              </p>
 
-            <TerminalWindow title="bash" className="mb-6">
-              <div className="text-sm">
-                <span className="text-cyber-green">
-                  curl -fsSL https://www.eigencode.dev/stable/latest/installer.sh
-                </span>
-                <div className="w-full h-2 bg-cyber-terminal border border-cyber-green/30 rounded mt-2">
-                  <div className="w-3/4 h-full bg-cyber-green rounded"></div>
+              <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 mb-4">
+                <div className="text-sm font-mono">
+                  <span className="text-cyber-green">
+                    curl -fsSL https://www.eigencode.dev/stable/latest/installer.sh | sudo bash
+                  </span>
+                </div>
+                <div className="w-full h-2 bg-cyber-terminal">
                 </div>
               </div>
-            </TerminalWindow>
 
-            <p className="text-cyber-text mb-4">And as for Windows users:</p>
+              <p className="text-cyber-text mb-4">And as for Windows users:</p>
 
-            <TerminalWindow title="powershell" className="mb-6">
-              <div className="text-sm">
-                <span className="text-cyber-blue">
-                  powershell -ExecutionPolicy Bypass -Command "iex (New-Object
-                  Net.WebClient).DownloadString('https://www.eigencode.dev/install.ps1')"
-                </span>
-                <div className="w-full h-2 bg-cyber-terminal border border-cyber-blue/30 rounded mt-2">
-                  <div className="w-1/2 h-full bg-cyber-blue rounded"></div>
+              <div className="bg-cyber-terminal border border-cyber-blue/30 rounded p-4 mb-6">
+                <div className="text-sm font-mono">
+                  <span className="text-cyber-blue">
+                    powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.eigencode.dev/stable/latest/installer.ps1')"
+                  </span>
+                </div>
+                <div className="w-full h-2 bg-cyber-terminal">
                 </div>
               </div>
-            </TerminalWindow>
 
-            <Link href="#usage" className="text-cyber-blue hover:text-cyber-green transition-colors">
-              View installation guide →
-            </Link>
-          </section>
+              <Link href="#usage" className="text-cyber-blue hover:text-cyber-green transition-colors">
+                View installation guide →
+              </Link>
+            </div>
 
-          {/* Usage Section */}
-          <section id="usage" className="mb-12">
-            <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
-              <span className="text-cyber-blue">{">"}</span>
-              <GlitchText text="Usage" className="text-cyber-blue" glitchInterval={6000} />
-            </h2>
+            {/* Usage Card */}
+            <div className="bg-cyber-dark/50 border border-cyber-blue/20 rounded-lg p-6 backdrop-blur-sm">
+              <h2 className="text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
+                <Code2 className="w-5 h-5 text-cyber-blue" />
+                Usage
+              </h2>
 
-            <p className="text-cyber-text mb-6">
-              To get started with Eigencode, initialize it in your project directory:
-            </p>
+              <p className="text-cyber-text mb-6">
+                To get started with Eigencode, initialize it in your project directory:
+              </p>
 
-            <TerminalWindow title="terminal" className="mb-6">
-              <div className="text-sm">
-                <span className="text-cyber-green">eigencode open .</span>
-              </div>
-            </TerminalWindow>
-
-            <p className="text-cyber-text mb-6">
-              This will analyze your project and set up the necessary context for Eigencode to work effectively. You can
-              then run various commands to analyze, optimize, and transform your code.
-            </p>
-
-            <Link href="#commands" className="text-cyber-blue hover:text-cyber-green transition-colors">
-              View quick start guide →
-            </Link>
-          </section>
-
-          {/* Commands Section */}
-          <section id="commands" className="mb-12">
-            <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
-              <span className="text-cyber-blue">{">"}</span>
-              <GlitchText text="Commands" className="text-cyber-blue" glitchInterval={9000} />
-            </h2>
-
-            <p className="text-cyber-text mb-6">
-              Eigencode provides a variety of commands for analyzing and modifying your code:
-            </p>
-
-            <TerminalWindow title="commands" className="mb-6">
-              <div className="text-sm space-y-2">
-                <div>
-                  <span className="text-cyber-blue">$ eigencode open [path]</span>
-                  <span className="text-cyber-text ml-4">Initialize project context and scan files</span>
-                </div>
-                <div>
-                  <span className="text-cyber-blue">$ eigencode setup</span>
-                  <span className="text-cyber-text ml-4">Start configuring the Eigencode environment</span>
-                </div>
-                <div>
-                  <span className="text-cyber-blue">$ --help</span>
-                  <span className="text-cyber-text ml-4">Display list of sub-commands in the 'open' mode</span>
-                </div>
-                <div>
-                  <span className="text-cyber-blue">$ :split</span>
-                  <span className="text-cyber-text ml-4">Run multiple tasks simultaneously</span>
+              <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 mb-6">
+                <div className="text-sm font-mono">
+                  <span className="text-cyber-green">eigencode open .</span>
                 </div>
               </div>
-            </TerminalWindow>
 
-            <Link href="/cmds" className="text-cyber-blue hover:text-cyber-green transition-colors">
-              View all commands →
-            </Link>
-          </section>
+              <p className="text-cyber-text mb-6">
+                This will analyze your project and set up the necessary context for Eigencode to work effectively. You
+                can then run various commands to analyze, optimize, and transform your code.
+              </p>
+
+              <Link href="/cmds" className="text-cyber-blue hover:text-cyber-green transition-colors">
+                View all commands →
+              </Link>
+            </div>
+          </div>
         </main>
       </div>
 

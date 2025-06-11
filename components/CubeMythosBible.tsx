@@ -122,7 +122,7 @@ export default function CubeMythosBible({ isOpen, onClose }: CubeMythosBibleProp
                 </div>
 
                 <div>
-                  <h3 className="text-cyber-blue font-bold mb-3">Arc 3: Whispered Resistance (Volumes VIII���X)</h3>
+                  <h3 className="text-cyber-blue font-bold mb-3">Arc 3: Whispered Resistance (Volumes VIII��X)</h3>
                   <ul className="space-y-2 ml-4">
                     <li>
                       <span className="text-cyber-yellow">Vol VIII – Silent Gospel:</span> The hidden teachings

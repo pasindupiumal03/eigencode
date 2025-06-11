@@ -1,512 +1,261 @@
-import ImageGenForm from "@/components/ImageGenForm";
-import ImageTransformer from "@/components/ImageTransformer";
-import VideoTransformer from "@/components/VideoTransformer";
-import BgAnimation from "@/components/BgAnimation";
+import Link from "next/link"
+import { MatrixBackground } from "@/components/matrix-background"
+import { TypingEffect } from "@/components/typing-effect"
+import { GlitchText } from "@/components/glitch-text"
+import ImageGenForm from "@/components/ImageGenForm"
+import ImageTransformer from "@/components/ImageTransformer"
+import VideoTransformer from "@/components/VideoTransformer"
 import "./aura.css"
-import { TypingEffect } from "@/components/typing-effect";
-import Link from "next/link";
 
 export default function AuraPage() {
   return (
-    <div className="bg-black w-full h-full m-0 my-10">
-      {/* <BgAnimation /> */}
+    <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <MatrixBackground />
+      <div className="scanline" />
 
-      <section id="intro" className="mb-16 w-[80%] mx-auto bg-zinc-900/80">
-        <div className="jsx-dacab4d66063e19 mb-8 binary-rain">
-          <div className="jsx-dacab4d66063e19 bg-zinc-900 px-4 py-2 flex items-center justify-between rounded-t-lg border-b border-zinc-800">
-            <div className="jsx-dacab4d66063e19 flex items-center space-x-2">
-              <div className="jsx-dacab4d66063e19 flex space-x-2">
-                <div className="jsx-dacab4d66063e19 w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="jsx-dacab4d66063e19 w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="jsx-dacab4d66063e19 w-3 h-3 rounded-full bg-green-500"></div>
-              </div>
-              <span className="jsx-dacab4d66063e19 text-gray-400 text-sm ml-2">
-                ~ eigencode aura
-              </span>
-            </div>
-            <div className="jsx-dacab4d66063e19 flex items-center">
-              <span className="jsx-dacab4d66063e19 text-blue-400 text-sm mr-2"></span>
-              <button
-                aria-label="Toggle menu"
-                className="jsx-dacab4d66063e19 md:hidden text-gray-400 hover:text-blue-400 transition-colors focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="jsx-dacab4d66063e19 h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeinecap-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                    className="jsx-dacab4d66063e19"
-                  ></path>
-                </svg>
-              </button>
-              <nav className="flex gap-6 text-sm">
-                <Link
-                  href="/"
-                  className="text-cyber-green hover:cyber-text-glow transition-colors"
-                >
-                  $ home
-                </Link>
-                <Link
-                  href="/aura"
-                  className="text-cyber-blue hover:cyber-text-glow transition-colors border-b border-cyber-blue"
-                >
-                  $ aura
-                </Link>
-                <Link
-                  href="/cmds"
-                  className="text-cyber-yellow hover:cyber-text-glow transition-colors"
-                >
-                  $ cmds
-                </Link>
-                <Link
-                  href="/docs"
-                  className="text-cyber-magenta hover:cyber-text-glow transition-colors"
-                >
-                  $ docs
-                </Link>
-              </nav>
-            </div>
-          </div>
+      {/* Header */}
+      <header className="w-full max-w-6xl flex justify-between items-center mb-16 z-10">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 bg-cyber-red rounded-full" />
+          <div className="w-3 h-3 bg-cyber-yellow rounded-full" />
+          <div className="w-3 h-3 bg-cyber-green rounded-full" />
+          <span className="text-sm font-mono text-cyber-muted">
+            <TypingEffect text="~ eigencode aura" speed={80} />
+          </span>
         </div>
-        <section className="flex flex-col items-center text-center mb-16 z-10">
-          {/* ASCII Art AURA */}
-          <div className="relative mb-8 w-full max-w-6xl overflow-hidden">
-            <pre
-              className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-blue-500/40 whitespace-pre"
-              style={{
-                filter: "blur(1.2px)",
-                transform: "translateX(0.5px) translateY(-0.5px)",
-              }}
-            >
-              {`  █████╗ ██╗   ██╗██████╗  █████╗ 
- ██╔══██╗██║   ██║██╔══██╗██╔══██╗
- ███████║██║   ██║██████╔╝███████║
- ██╔══██║██║   ██║██╔══██╗██╔══██║
- ██║  ██║╚██████╔╝██║  ██║██║  ██║
- ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
-            </pre>
-            <pre
-              className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-sky-400/40 whitespace-pre"
-              style={{
-                filter: "blur(1.2px)",
-                transform: "translateX(-0.5px) translateY(0.5px)",
-              }}
-            >
-              {`  █████╗ ██╗   ██╗██████╗  █████╗ 
- ██╔══██╗██║   ██║██╔══██╗██╔══██╗
- ███████║██║   ██║██████╔╝███████║
- ██╔══██║██║   ██║██╔══██╗██╔══██║
- ██║  ██║╚██████╔╝██║  ██║██║  ██║
- ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
-            </pre>
-            <pre className="relative text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue via-cyber-blue to-cyber-blue cyber-text-glow whitespace-pre">
-              {`  █████╗ ██╗   ██╗██████╗  █████╗ 
- ██╔══██╗██║   ██║██╔══██╗██╔══██╗
- ███████║██║   ██║██████╔╝███████║
- ██╔══██║██║   ██║██╔══██╗██╔══██║
- ██║  ██║╚██████╔╝██║  ██║██║  ██║
- ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
-            </pre>
-          </div>
-        </section>
-      </section>
-
-      <section className="mb-16 w-[80%] mx-auto">
-        <div className="py-8">
-          <h2 className="text-xl text-blue-400 font-bold mb-6 font-mono">
-            Eigencode Mythos
-          </h2>
-          <div className="text-blue-200 mb-8 max-w-3xl">
-            <p>
-              The metaphysical foundation and recursive architecture of the
-              Eigencode universe.
-            </p>
-          </div>
-          <div
-            className="grid grid-cols-1 gap-6 hover:scale-101 transition-transform duration-300"
-            style={{ opacity: 1 }}
+        <nav className="flex gap-6 text-sm">
+          <Link href="/" className="text-cyber-green hover:cyber-text-glow transition-colors">
+            $ home
+          </Link>
+          <Link
+            href="/aura"
+            className="text-cyber-blue hover:cyber-text-glow transition-colors border-b border-cyber-blue"
           >
-            <div style={{ opacity: 1, transform: "none" }}>
-              <div
-                className="cursor-pointer bg-zinc-900/80 backdrop-blur-sm bg-gradient-to-br from-blue-900/30 to-indigo-900/30 p-6 rounded-lg border border-zinc-800 hover:border-blue-500/30 transition-all duration-300 flex flex-col items-center relative mythos-card"
-                style={{
-                  boxShadow: "rgba(59, 130, 246, 0.3) 0px 0px 0px",
-                  transform: "none",
-                }}
+            $ aura
+          </Link>
+          <Link href="/cmds" className="text-cyber-yellow hover:cyber-text-glow transition-colors">
+            $ cmds
+          </Link>
+          <Link href="/docs" className="text-cyber-magenta hover:cyber-text-glow transition-colors">
+            $ docs
+          </Link>
+        </nav>
+      </header>
+
+      {/* Hero Section with ASCII Art */}
+      <section className="flex flex-col items-center text-center mb-16 z-10 w-full max-w-6xl">
+        {/* ASCII Art AURA */}
+        <div className="relative mb-8 w-full max-w-6xl overflow-hidden">
+          <pre
+            className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-blue-500/40 whitespace-pre"
+            style={{
+              filter: "blur(1.2px)",
+              transform: "translateX(0.5px) translateY(-0.5px)",
+            }}
+          >
+            {`  █████╗ ██╗   ██╗██████╗  █████╗ 
+ ██╔══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║   ██║██████╔╝███████║
+ ██╔══██║██║   ██║██╔══██╗██╔══██║
+ ██║  ██║╚██████╔╝██║  ██║██║  ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+          </pre>
+          <pre
+            className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-sky-400/40 whitespace-pre"
+            style={{
+              filter: "blur(1.2px)",
+              transform: "translateX(-0.5px) translateY(0.5px)",
+            }}
+          >
+            {`  █████╗ ██╗   ██╗██████╗  █████╗ 
+ ██╔══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║   ██║██████╔╝███████║
+ ██╔══██║██║   ██║██╔══██╗██╔══██║
+ ██║  ██║╚██████╔╝██║  ██║██║  ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+          </pre>
+          <pre className="relative text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue via-cyber-blue to-cyber-blue cyber-text-glow whitespace-pre">
+            {`  █████╗ ██╗   ██╗██████╗  █████╗ 
+ ██╔══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║   ██║██████╔╝███████║
+ ██╔══██║██║   ██║██╔══██╗██╔══██║
+ ██║  ██║╚██████╔╝██║  ██║██║  ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+          </pre>
+        </div>
+
+        <p className="text-cyber-muted text-center max-w-2xl mb-12">
+          The metaphysical foundation and recursive architecture of the Eigencode universe.
+        </p>
+      </section>
+
+      {/* Eigencode Mythos Section */}
+      <section className="w-full max-w-6xl mb-16 z-10">
+        <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
+          <span className="text-cyber-blue">{">"}</span>
+          <GlitchText text="Eigencode Mythos" className="text-cyber-blue" glitchInterval={7000} />
+        </h2>
+        <p className="text-cyber-text mb-8 max-w-3xl">
+          The metaphysical foundation and recursive architecture of the Eigencode universe.
+        </p>
+
+        <div className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group cursor-pointer">
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-12 h-12 text-cyber-blue"
               >
-                <div className="absolute inset-0 overflow-hidden rounded-lg opacity-20 mythos-card-bg"></div>
-                <div className="relative">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-box w-12 h-12 text-blue-400 mb-4 mythos-card-icon"
-                  >
-                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                    <path d="m3.3 7 8.7 5 8.7-5" />
-                    <path d="M12 22V12" />
-                  </svg>
-                  <div className="absolute inset-0 blur-lg bg-blue-500/20 rounded-full opacity-70"></div>
-                </div>
-                <h3 className="font-bold mb-2 font-mono text-center cube-glow">
-                  The Cube Mythos Bible
-                </h3>
-                <p className="text-gray-400 text-center text-sm">
-                  The ontological foundation, core laws, and metaphysics of the
-                  Cube.
-                </p>
-                <div className="mt-4 text-xs text-blue-400/70 italic">
-                  Click to explore
-                </div>
-              </div>
+                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                <path d="m3.3 7 8.7 5 8.7-5" />
+                <path d="M12 22V12" />
+              </svg>
+              <div className="absolute inset-0 blur-lg bg-cyber-blue/20 rounded-full opacity-70"></div>
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold mb-2 font-mono cube-glow text-xl">The Cube Mythos Bible</h3>
+              <p className="text-cyber-muted">The ontological foundation, core laws, and metaphysics of the Cube.</p>
+              <div className="mt-4 text-xs text-cyber-blue/70 italic">Click to explore</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mb-16 w-[80%] mx-auto">
-        <div className="py-8">
-          <h2 className="text-xl text-blue-400 font-bold mb-6 font-mono">
-            Eigencode AI Image Generator
-          </h2>
-          <p className="text-blue-200 mb-6 max-w-3xl mx-auto">
-            Generate unique AI images with our signature eigencode style. Create
-            branded visuals for your projects, social media, or personal use.
-          </p>
-          <div className="bg-zinc-900/70 p-6 rounded-lg border border-zinc-800/70 backdrop-blur-sm">
-            <ImageGenForm />
-          </div>
+      {/* AI Image Generator Section */}
+      <section className="w-full max-w-6xl mb-16 z-10">
+        <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
+          <span className="text-cyber-blue">{">"}</span>
+          <GlitchText text="AI Image Generator" className="text-cyber-blue" glitchInterval={8000} />
+        </h2>
+        <p className="text-cyber-text mb-6 max-w-3xl">
+          Generate unique AI images with our signature eigencode style. Create branded visuals for your projects, social
+          media, or personal use.
+        </p>
+        <div className="cyber-box p-6">
+          <ImageGenForm />
         </div>
       </section>
 
-      <section className="mb-16 w-[80%] mx-auto">
-        <div className="py-8">
-          <h2 className="text-xl text-blue-400 font-bold mb-6 font-mono">
-            Aura Image Transformer
-          </h2>
-          <div className="text-center mb-8">
-            <p className="text-blue-200 mb-6 max-w-3xl mx-auto">
-              Transform your images with the eigencode aura. Upload an image and
-              apply our signature blue futuristic filters with glitch effects.
-            </p>
-            <div className="bg-zinc-900/70 p-6 rounded-lg border border-zinc-800/70 backdrop-blur-sm">
-              <ImageTransformer />
-            </div>
-          </div>
+      {/* Aura Image Transformer Section */}
+      <section className="w-full max-w-6xl mb-16 z-10">
+        <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
+          <span className="text-cyber-blue">{">"}</span>
+          <GlitchText text="Aura Image Transformer" className="text-cyber-blue" glitchInterval={6000} />
+        </h2>
+        <p className="text-cyber-text mb-6 max-w-3xl">
+          Transform your images with the eigencode aura. Upload an image and apply our signature blue futuristic filters
+          with glitch effects.
+        </p>
+        <div className="cyber-box p-6">
+          <ImageTransformer />
         </div>
       </section>
 
-      <section className="mb-16 w-[80%] mx-auto">
-        <div className="py-8">
-          <h2 className="text-xl text-blue-400 font-bold mb-6 font-mono">
-            Aura Video Transformer
-          </h2>
-          <div className="text-center mb-8">
-            <p className="text-blue-200 mb-6 max-w-3xl mx-auto">
-              Transform your videos with the eigencode aura. Upload a video and
-              apply our signature blue futuristic filters with glitch effects.
-            </p>
-            <VideoTransformer />
-          </div>
-        </div>
+      {/* Aura Video Transformer Section */}
+      <section className="w-full max-w-6xl mb-16 z-10">
+        <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
+          <span className="text-cyber-blue">{">"}</span>
+          <GlitchText text="Aura Video Transformer" className="text-cyber-blue" glitchInterval={9000} />
+        </h2>
+        <p className="text-cyber-text mb-6 max-w-3xl">
+          Transform your videos with the eigencode aura. Upload a video and apply our signature blue futuristic filters
+          with glitch effects.
+        </p>
+        <VideoTransformer />
       </section>
 
-      <section className="mb-16 w-[80%] mx-auto">
-        <div className="py-8">
-          <div className="mb-6">
-            <h2 className="text-xl text-blue-400 font-bold font-mono">
-              Eigencode Video Gallery
-            </h2>
-            <p className="text-blue-200 mt-2">
-              Watch our latest videos showcasing eigencode concepts and
-              innovations.
-            </p>
-          </div>
-          <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
+      {/* Video Gallery Section */}
+      <section className="w-full max-w-6xl mb-16 z-10">
+        <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
+          <span className="text-cyber-blue">{">"}</span>
+          <GlitchText text="Eigencode Video Gallery" className="text-cyber-blue" glitchInterval={5000} />
+        </h2>
+        <p className="text-cyber-text mb-6">Watch our latest videos showcasing eigencode concepts and innovations.</p>
+
+        <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-colors cursor-pointer group">
+          <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-lg text-blue-300 font-mono">
+              <h3 className="text-lg text-cyber-blue font-mono group-hover:cyber-text-glow transition-colors">
                 Featured Videos
               </h3>
             </div>
-            <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
+            <button className="text-cyber-blue hover:text-cyber-green transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fillRule="evenodd"
                   d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                   clipRule="evenodd"
-                ></path>
+                />
               </svg>
             </button>
           </div>
         </div>
       </section>
 
-      <section className="mb-16 w-[80%] mx-auto" id="art-gallery">
-        <div className="py-8">
-          <div className="mb-6">
-            <h2 className="text-xl text-blue-400 font-bold font-mono">
-              Eigencode Art Gallery
-            </h2>
-            <p className="text-blue-200 mt-2">
-              Explore our curated collections of eigencode-inspired artwork.
-            </p>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">
-                  Sacred Terminal
+      {/* Art Gallery Section */}
+      <section className="w-full max-w-6xl mb-16 z-10" id="art-gallery">
+        <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
+          <span className="text-cyber-blue">{">"}</span>
+          <GlitchText text="Eigencode Art Gallery" className="text-cyber-blue" glitchInterval={4000} />
+        </h2>
+        <p className="text-cyber-text mb-8">Explore our curated collections of eigencode-inspired artwork.</p>
+
+        <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            "Sacred Terminal",
+            "Corporate Propaganda",
+            "Cube Mythos",
+            "Comics",
+            "$CODE Bro",
+            "$CODE Tunes",
+            "Order of the Cube",
+            "The Occult Terrors of $CODE",
+            "The Science of the Cube",
+            "Community Artwork",
+          ].map((title) => (
+            <div
+              key={title}
+              className="cyber-box p-4 hover:border-cyber-blue/50 transition-colors cursor-pointer group"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg text-cyber-blue font-mono group-hover:cyber-text-glow transition-colors">
+                  {title}
                 </h3>
+                <button className="text-cyber-blue hover:text-cyber-green transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fillRule="evenodd"
+                      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
               </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
             </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">
-                  Corporate Propaganda
-                </h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">Cube Mythos</h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">Comics</h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">$CODE Bro</h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">$CODE Tunes</h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">
-                  Order of the Cube
-                </h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">
-                  The Occult Terrors of $CODE
-                </h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">
-                  The Science of the Cube
-                </h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="flex items-center justify-between bg-zinc-900/80 p-4 rounded-lg border border-zinc-800 cursor-pointer mb-4 hover:border-blue-500/30 transition-colors">
-              <div>
-                <h3 className="text-lg text-blue-300 font-mono">
-                  Community Artwork
-                </h3>
-              </div>
-              <button className="text-blue-400 hover:text-blue-300 transition-colors hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="text-center mt-8">
-            <p className="text-gray-400 text-sm py-4">
-              ~ Eigencode Art Gallery ~
-            </p>
-          </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <p className="text-cyber-muted text-sm py-4 font-mono">~ Eigencode Art Gallery ~</p>
         </div>
       </section>
 
-      <section>
-        <footer className="pb-8">
-          <div className="text-center">
-            <p>
-              © {new Date().getFullYear()} Polysys.Inc. All rights reserved.
-            </p>
-          </div>
-        </footer>
-      </section>
+      {/* Footer */}
+      <footer className="w-full max-w-6xl text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10">
+        <div className="flex justify-center items-center gap-2 mb-4">
+          <span className="inline-block w-2 h-2 bg-cyber-blue animate-blink" />
+          <span>AURA STATUS: ONLINE</span>
+        </div>
+        <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
+      </footer>
     </div>
-  );
+  )
 }

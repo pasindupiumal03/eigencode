@@ -16,11 +16,14 @@ export function TypingEffect({ text, speed = 50, delay = 0, className = "", show
   const [isTyping, setIsTyping] = useState(false)
 
   useEffect(() => {
-    const delayTimer = setTimeout(() => {
+    if (delay > 0) {
+      const delayTimer = setTimeout(() => {
+        setIsTyping(true)
+      }, delay)
+      return () => clearTimeout(delayTimer)
+    } else {
       setIsTyping(true)
-    }, delay)
-
-    return () => clearTimeout(delayTimer)
+    }
   }, [delay])
 
   useEffect(() => {
@@ -28,20 +31,18 @@ export function TypingEffect({ text, speed = 50, delay = 0, className = "", show
 
     if (currentIndex < text.length) {
       const timer = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex])
-        setCurrentIndex((prev) => prev + 1)
+        setDisplayedText(text.slice(0, currentIndex + 1))
+        setCurrentIndex(currentIndex + 1)
       }, speed)
 
       return () => clearTimeout(timer)
     }
-  }, [currentIndex, isTyping, speed, text])
+  }, [currentIndex, text, speed, isTyping])
 
   return (
     <span className={className}>
       {displayedText}
-      {showCursor && (currentIndex < text.length || isTyping) && (
-        <span className="inline-block w-2 h-4 bg-cyber-green ml-0.5 animate-blink" />
-      )}
+      {showCursor && <span className="inline-block w-2 h-5 bg-cyber-green animate-blink ml-1" />}
     </span>
   )
 }

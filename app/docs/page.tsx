@@ -181,7 +181,7 @@ export default function DocsPage() {
                 </code>
               </pre>
 
-              <Link href="#usage" className="text-cyber-blue hover:text-cyber-green transition-colors">
+              <Link href="/docs/getting-started/installation" className="text-cyber-blue hover:text-cyber-green transition-colors">
                 View installation guide →
               </Link>
             </div>

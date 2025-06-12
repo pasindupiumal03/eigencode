@@ -48,25 +48,25 @@ export default function DocsPage() {
             </div>
             <nav className="space-y-2">
               <Link
-                href="#getting-started"
+                href="/docs/getting-started"
                 className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
               >
                 Getting Started
               </Link>
               <Link
-                href="#installation"
+                href="/docs/getting-started/installation"
                 className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
               >
                 Installation Guide
               </Link>
               <Link
-                href="#quick-start"
+                href="/docs/getting-started/quick-start"
                 className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
               >
                 Quick Start
               </Link>
               <Link
-                href="#usage"
+                href="/docs/getting-started/open"
                 className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
               >
                 Open
@@ -113,13 +113,17 @@ export default function DocsPage() {
             </p>
 
             <div className="flex gap-4 justify-center mb-8">
-              <Button className="cyber-button-primary flex items-center gap-2">
-                <Download className="w-4 h-4" />
-                <span className="relative z-10">Get Started</span>
-              </Button>
+              <Link href="/docs/getting-started/installation" passHref legacyBehavior>
+  <Button className="cyber-button-primary flex items-center gap-2">
+    <Download className="w-4 h-4" />
+    <span className="relative z-10">Get Started</span>
+  </Button>
+</Link>
               <Button variant="outline" className="cyber-button-secondary flex items-center gap-2">
                 <Code2 className="w-4 h-4" />
+                <Link href="/cmds" passHref legacyBehavior>
                 <span className="relative z-10">Commands</span>
+                </Link>
               </Button>
             </div>
           </section>
@@ -143,7 +147,7 @@ export default function DocsPage() {
                 This documentation will guide you through installation, configuration, and usage of the Eigencode CLI.
               </p>
 
-              <Link href="#installation" className="text-cyber-blue hover:text-cyber-green transition-colors">
+              <Link href="/docs/getting-started" className="text-cyber-blue hover:text-cyber-green transition-colors">
                 Learn more →
               </Link>
             </div>
@@ -159,11 +163,11 @@ export default function DocsPage() {
                 Paste following command in your terminal to install Eigencode on UNIX-like systems:
               </p>
 
-              <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 mb-4">
+              <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4">
                 <div className="text-sm font-mono">
-                  <span className="text-cyber-green">
+                  <code className="text-cyber-green">
                     curl -fsSL https://www.eigencode.dev/stable/latest/installer.sh | sudo bash
-                  </span>
+                  </code>
                 </div>
                 <div className="w-full h-2 bg-cyber-terminal">
                 </div>
@@ -171,15 +175,11 @@ export default function DocsPage() {
 
               <p className="text-cyber-text mb-4">And as for Windows users:</p>
 
-              <div className="bg-cyber-terminal border border-cyber-blue/30 rounded p-4 mb-6">
-                <div className="text-sm font-mono">
-                  <span className="text-cyber-blue">
-                    powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.eigencode.dev/stable/latest/installer.ps1')"
-                  </span>
-                </div>
-                <div className="w-full h-2 bg-cyber-terminal">
-                </div>
-              </div>
+              <pre className="bg-cyber-terminal border border-cyber-blue/30 rounded p-4 overflow-x-auto mb-6">
+                <code className="text-cyber-blue">
+                  powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.eigencode.dev/stable/latest/installer.ps1')"
+                </code>
+              </pre>
 
               <Link href="#usage" className="text-cyber-blue hover:text-cyber-green transition-colors">
                 View installation guide →
@@ -197,11 +197,7 @@ export default function DocsPage() {
                 To get started with Eigencode, initialize it in your project directory:
               </p>
 
-              <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 mb-6">
-                <div className="text-sm font-mono">
-                  <span className="text-cyber-green">eigencode open .</span>
-                </div>
-              </div>
+              <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">eigencode open .</code></pre>
 
               <p className="text-cyber-text mb-6">
                 This will analyze your project and set up the necessary context for Eigencode to work effectively. You

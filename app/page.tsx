@@ -104,10 +104,14 @@ export default function Component() {
         {/* Action Buttons */}
         <div className="flex gap-4 mb-8">
           <button className="cyber-button-primary">
+          <Link href="/docs" passHref legacyBehavior>
             <span className="relative z-10">GET_STARTED</span>
+          </Link>
           </button>
           <button className="cyber-button-secondary">
+          <Link href="/docs/getting-started/installation" passHref legacyBehavior>
             <span className="relative z-10">DOWNLOAD</span>
+          </Link>
           </button>
         </div>
 

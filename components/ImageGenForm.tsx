@@ -827,19 +827,6 @@ export default function ImageGenForm() {
                     </button>
                   </div>
                 </div>
-                <div className="text-xs space-y-2">
-                  <div className="text-zinc-500">
-                    Generated: 6/9/2025, 9:31:23 PM
-                  </div>
-                  <div>
-                    <div className="text-zinc-400 font-medium">
-                      Your prompt:
-                    </div>
-                    <div className="text-zinc-500 text-xs mt-1 line-clamp-2">
-                      "flower"
-                    </div>
-                  </div>
-                </div>
               </div>
             )}
           </div>

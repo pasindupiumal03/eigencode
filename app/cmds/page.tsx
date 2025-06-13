@@ -1249,7 +1249,7 @@ export default function CmdsPage() {
                   onClick={resetCommandFilters}
                   className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
                     activeFilter === "noFilter"
-                      ? "bg-cyber-blue text-cyber-terminal"
+                      ? "bg-cyber-blue text-black"
                       : ""
                   }`}
                 >
@@ -1259,7 +1259,7 @@ export default function CmdsPage() {
                   onClick={() => filterByCategory("analysis")}
                   className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
                     activeFilter === "analysis"
-                      ? "bg-cyber-blue text-cyber-terminal"
+                      ? "bg-cyber-blue text-black"
                       : ""
                   }`}
                 >
@@ -1269,7 +1269,7 @@ export default function CmdsPage() {
                   onClick={() => filterByCategory("optimization")}
                   className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
                     activeFilter === "optimization"
-                      ? "bg-cyber-blue text-cyber-terminal"
+                      ? "bg-cyber-blue text-black"
                       : ""
                   }`}
                 >
@@ -1279,7 +1279,7 @@ export default function CmdsPage() {
                   onClick={() => filterByCategory("refactoring")}
                   className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
                     activeFilter === "refactoring"
-                      ? "bg-cyber-blue text-cyber-terminal"
+                      ? "bg-cyber-blue text-black"
                       : ""
                   }`}
                 >
@@ -1289,7 +1289,7 @@ export default function CmdsPage() {
                   onClick={() => filterByCategory("documentation")}
                   className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
                     activeFilter === "documentation"
-                      ? "bg-cyber-blue text-cyber-terminal"
+                      ? "bg-cyber-blue text-black"
                       : ""
                   }`}
                 >
@@ -1299,7 +1299,7 @@ export default function CmdsPage() {
                   onClick={() => filterByCategory("utility")}
                   className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
                     activeFilter === "utility"
-                      ? "bg-cyber-blue text-cyber-terminal"
+                      ? "bg-cyber-blue text-black"
                       : ""
                   }`}
                 >
@@ -1594,6 +1594,15 @@ export default function CmdsPage() {
                 <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-green rounded-full"></div>
                 <div className="pl-10 border-l border-cyber-green/30">
                   <h3 className="text-cyber-green text-xl mb-6">Completed</h3>
+                  <div className="text-cyber-muted text-xs mb-4 font-mono">
+                    <div>
+                      Line 78: Perform batch operations with single regex
+                    </div>
+                    <div>Line 145: Lazy evaluation to avoid recalculation</div>
+                    <div>
+                      Line 201: Use Map/Set for improved memory allocation
+                    </div>
+                  </div>
                   <p className="text-cyber-text mb-6">
                     Core command infrastructure and essential commands
                     completed.
@@ -1657,6 +1666,17 @@ export default function CmdsPage() {
                   <h3 className="text-cyber-yellow text-xl mb-6">
                     Current Development
                   </h3>
+                  <div className="text-cyber-muted text-xs mb-4 font-mono">
+                    <div>
+                      Refactoring activity: Safely transform line 45-67 into a
+                      new function
+                    </div>
+                    <div>
+                      Generating JS module: Rewrite loop at line 102 to
+                      functional style
+                    </div>
+                  </div>
+
                   <div className="cyber-box p-4 hover:border-cyber-yellow/50 transition-all duration-300">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-cyber-blue">$</span>
@@ -1678,6 +1698,15 @@ export default function CmdsPage() {
                   <h3 className="text-cyber-blue text-xl mb-6">
                     Planned Features
                   </h3>
+                  <div className="text-cyber-muted text-xs mb-4 font-mono">
+                    <div>
+                      Line 78: Perform batch operations with single regex
+                    </div>
+                    <div>Line 145: Lazy evaluation to avoid recalculation</div>
+                    <div>
+                      Line 201: Use Map/Set for improved memory allocation
+                    </div>
+                  </div>
                   <p className="text-cyber-text mb-6">
                     Features coming in the future:
                   </p>

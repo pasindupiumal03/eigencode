@@ -313,8 +313,7 @@ export default function CmdsPage() {
   };
 
   return (
-    <>
-      <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <MatrixBackground />
 
         {submitFeatureModalVisible && currentModalId === 1 && (
@@ -1636,87 +1635,183 @@ export default function CmdsPage() {
                     </p>
                   </div>
 
-                  <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">
-                        chat
-                      </span>
+                {/* Timeline Container */}
+                <div className="relative">
+                  {/* Timeline Line */}
+                  <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyber-green via-cyber-yellow to-cyber-blue/30"></div>
+                  
+                  {/* Completed Section */}
+                  <div className="relative pl-12 mb-16 group">
+                    <div className="absolute left-0 top-0 w-4 h-4 rounded-full bg-cyber-green border-2 border-cyber-green/80 shadow-lg shadow-cyber-green/20 transform -translate-x-1/2 group-hover:scale-125 transition-transform"></div>
+                    <div className="bg-cyber-card/50 backdrop-blur-sm border border-cyber-green/20 rounded-xl p-6 shadow-lg hover:border-cyber-green/40 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-cyber-green/10 text-cyber-green">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M20 6 9 17l-5-5"/>
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-cyber-green">Completed</h3>
+                        <span className="ml-auto text-xs px-3 py-1 bg-cyber-green/10 text-cyber-green rounded-full">Version 1.0</span>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="p-4 bg-cyber-bg/50 rounded-lg border border-cyber-green/10">
+                          <h4 className="font-medium text-cyber-text mb-2">Core Infrastructure</h4>
+                          <p className="text-sm text-cyber-muted">
+                            Basic command system and UI components are now live and fully functional.
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {['Basic Commands', 'UI Components', 'Authentication', 'File Management'].map((item) => (
+                            <div key={item} className="flex items-center gap-2 text-sm">
+                              <svg className="w-4 h-4 text-cyber-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span className="text-cyber-text">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-cyber-text text-sm">
-                      Use Eigencode without supplying additional context
-                    </p>
+                  </div>
+
+                  {/* In Progress Section */}
+                  <div className="relative pl-12 mb-16 group">
+                    <div className="absolute left-0 top-0 w-4 h-4 rounded-full bg-cyber-yellow border-2 border-cyber-yellow/80 shadow-lg shadow-cyber-yellow/20 transform -translate-x-1/2 group-hover:scale-125 transition-transform"></div>
+                    <div className="bg-cyber-card/50 backdrop-blur-sm border border-cyber-yellow/20 rounded-xl p-6 shadow-lg hover:border-cyber-yellow/40 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2 rounded-lg bg-cyber-yellow/10 text-cyber-yellow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                          </svg>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-cyber-yellow">In Development</h3>
+                          <div className="text-xs text-cyber-muted mt-1">Target: Q3 2025</div>
+                        </div>
+                        <span className="text-xs px-3 py-1 bg-cyber-yellow/10 text-cyber-yellow rounded-full">65% Complete</span>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="mb-4">
+                          <h4 className="font-medium text-cyber-text mb-3">Advanced Code Analysis</h4>
+                          <div className="h-2 bg-cyber-bg rounded-full overflow-hidden">
+                            <div 
+                              className="h-full bg-gradient-to-r from-cyber-yellow to-amber-500 transition-all duration-1000"
+                              style={{ width: '65%' }}
+                            ></div>
+                          </div>
+                          <div className="flex justify-between text-xs text-cyber-muted mt-1">
+                            <span>In Progress</span>
+                            <span>65%</span>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {['Code Quality Metrics', 'Performance Analysis', 'Dependency Mapping', 'Security Scanning'].map((item, i) => (
+                            <div key={item} className={`p-3 rounded-lg border ${i < 2 ? 'border-cyber-yellow/30 bg-cyber-yellow/5' : 'border-cyber-border/30'}`}>
+                              <div className="flex items-center gap-2">
+                                <div className={`w-2 h-2 rounded-full ${i < 2 ? 'bg-cyber-yellow' : 'bg-cyber-muted/30'}`}></div>
+                                <span className={`text-sm ${i < 2 ? 'text-cyber-text' : 'text-cyber-muted'}`}>
+                                  {item}
+                                </span>
+                                {i < 2 && (
+                                  <span className="ml-auto text-xs text-cyber-yellow">
+                                    <svg className="w-3 h-3 animate-pulse" fill="currentColor" viewBox="0 0 8 8">
+                                      <circle cx="4" cy="4" r="3" />
+                                    </svg>
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Planned Section */}
+                  <div className="relative pl-12 mb-16 group">
+                    <div className="absolute left-0 top-0 w-4 h-4 rounded-full bg-cyber-blue border-2 border-cyber-blue/80 shadow-lg shadow-cyber-blue/20 transform -translate-x-1/2 group-hover:scale-125 transition-transform"></div>
+                    <div className="bg-cyber-card/50 backdrop-blur-sm border border-cyber-blue/20 rounded-xl p-6 shadow-lg hover:border-cyber-blue/40 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2 rounded-lg bg-cyber-blue/10 text-cyber-blue">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 3v18h18"/>
+                            <path d="m19 9-5 5-4-4-3 3"/>
+                          </svg>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-cyber-blue">Planned Features</h3>
+                          <div className="text-xs text-cyber-muted mt-1">Coming Soon</div>
+                        </div>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {[
+                          { 
+                            icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4', 
+                            title: 'AI Refactoring',
+                            desc: 'Automated code quality improvements and optimizations'
+                          },
+                          { 
+                            icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0111-3.5M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+                            title: 'Team Collaboration',
+                            desc: 'Real-time collaboration features for team-based development'
+                          },
+                          { 
+                            icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+                            title: 'Security Tools',
+                            desc: 'Advanced security scanning and vulnerability detection'
+                          },
+                          { 
+                            icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+                            title: 'Performance Boost',
+                            desc: 'Optimizations for faster code execution and reduced latency'
+                          }
+                        ].map((feature, i) => (
+                          <div key={i} className="p-4 bg-cyber-bg/50 rounded-lg border border-cyber-blue/20 hover:border-cyber-blue/40 transition-colors">
+                            <div className="flex items-center gap-3 mb-2">
+                              <div className="p-1.5 bg-cyber-blue/10 rounded-md">
+                                <svg className="w-4 h-4 text-cyber-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
+                                </svg>
+                              </div>
+                              <h4 className="font-medium text-cyber-text">{feature.title}</h4>
+                            </div>
+                            <p className="text-sm text-cyber-muted ml-8">{feature.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="mt-6 pt-6 border-t border-cyber-border/20">
+                        <button 
+                          onClick={() => setSubmitFeatureModalVisible(true)}
+                          className="group flex items-center gap-2 text-sm text-cyber-blue hover:text-cyber-blue/80 transition-colors"
+                        >
+                          <span>Suggest a Feature</span>
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Current Development Section */}
-              <div className="mb-12 relative">
-                <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-yellow rounded-full"></div>
-                <div className="pl-10 border-l border-cyber-yellow/30">
-                  <h3 className="text-cyber-yellow text-xl mb-6">
-                    Current Development
-                  </h3>
-                  <div className="cyber-box p-4 hover:border-cyber-yellow/50 transition-all duration-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">
-                        dependency_graph
-                      </span>
-                    </div>
-                    <p className="text-cyber-text text-sm">
-                      Generate and visualize module dependencies
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Planned Features Section */}
-              <div className="mb-12 relative">
-                <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-blue rounded-full"></div>
-                <div className="pl-10 border-l border-cyber-blue/30">
-                  <h3 className="text-cyber-blue text-xl mb-6">
-                    Planned Features
-                  </h3>
-                  <p className="text-cyber-text mb-6">
-                    Features coming in the future:
+                {/* Feature Request CTA */}
+                <div className="mt-16 text-center">
+                  <h3 className="text-xl font-bold text-cyber-text mb-4">Have a feature request?</h3>
+                  <p className="text-cyber-muted max-w-2xl mx-auto mb-6">
+                    We're always looking for ways to improve. Let us know what features you'd like to see in future updates!
                   </p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-all duration-300">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-cyber-blue">$</span>
-                        <span className="text-cyber-blue font-mono font-bold">
-                          init
-                        </span>
-                      </div>
-                      <p className="text-cyber-text text-sm">
-                        Initialize new projects using Eigencode
-                      </p>
-                    </div>
-                    <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-all duration-300">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-cyber-blue">$</span>
-                        <span className="text-cyber-blue font-mono font-bold">
-                          fix
-                        </span>
-                      </div>
-                      <p className="text-cyber-text text-sm">
-                        Analyze error and codebase to make fixes
-                      </p>
-                    </div>
-                  </div>
+                  <button 
+                    onClick={() => setSubmitFeatureModalVisible(true)}
+                    className="px-6 py-2.5 bg-cyber-blue hover:bg-cyber-blue/90 text-cyber-terminal font-medium rounded-lg transition-colors shadow-lg hover:shadow-cyber-blue/20"
+                  >
+                    Suggest a Feature
+                  </button>
                 </div>
-              </div>
-
-              {/* Future Feature Ideas Section */}
-              <div className="mb-12">
-                <h3 className="text-cyber-text text-xl mb-6">
-                  Future Feature Ideas
-                </h3>
-
-                <div className="mb-8">
-                  <div className="flex items-start gap-3 mb-2">
+                
+                <div className="flex items-start gap-3 mb-2">
                     <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
                     <div>
                       <h4 className="text-cyber-magenta font-bold">
@@ -1842,6 +1937,5 @@ export default function CmdsPage() {
           command={selectedCommand}
         />
       </div>
-    </>
   );
 }

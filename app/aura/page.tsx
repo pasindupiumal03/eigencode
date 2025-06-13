@@ -101,7 +101,7 @@ export default function AuraPage() {
       </section>
 
       {/* AI Image Generator Section */}
-      <section className="w-full max-w-6xl mb-16 z-10">
+      <section className="w-full max-w-6xl mb-16">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
           <GlitchText text="AI Image Generator" className="text-cyber-blue" glitchInterval={8000} />

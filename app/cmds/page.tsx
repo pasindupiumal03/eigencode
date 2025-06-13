@@ -1,25 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { MatrixBackground } from "@/components/matrix-background"
-import { GlitchText } from "@/components/glitch-text"
-import { TypingEffect } from "@/components/typing-effect"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { FaCodeBranch } from "react-icons/fa6"
-import { FaArrowsLeftRight } from "react-icons/fa6"
-import CommandDetailsModal from "@/components/CommandDetailsModal"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { MatrixBackground } from "@/components/matrix-background";
+import { GlitchText } from "@/components/glitch-text";
+import { TypingEffect } from "@/components/typing-effect";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { FaCodeBranch } from "react-icons/fa6";
+import { FaArrowsLeftRight } from "react-icons/fa6";
+import CommandDetailsModal from "@/components/CommandDetailsModal";
 
 export default function CmdsPage() {
-  const [activeTab, setActiveTab] = useState("avail")
-  const [selectedCommand, setSelectedCommand] = useState<any>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const commands = [
+  const [activeTab, setActiveTab] = useState("avail");
+  const [selectedCommand, setSelectedCommand] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filteredCommands, setFilteredCommands] = useState<any[]>([]);
+  const [activeFilter, setActiveFilter] = useState("noFilter");
+  const [sortType, setSortType] = useState<
+    "az" | "none" | "status" | "popularity" | "recent"
+  >("status");
+  const [sortAscending, setSortAscending] = useState(true);
+  const [commands, setCommands] = useState([
     {
       name: "open",
+      id: 1,
       status: "complete",
       description: "Open the Eigencode in your working directory or a file",
       detailedDescription:
@@ -27,10 +33,13 @@ export default function CmdsPage() {
       tags: ["programming", "efficiency", "full-pack"],
       category: "analysis",
       usage: "$ eigencode open",
-      examples: ["# Open Eigencode in the current directory\n$ eigencode open ."],
+      examples: [
+        "# Open Eigencode in the current directory\n$ eigencode open .",
+      ],
     },
     {
       name: "setup",
+      id: 2,
       status: "complete",
       description: "Setup the AI configuration you want Eigencode to use",
       detailedDescription:
@@ -42,6 +51,7 @@ export default function CmdsPage() {
     },
     {
       name: "explain",
+      id: 3,
       status: "complete",
       description: "Get AI-powered explanation of code",
       detailedDescription:
@@ -55,6 +65,7 @@ export default function CmdsPage() {
     },
     {
       name: "chat",
+      id: 4,
       status: "complete",
       description: "Use Eigencode without supplying additional context",
       detailedDescription:
@@ -70,6 +81,7 @@ export default function CmdsPage() {
     },
     {
       name: "dependency_graph",
+      id: 5,
       status: "in progress",
       description: "Generate and visualize module dependencies",
       detailedDescription:
@@ -81,6 +93,7 @@ export default function CmdsPage() {
     },
     {
       name: "init",
+      id: 6,
       status: "planned",
       description: "Initialize new projects using Eigencode",
       detailedDescription:
@@ -96,6 +109,7 @@ export default function CmdsPage() {
     },
     {
       name: "fix",
+      id: 7,
       status: "planned",
       description: "Analyze error and codebase to make fixes",
       detailedDescription:
@@ -109,404 +123,1725 @@ export default function CmdsPage() {
         "# Fix with specific error type\n$ eigencode fix --type syntax",
       ],
     },
-  ]
+  ]);
+  const [submitFeatureModalVisible, setSubmitFeatureModalVisible] =
+    useState(false);
+  const [currentModalId, setCurrentModalId] = useState(1);
+
+  useEffect(() => {
+    if (!submitFeatureModalVisible) {
+      resetSubmitCommandModal();
+    }
+  }, [submitFeatureModalVisible])
+
+  const handleNext = () => {
+    if (currentModalId !== 4) {
+      setCurrentModalId(currentModalId + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentModalId !== 1) {
+      setCurrentModalId(currentModalId - 1);
+    }
+  };
+
+  const [newCommand, setNewCommand] = useState({
+    commandName: "",
+    shortDescription: "",
+    detailedDescription: "",
+    category: "",
+    githubRepositoryLink: "",
+    usageExample: "",
+    parameters: [
+      {
+        name: "",
+        type: "",
+        description: "",
+        required: false
+      },
+    ],
+    usageExamples: [
+      {
+        description: "",
+        commandCode: "",
+      },
+    ],
+    rustImplementationCode: "",
+  });
+
+  const handleSubmitCommand = () => {
+    const formattedNewCommand = {
+      name: newCommand.commandName,
+      id: commands.length + 1,
+      status: "planned",
+      description: newCommand.shortDescription,
+      detailedDescription: newCommand.detailedDescription,
+      tags: [],
+      category: newCommand.category,
+      usage: newCommand.usageExample,
+      examples: newCommand.usageExamples.map((e) => e.description),
+    };
+    setCommands((prev) => [...prev, formattedNewCommand]);
+    resetSubmitCommandModal();
+  }
+
+  const resetSubmitCommandModal = () => {
+    setCurrentModalId(1);
+    setNewCommand({
+      commandName: "",
+      shortDescription: "",
+      detailedDescription: "",
+      category: "",
+      githubRepositoryLink: "",
+      usageExample: "",
+      parameters: [
+        {
+          name: "",
+          type: "",
+          description: "",
+          required: false,
+        },
+      ],
+      usageExamples: [
+        {
+          description: "",
+          commandCode: "",
+        },
+      ],
+      rustImplementationCode: "",
+    });
+    setSubmitFeatureModalVisible(false);
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "complete":
-        return "text-cyber-green"
+        return "text-cyber-green";
       case "planned":
-        return "text-cyber-blue"
+        return "text-cyber-blue";
       case "in progress":
-        return "text-cyber-yellow"
+        return "text-cyber-yellow";
       default:
-        return "text-cyber-text"
+        return "text-cyber-text";
     }
-  }
+  };
 
   const getStatusBg = (status: string) => {
     switch (status) {
       case "complete":
-        return "bg-cyber-green/20 border-cyber-green/30"
+        return "bg-cyber-green/20 border-cyber-green/30";
       case "planned":
-        return "bg-cyber-blue/20 border-cyber-blue/30"
+        return "bg-cyber-blue/20 border-cyber-blue/30";
       case "in progress":
-        return "bg-cyber-yellow/20 border-cyber-yellow/30"
+        return "bg-cyber-yellow/20 border-cyber-yellow/30";
       default:
-        return "bg-cyber-text/20 border-cyber-text/30"
+        return "bg-cyber-text/20 border-cyber-text/30";
     }
-  }
+  };
 
   const handleCommandClick = (command: any) => {
-    setSelectedCommand(command)
-    setIsModalOpen(true)
-  }
+    setSelectedCommand(command);
+    setIsModalOpen(true);
+  };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedCommand(null)
-  }
+    setIsModalOpen(false);
+    setSelectedCommand(null);
+  };
+
+  const filterByCategory = (passedCategory: string) => {
+    setActiveFilter(passedCategory);
+    const filtered = commands.filter(
+      (command) => command.category === passedCategory
+    );
+    setFilteredCommands(sortCommands(filtered));
+  };
+
+  const resetCommandFilters = () => {
+    setActiveFilter("noFilter");
+    setFilteredCommands([]);
+  };
+
+  const sortCommands = (commandsToSort: any[]) => {
+    if (sortType === "az") {
+      const result =
+        sortAscending === true
+          ? [...commandsToSort].sort((a, b) => a.name.localeCompare(b.name))
+          : [...commandsToSort].sort((a, b) => b.name.localeCompare(a.name));
+      return result;
+    } else if (sortType === "status") {
+      const completed = [];
+      const planned = [];
+      const inProgress = [];
+      for (let i = 0; i < commandsToSort.length; i++) {
+        if (commandsToSort[i].status === "complete") {
+          completed.push(commandsToSort[i]);
+        } else if (commandsToSort[i].status === "planned") {
+          planned.push(commandsToSort[i]);
+        } else if (commandsToSort[i].status === "in progress") {
+          inProgress.push(commandsToSort[i]);
+        } else {
+          continue;
+        }
+      }
+      const result = sortAscending
+        ? [...completed, ...inProgress, ...planned]
+        : [...planned, ...inProgress, ...completed];
+      return result;
+    } else if (sortType === "recent") {
+      const result = sortAscending
+        ? [...commandsToSort].sort((a, b) => b.id - a.id)
+        : [...commandsToSort].sort((a, b) => a.id - b.id);
+      return result;
+    } else if (sortType === "popularity") {
+      const result = sortAscending
+        ? [...commandsToSort].sort((a, b) => a.id - b.id)
+        : [...commandsToSort].sort((a, b) => b.id - a.id);
+      return result;
+    }
+    return commandsToSort;
+  };
+
+  const handleSort = (
+    type: "none" | "az" | "status" | "popularity" | "recent"
+  ) => {
+    setSortType(type);
+    const commandsToSort =
+      filteredCommands.length === 0 ? commands : filteredCommands;
+    setFilteredCommands(sortCommands(commandsToSort));
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <MatrixBackground />
-      <div className="scanline" />
+    <>
+      <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <MatrixBackground />
 
-      {/* Header */}
-      <header className="w-full max-w-6xl flex justify-between items-center mb-16 z-10">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-cyber-red rounded-full" />
-          <div className="w-3 h-3 bg-cyber-yellow rounded-full" />
-          <div className="w-3 h-3 bg-cyber-green rounded-full" />
-          <span className="text-sm font-mono text-cyber-muted">
-            <TypingEffect text="~ eigencode features" speed={80} />
-          </span>
-        </div>
-        <nav className="flex gap-6 text-sm">
-          <Link href="/" className="text-cyber-green hover:cyber-text-glow transition-colors">
-            $ home
-          </Link>
-          <Link href="/aura" className="text-cyber-blue hover:cyber-text-glow transition-colors">
-            $ aura
-          </Link>
-          <Link href="/cmds" className="text-cyber-yellow hover:cyber-text-glow transition-colors ">
-            $ cmds
-          </Link>
-          <Link href="/docs" className="text-cyber-magenta hover:cyber-text-glow transition-colors">
-            $ docs
-          </Link>
-        </nav>
-      </header>
-
-      {/* Terminal Command */}
-      <div className="w-full max-w-6xl mb-8 z-10">
-        <div className="text-cyber-green font-mono text-sm mb-4">eigencode $ view features</div>
-      </div>
-
-      {/* Hero Section */}
-      <section className="flex flex-col items-center text-center mb-16 z-10 w-full max-w-6xl">
-        <h1 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
-          <GlitchText text="> Features" glitchInterval={7000} />
-        </h1>
-
-        <p className="text-cyber-muted text-center max-w-2xl mb-12">
-          Explore Eigencode's ecosystem of commands, scripts, APIs, and AI integrations.
-        </p>
-
-        {/* Tabs */}
-        <Tabs defaultValue="avail" className="w-full mb-8" onValueChange={setActiveTab}>
-          <TabsList className="bg-transparent border-b border-cyber-green/30 rounded-none h-auto p-0 mb-8">
-            <TabsTrigger
-              value="avail"
-              className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-green data-[state=active]:text-cyber-green rounded-none px-4 py-2"
+        {submitFeatureModalVisible && currentModalId === 1 && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div
+              className="bg-zinc-900 border border-zinc-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              style={{ transform: "none" }}
             >
-              <FaArrowsLeftRight className="text-cyber-green mr-2" aria-label="Arrows Left Right" /> avail
-            </TabsTrigger>
-            <TabsTrigger
-              value="roadmap"
-              className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-magenta data-[state=active]:text-cyber-magenta rounded-none px-4 py-2"
-            >
-              <FaCodeBranch className="text-cyber-magenta mr-2" aria-label="Code Branch" /> roadmap
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="avail" className="w-full">
-            {/* Command Input and Submit */}
-            <div className="flex gap-4 mb-8 items-center">
-              <div className="cyber-box flex-1 p-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-cyber-green">{">"}</span>
-                  <span className="text-cyber-blue">$</span>
-                  <Input
-                    className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-text placeholder:text-cyber-muted"
-                    placeholder="commands"
-                    defaultValue="commands"
-                    readOnly
-                  />
-                </div>
-              </div>
-              <button className="cyber-button-primary px-6 py-3">
-                <span className="relative z-10">Submit feature</span>
-              </button>
-            </div>
-
-            {/* Filter Tabs */}
-            <div className="flex gap-2 mb-6 flex-wrap">
-              <button className="px-4 py-2 bg-cyber-blue text-cyber-dark rounded text-sm font-medium">All</button>
-              <button className="px-4 py-2 bg-cyber-terminal border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors">
-                Analysis
-              </button>
-              <button className="px-4 py-2 bg-cyber-terminal border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors">
-                Optimization
-              </button>
-              <button className="px-4 py-2 bg-cyber-terminal border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors">
-                Refactoring
-              </button>
-              <button className="px-4 py-2 bg-cyber-terminal border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors">
-                Documentation
-              </button>
-              <button className="px-4 py-2 bg-cyber-terminal border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors">
-                Utility
-              </button>
-            </div>
-
-            {/* Sort Options */}
-            <div className="flex items-center gap-4 mb-8 text-sm">
-              <span className="text-cyber-muted">Sort by:</span>
-              <button className="text-cyber-text hover:text-cyber-blue transition-colors">Status</button>
-              <button className="text-cyber-text hover:text-cyber-blue transition-colors">A-Z</button>
-              <button className="text-cyber-text hover:text-cyber-blue transition-colors">Popularity</button>
-              <button className="text-cyber-text hover:text-cyber-blue transition-colors">Recent</button>
-            </div>
-
-            {/* Commands Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {commands.map((command) => (
-                <div
-                  key={command.name}
-                  className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group cursor-pointer"
-                  onClick={() => handleCommandClick(command)}
+              <div className="border-b border-zinc-800 p-4 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-white">
+                  Submit a Command
+                </h2>
+                <button
+                  className="text-zinc-500 hover:text-zinc-300"
+                  onClick={resetSubmitCommandModal}
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">{command.name}</span>
-                    </div>
-                    <Badge
-                      className={`text-xs px-2 py-1 ${getStatusBg(command.status)} ${getStatusColor(command.status)}`}
-                    >
-                      {command.status}
-                    </Badge>
-                  </div>
-
-                  <p className="text-cyber-text text-sm mb-4 leading-relaxed">{command.description}</p>
-
-                  {command.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                      {command.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="outline"
-                          className="text-xs px-2 py-0.5 bg-cyber-terminal/50 border-cyber-blue/30 text-cyber-blue"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="roadmap" className="w-full">
-            <div className="text-cyber-magenta font-mono text-sm mb-6">{">"} roadmap</div>
-            <p className="text-cyber-text mb-8">
-              The Eigencode command system is continuously evolving. Below is our development timeline and future plans.
-            </p>
-
-            {/* Completed Section */}
-            <div className="mb-12 relative">
-              <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-green rounded-full"></div>
-              <div className="pl-10 border-l border-cyber-green/30">
-                <h3 className="text-cyber-green text-xl mb-6">Completed</h3>
-                <div className="text-cyber-muted text-xs mb-4 font-mono">
-                  <div>Line 78: Perform batch operations with single regex</div>
-                  <div>Line 145: Lazy evaluation to avoid recalculation</div>
-                  <div>Line 201: Use Map/Set for improved memory allocation</div>
-                </div>
-                <p className="text-cyber-text mb-6">Core command infrastructure and essential commands completed.</p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">open</span>
-                    </div>
-                    <p className="text-cyber-text text-sm">Open the Eigencode in your working directory or a file</p>
-                  </div>
-                  <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">setup</span>
-                    </div>
-                    <p className="text-cyber-text text-sm">Setup the AI configuration you want Eigencode to use</p>
-                  </div>
-                </div>
-
-                <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300 mb-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-cyber-blue">$</span>
-                    <span className="text-cyber-blue font-mono font-bold">explain</span>
-                  </div>
-                  <p className="text-cyber-text text-sm">Get AI-powered explanation of code</p>
-                </div>
-
-                <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-cyber-blue">$</span>
-                    <span className="text-cyber-blue font-mono font-bold">chat</span>
-                  </div>
-                  <p className="text-cyber-text text-sm">Use Eigencode without supplying additional context</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Current Development Section */}
-            <div className="mb-12 relative">
-              <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-yellow rounded-full"></div>
-              <div className="pl-10 border-l border-cyber-yellow/30">
-                <h3 className="text-cyber-yellow text-xl mb-6">Current Development</h3>
-                <div className="text-cyber-muted text-xs mb-4 font-mono">
-                  <div>Refactoring activity: Safely transform line 45-67 into a new function</div>
-                  <div>Generating JS module: Rewrite loop at line 102 to functional style</div>
-                </div>
-
-                <div className="cyber-box p-4 hover:border-cyber-yellow/50 transition-all duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-cyber-blue">$</span>
-                    <span className="text-cyber-blue font-mono font-bold">dependency_graph</span>
-                  </div>
-                  <p className="text-cyber-text text-sm">Generate and visualize module dependencies</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Planned Features Section */}
-            <div className="mb-12 relative">
-              <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-blue rounded-full"></div>
-              <div className="pl-10 border-l border-cyber-blue/30">
-                <h3 className="text-cyber-blue text-xl mb-6">Planned Features</h3>
-                <div className="text-cyber-muted text-xs mb-4 font-mono">
-                  <div>Line 78: Perform batch operations with single regex</div>
-                  <div>Line 145: Lazy evaluation to avoid recalculation</div>
-                  <div>Line 201: Use Map/Set for improved memory allocation</div>
-                </div>
-                <p className="text-cyber-text mb-6">Features coming in the future:</p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-all duration-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">init</span>
-                    </div>
-                    <p className="text-cyber-text text-sm">Initialize new projects using Eigencode</p>
-                  </div>
-                  <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-all duration-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-cyber-blue">$</span>
-                      <span className="text-cyber-blue font-mono font-bold">fix</span>
-                    </div>
-                    <p className="text-cyber-text text-sm">Analyze error and codebase to make fixes</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Future Feature Ideas Section */}
-            <div className="mb-12">
-              <h3 className="text-cyber-text text-xl mb-6">Future Feature Ideas</h3>
-
-              <div className="mb-8">
-                <div className="flex items-start gap-3 mb-2">
-                  <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                  <div>
-                    <h4 className="text-cyber-magenta font-bold">Eigencode Pipeline Features</h4>
-                    <p className="text-cyber-text text-sm">
-                      Features for building and managing automated code transformation pipelines
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <div className="flex items-start gap-3 mb-2">
-                  <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                  <div>
-                    <h4 className="text-cyber-magenta font-bold">Language-Specific Analysis Tools</h4>
-                    <p className="text-cyber-text text-sm">
-                      Deep analysis tools tailored to specific programming languages (Rust, TypeScript, Python, etc.)
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <div className="flex items-start gap-3 mb-2">
-                  <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                  <div>
-                    <h4 className="text-cyber-magenta font-bold">Integration APIs</h4>
-                    <p className="text-cyber-text text-sm">
-                      APIs for integrating Eigencode with other development tools and environments
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <div className="flex items-start gap-3 mb-2">
-                  <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                  <div>
-                    <h4 className="text-cyber-magenta font-bold">Workflow Automation Scripts</h4>
-                    <p className="text-cyber-text text-sm">
-                      Scripts for automating complex development workflows using Eigencode's capabilities
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Community Contributions Section */}
-            <div className="mb-12">
-              <h3 className="text-cyber-text text-xl mb-6">Community Contributions</h3>
-
-              <p className="text-cyber-text mb-8">
-                Help shape the future of Eigencode by contributing your feature ideas. Community contributions help us
-                understand user needs and expand Eigencode's capabilities.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="text-cyber-blue font-bold mb-4">Why Contribute?</h4>
-                  <ul className="text-cyber-text text-sm space-y-2 list-inside">
-                    <li>• Shape the tool to meet your specific needs</li>
-                    <li>• Get recognized in the Eigencode community</li>
-                    <li>• Help advance AI-assisted coding tools</li>
-                    <li>• Gain experience with next development</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="text-cyber-blue font-bold mb-4">Contribution Process</h4>
-                  <ol className="text-cyber-text text-sm space-y-2 list-inside">
-                    <li>1. Submit your feature idea through this form</li>
-                    <li>2. Our team reviews the submission</li>
-                    <li>3. Approved features get added to the roadmap</li>
-                    <li>4. Features are implemented and released</li>
-                  </ol>
-                </div>
-              </div>
-
-              <div className="flex justify-center mt-8">
-                <button className="cyber-button-primary px-6 py-3">
-                  <span className="relative z-10">Submit Feature</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
                 </button>
               </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </section>
 
-      {/* Footer */}
-      <footer className="w-full max-w-6xl text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10">
-        <div className="flex justify-center items-center gap-2 mb-4">
-          <span className="inline-block w-2 h-2 bg-cyber-blue animate-blink" />
-          <span>COMMANDS STATUS: ONLINE</span>
+              <div className="p-6">
+                <div className="flex mb-8 justify-between">
+                  {["Basics", "Details", "Examples", "Review"].map(
+                    (label, index) => {
+                      const step = index + 1;
+                      const isActive = step === 1;
+                      return (
+                        <div key={label} className="flex flex-col items-center">
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                              isActive
+                                ? "bg-blue-600 text-white"
+                                : "bg-zinc-800 text-zinc-500"
+                            }`}
+                            style={{
+                              transform: isActive ? "scale(1.1)" : "none",
+                              backgroundColor: isActive
+                                ? "rgb(37, 99, 235)"
+                                : "rgb(39, 39, 42)",
+                            }}
+                          >
+                            {step}
+                          </div>
+                          <div className="text-xs mt-1 text-zinc-500">
+                            {label}
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-zinc-300 mb-2">
+                      Command Name
+                    </label>
+                    <input
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded"
+                      placeholder="e.g., analyze_perf"
+                      type="text"
+                      onChange={(e) =>
+                        setNewCommand((prev) => ({
+                          ...prev,
+                          commandName: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-zinc-300 mb-2">
+                      Short Description
+                    </label>
+                    <input
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded"
+                      placeholder="Brief description of command functionality"
+                      type="text"
+                      onChange={(e) =>
+                        setNewCommand((prev) => ({
+                          ...prev,
+                          shortDescription: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-zinc-300 mb-2">
+                      Detailed Description
+                    </label>
+                    <textarea
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded h-24"
+                      placeholder="Detailed explanation of what the command does and how it works"
+                      onChange={(e) =>
+                        setNewCommand((prev) => ({
+                          ...prev,
+                          detailedDescription: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-zinc-300 mb-2">Category</label>
+                    <select
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded"
+                      value={newCommand.category}
+                      onChange={(e) =>
+                        setNewCommand((prev) => ({
+                          ...prev,
+                          category: e.target.value,
+                        }))
+                      }
+                    >
+                      <option value="NA">Select Category</option>
+                      <option value="analysis">Analysis</option>
+                      <option value="optimization">Optimization</option>
+                      <option value="refactoring">Refactoring</option>
+                      <option value="documentation">Documentation</option>
+                      <option value="utility">Utility</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-zinc-300 mb-2">
+                      GitHub Repository Link{" "}
+                      <span className="text-zinc-500 text-xs">(Optional)</span>
+                    </label>
+                    <input
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded"
+                      placeholder="https://github.com/yourusername/your-command-repo"
+                      type="url"
+                      onChange={(e) =>
+                        setNewCommand((prev) => ({
+                          ...prev,
+                          githubRepositoryLink: e.target.value,
+                        }))
+                      }
+                    />
+                    <p className="text-zinc-500 text-xs mt-1">
+                      If you've already implemented your command, provide a link
+                      to the GitHub repository
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between mt-8">
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-zinc-800 text-zinc-400 rounded"
+                    onClick={resetSubmitCommandModal}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    onClick={handleNext}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {submitFeatureModalVisible && currentModalId === 2 && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div
+              className="bg-zinc-900 border border-zinc-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              style={{ transform: "none" }}
+            >
+              <div className="border-b border-zinc-800 p-4 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-white">
+                  Submit a Command
+                </h2>
+                <button
+                  className="text-zinc-500 hover:text-zinc-300"
+                  onClick={() => {
+                    setSubmitFeatureModalVisible(false);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div className="p-6">
+                {/* Stepper */}
+                <div className="flex mb-8 justify-between">
+                  {/* Step 1 - Completed */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-green-600 text-white"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(22, 163, 74)",
+                      }}
+                    >
+                      ✓
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Basics</div>
+                  </div>
+
+                  {/* Step 2 - Active */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-blue-600 text-white"
+                      style={{
+                        transform: "scale(1.1)",
+                        backgroundColor: "rgb(37, 99, 235)",
+                      }}
+                    >
+                      2
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Details</div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-zinc-800 text-zinc-500"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(39, 39, 42)",
+                      }}
+                    >
+                      3
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Examples</div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-zinc-800 text-zinc-500"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(39, 39, 42)",
+                      }}
+                    >
+                      4
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Review</div>
+                  </div>
+                </div>
+
+                {/* Form Fields */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-zinc-300 mb-2">
+                      Usage Example
+                    </label>
+                    <input
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded"
+                      placeholder="e.g., eigencode analyze_perf [file_or_dir]"
+                      type="text"
+                      onChange={(e) =>
+                        setNewCommand((prev) => ({
+                          ...prev,
+                          usageExample: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-zinc-300">Parameters</label>
+                    </div>
+                    <div className="bg-zinc-800/50 p-3 rounded border border-zinc-700">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-zinc-400 text-sm">
+                          Parameter 1
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        {/* Name */}
+                        <div>
+                          <label className="block text-zinc-400 text-xs mb-1">
+                            Name
+                          </label>
+                          <input
+                            className="w-full bg-zinc-800 border border-zinc-700 text-white p-1 rounded text-sm"
+                            type="text"
+                            value={newCommand.parameters[0].name}
+                            onChange={(e) => {
+                              const updatedParam = {
+                                ...newCommand.parameters[0],
+                                name: e.target.value,
+                              };
+                              setNewCommand((prev) => ({
+                                ...prev,
+                                parameters: [updatedParam],
+                              }));
+                            }}
+                          />
+                        </div>
+
+                        {/* Type */}
+                        <div>
+                          <label className="block text-zinc-400 text-xs mb-1">
+                            Type
+                          </label>
+                          <select
+                            className="w-full bg-zinc-800 border border-zinc-700 text-white p-1 rounded text-sm"
+                            value={newCommand.parameters[0].type}
+                            onChange={(e) => {
+                              const updatedParam = {
+                                ...newCommand.parameters[0],
+                                type: e.target.value,
+                              };
+                              setNewCommand((prev) => ({
+                                ...prev,
+                                parameters: [updatedParam],
+                              }));
+                            }}
+                          >
+                            <option value="NA">Select a type</option>
+                            <option value="string">String</option>
+                            <option value="number">Number</option>
+                            <option value="boolean">Boolean</option>
+                            <option value="array">Array</option>
+                            <option value="object">Object</option>
+                          </select>
+                        </div>
+
+                        {/* Description */}
+                        <div className="col-span-2">
+                          <label className="block text-zinc-400 text-xs mb-1">
+                            Description
+                          </label>
+                          <input
+                            className="w-full bg-zinc-800 border border-zinc-700 text-white p-1 rounded text-sm"
+                            type="text"
+                            value={newCommand.parameters[0].description}
+                            onChange={(e) => {
+                              const updatedParam = {
+                                ...newCommand.parameters[0],
+                                description: e.target.value,
+                              };
+                              setNewCommand((prev) => ({
+                                ...prev,
+                                parameters: [updatedParam],
+                              }));
+                            }}
+                          />
+                        </div>
+
+                        {/* Required checkbox */}
+                        <div className="col-span-2">
+                          <label className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              checked={
+                                newCommand.parameters[0].required || false
+                              }
+                              onChange={(e) => {
+                                const updatedParam = {
+                                  ...newCommand.parameters[0],
+                                  required: e.target.checked,
+                                };
+                                setNewCommand((prev) => ({
+                                  ...prev,
+                                  parameters: [updatedParam],
+                                }));
+                              }}
+                            />
+                            <span className="text-zinc-400 text-xs">
+                              Required
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className="flex justify-between mt-8">
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-zinc-800 text-zinc-300 rounded hover:bg-zinc-700"
+                    onClick={handlePrev}
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    onClick={handleNext}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {submitFeatureModalVisible && currentModalId === 3 && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div
+              className="bg-zinc-900 border border-zinc-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              style={{ transform: "none" }}
+            >
+              <div className="border-b border-zinc-800 p-4 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-white">
+                  Submit a Command
+                </h2>
+                <button
+                  className="text-zinc-500 hover:text-zinc-300"
+                  onClick={() => {
+                    setSubmitFeatureModalVisible(false);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div className="p-6">
+                {/* Stepper */}
+                <div className="flex mb-8 justify-between">
+                  {/* Step 1 - Completed */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-green-600 text-white"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(22, 163, 74)",
+                      }}
+                    >
+                      ✓
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Basics</div>
+                  </div>
+
+                  {/* Step 2 - Completed */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-green-600 text-white"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(22, 163, 74)",
+                      }}
+                    >
+                      ✓
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Details</div>
+                  </div>
+
+                  {/* Step 3 - Active */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-blue-600 text-white"
+                      style={{
+                        transform: "scale(1.1)",
+                        backgroundColor: "rgb(37, 99, 235)",
+                      }}
+                    >
+                      3
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Examples</div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-zinc-800 text-zinc-500"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(39, 39, 42)",
+                      }}
+                    >
+                      4
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Review</div>
+                  </div>
+                </div>
+
+                {/* Usage Examples */}
+                <div className="space-y-4">
+                  {/* Usage Examples */}
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-zinc-300">Usage Examples</label>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="bg-zinc-800/50 p-3 rounded border border-zinc-700">
+                        <div className="flex justify-between mb-2">
+                          <span className="text-zinc-400 text-sm">
+                            Example 1
+                          </span>
+                        </div>
+
+                        <div className="space-y-3">
+                          {/* Description */}
+                          <div>
+                            <label className="block text-zinc-400 text-xs mb-1">
+                              Description
+                            </label>
+                            <input
+                              className="w-full bg-zinc-800 border border-zinc-700 text-white p-1 rounded text-sm"
+                              placeholder="What this example demonstrates"
+                              type="text"
+                              value={newCommand.usageExamples[0].description}
+                              onChange={(e) => {
+                                const updatedExample = {
+                                  ...newCommand.usageExamples[0],
+                                  description: e.target.value,
+                                };
+                                setNewCommand((prev) => ({
+                                  ...prev,
+                                  usageExamples: [updatedExample],
+                                }));
+                              }}
+                            />
+                          </div>
+
+                          {/* Command Code */}
+                          <div>
+                            <label className="block text-zinc-400 text-xs mb-1">
+                              Command Code
+                            </label>
+                            <div className="relative font-mono text-sm rounded border border-zinc-700 bg-zinc-900 overflow-hidden">
+                              <div className="absolute left-0 top-0 bottom-0 w-12 bg-zinc-800 border-r border-zinc-700 flex flex-col items-end pt-2 pb-2 text-zinc-500 select-none">
+                                <div className="px-2 text-xs">1</div>
+                              </div>
+                              <textarea
+                                placeholder="eigencode command --option value"
+                                className="w-full h-16 bg-transparent pl-14 pr-4 pt-2 pb-2 focus:outline-none resize-none text-green-400"
+                                spellCheck="false"
+                                value={newCommand.usageExamples[0].commandCode}
+                                onChange={(e) => {
+                                  const updatedExample = {
+                                    ...newCommand.usageExamples[0],
+                                    commandCode: e.target.value,
+                                  };
+                                  setNewCommand((prev) => ({
+                                    ...prev,
+                                    usageExamples: [updatedExample],
+                                  }));
+                                }}
+                              ></textarea>
+                              <div className="absolute right-2 bottom-2 w-2 h-2 rounded-full bg-green-500"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Rust Implementation Code */}
+                  <div>
+                    <label className="block text-zinc-300 mb-2">
+                      Rust Implementation Code (Optional)
+                    </label>
+                    <p className="text-zinc-500 text-xs mb-2">
+                      Provide a sample implementation or pseudocode for how this
+                      command might be implemented in Rust.
+                    </p>
+                    <div className="relative font-mono text-sm rounded border border-zinc-700 bg-zinc-900 overflow-hidden">
+                      <div className="absolute left-0 top-0 bottom-0 w-12 bg-zinc-800 border-r border-zinc-700 flex flex-col items-end pt-2 pb-2 text-zinc-500 select-none">
+                        <div className="px-2 text-xs">1</div>
+                      </div>
+                      <textarea
+                        placeholder="pub fn handle_command(args: &ArgMatches) -> io::Result<()> { // Your implementation here }"
+                        className="w-full h-48 bg-transparent pl-14 pr-4 pt-2 pb-2 focus:outline-none resize-none text-orange-400"
+                        spellCheck="false"
+                        value={newCommand.rustImplementationCode}
+                        onChange={(e) => {
+                          setNewCommand((prev) => ({
+                            ...prev,
+                            rustImplementationCode: e.target.value,
+                          }));
+                        }}
+                      ></textarea>
+                      <div className="absolute right-2 bottom-2 w-2 h-2 rounded-full bg-green-500"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className="flex justify-between mt-8">
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-zinc-800 text-zinc-300 rounded hover:bg-zinc-700"
+                    onClick={handlePrev}
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    onClick={handleNext}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {submitFeatureModalVisible && currentModalId === 4 && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div
+              className="bg-zinc-900 border border-zinc-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              style={{ transform: "none" }}
+            >
+              <div className="border-b border-zinc-800 p-4 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-white">
+                  Submit a Command
+                </h2>
+                <button
+                  className="text-zinc-500 hover:text-zinc-300"
+                  onClick={() => {
+                    setSubmitFeatureModalVisible(false);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div className="p-6">
+                {/* Stepper */}
+                <div className="flex mb-8 justify-between">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-green-600 text-white"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(22, 163, 74)",
+                      }}
+                    >
+                      ✓
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Basics</div>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-green-600 text-white"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(22, 163, 74)",
+                      }}
+                    >
+                      ✓
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Details</div>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-green-600 text-white"
+                      style={{
+                        transform: "none",
+                        backgroundColor: "rgb(22, 163, 74)",
+                      }}
+                    >
+                      ✓
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Examples</div>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-blue-600 text-white"
+                      style={{
+                        transform: "scale(1.1)",
+                        backgroundColor: "rgb(37, 99, 235)",
+                      }}
+                    >
+                      4
+                    </div>
+                    <div className="text-xs mt-1 text-zinc-500">Review</div>
+                  </div>
+                </div>
+
+                {/* Review Content */}
+                <div style={{ opacity: 1, transform: "none" }}>
+                  <h3 className="text-xl text-white mb-4">
+                    Command Submission Preview
+                  </h3>
+                  <div className="bg-zinc-800 p-4 rounded border border-zinc-700 mb-6">
+                    <div className="mb-3">
+                      <span className="text-zinc-500 text-sm">Name:</span>
+                      <p className="text-white">{newCommand.commandName}</p>
+                    </div>
+                    <div className="mb-3">
+                      <span className="text-zinc-500 text-sm">
+                        Description:
+                      </span>
+                      <p className="text-white">
+                        {newCommand.shortDescription}
+                      </p>
+                    </div>
+                    <div className="mb-3">
+                      <span className="text-zinc-500 text-sm">Category:</span>
+                      <p className="text-white capitalize">
+                        {newCommand.category}
+                      </p>
+                    </div>
+                    <div className="mb-3">
+                      <span className="text-zinc-500 text-sm">Usage:</span>
+                      <p className="text-white font-mono">
+                        {newCommand.usageExample}
+                      </p>
+                    </div>
+                    <div className="mb-3">
+                      <span className="text-zinc-500 text-sm">Parameters:</span>
+                      <ul className="list-disc list-inside text-zinc-300 text-sm mt-1">
+                        {newCommand.parameters.map((p) => (
+                          <li key={p.name}>
+                            {p.name} {p.type && <span>(</span>} {p.type}{" "}
+                            {p.type && <span>)</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mb-3">
+                      <span className="text-zinc-500 text-sm">Examples:</span>
+                      <ul className="list-disc list-inside text-zinc-300 text-sm mt-1">
+                        {newCommand.usageExamples.map((e) => (
+                          <li key={e.commandCode}>{e.description}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <p className="text-zinc-400 text-sm mb-4">
+                    Your command submission will be reviewed by the Eigencode
+                    team before being added to the registry. If approved, it
+                    will appear in the 'planned' status until implementation is
+                    complete.
+                  </p>
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className="flex justify-between mt-8">
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-zinc-800 text-zinc-300 rounded hover:bg-zinc-700"
+                    onClick={handlePrev}
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                    onClick={handleSubmitCommand}
+                  >
+                    Submit Command
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="scanline" />
+
+        {/* Header */}
+        <header className="w-full max-w-6xl flex justify-between items-center mb-16 z-10">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-cyber-red rounded-full" />
+            <div className="w-3 h-3 bg-cyber-yellow rounded-full" />
+            <div className="w-3 h-3 bg-cyber-green rounded-full" />
+            <span className="text-sm font-mono text-cyber-muted">
+              <TypingEffect text="~ eigencode features" speed={80} />
+            </span>
+          </div>
+          <nav className="flex gap-6 text-sm">
+            <Link
+              href="/"
+              className="text-cyber-green hover:cyber-text-glow transition-colors"
+            >
+              $ home
+            </Link>
+            <Link
+              href="/aura"
+              className="text-cyber-blue hover:cyber-text-glow transition-colors"
+            >
+              $ aura
+            </Link>
+            <Link
+              href="/cmds"
+              className="text-cyber-yellow hover:cyber-text-glow transition-colors "
+            >
+              $ cmds
+            </Link>
+            <Link
+              href="/docs"
+              className="text-cyber-magenta hover:cyber-text-glow transition-colors"
+            >
+              $ docs
+            </Link>
+          </nav>
+        </header>
+
+        {/* Terminal Command */}
+        <div className="w-full max-w-6xl mb-8 z-10">
+          <div className="text-cyber-green font-mono text-sm mb-4">
+            eigencode $ view features
+          </div>
         </div>
-        <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
-      </footer>
-      {/* Command Details Modal */}
-      <CommandDetailsModal isOpen={isModalOpen} onClose={handleCloseModal} command={selectedCommand} />
-    </div>
-  )
+
+        {/* Hero Section */}
+        <section className="flex flex-col items-center text-center mb-16 z-10 w-full max-w-6xl">
+          <h1 className="text-4xl font-bold mb-12 text-cyber-green cyber-text-glow">
+            <GlitchText text="> Features" glitchInterval={7000} />
+          </h1>
+
+          <p className="text-cyber-muted text-center max-w-2xl mb-12">
+            Explore Eigencode's ecosystem of commands, scripts, APIs, and AI
+            integrations.
+          </p>
+
+          {/* Tabs */}
+          <Tabs
+            defaultValue="avail"
+            className="w-full mb-8"
+            onValueChange={setActiveTab}
+          >
+            <TabsList className="bg-transparent border-b border-cyber-green/30 rounded-none h-auto p-0 mb-8">
+              <TabsTrigger
+                value="avail"
+                className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-green data-[state=active]:text-cyber-green rounded-none px-4 py-2"
+              >
+                <FaArrowsLeftRight
+                  className="text-cyber-green mr-2"
+                  aria-label="Arrows Left Right"
+                />{" "}
+                avail
+              </TabsTrigger>
+              <TabsTrigger
+                value="roadmap"
+                className="bg-transparent border-b-2 border-transparent data-[state=active]:border-cyber-magenta data-[state=active]:text-cyber-magenta rounded-none px-4 py-2"
+              >
+                <FaCodeBranch
+                  className="text-cyber-magenta mr-2"
+                  aria-label="Code Branch"
+                />{" "}
+                roadmap
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="avail" className="w-full">
+              {/* Command Input and Submit */}
+              <div className="flex gap-4 mb-8 items-center">
+                <div className="cyber-box flex-1 p-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyber-green">{">"}</span>
+                    <span className="text-cyber-blue">$</span>
+                    <Input
+                      className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-text placeholder:text-cyber-muted"
+                      placeholder="commands"
+                      defaultValue="commands"
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <button className="cyber-button-primary px-6 py-3">
+                  <span
+                    className="relative z-10"
+                    onClick={() => setSubmitFeatureModalVisible(true)}
+                  >
+                    Submit feature
+                  </span>
+                </button>
+              </div>
+
+              {/* Filter Tabs */}
+              <div className="flex gap-2 mb-6 flex-wrap">
+                <button
+                  onClick={resetCommandFilters}
+                  className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
+                    activeFilter === "noFilter"
+                      ? "bg-cyber-blue text-cyber-terminal"
+                      : ""
+                  }`}
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => filterByCategory("analysis")}
+                  className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
+                    activeFilter === "analysis"
+                      ? "bg-cyber-blue text-cyber-terminal"
+                      : ""
+                  }`}
+                >
+                  Analysis
+                </button>
+                <button
+                  onClick={() => filterByCategory("optimization")}
+                  className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
+                    activeFilter === "optimization"
+                      ? "bg-cyber-blue text-cyber-terminal"
+                      : ""
+                  }`}
+                >
+                  Optimization
+                </button>
+                <button
+                  onClick={() => filterByCategory("refactoring")}
+                  className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
+                    activeFilter === "refactoring"
+                      ? "bg-cyber-blue text-cyber-terminal"
+                      : ""
+                  }`}
+                >
+                  Refactoring
+                </button>
+                <button
+                  onClick={() => filterByCategory("documentation")}
+                  className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
+                    activeFilter === "documentation"
+                      ? "bg-cyber-blue text-cyber-terminal"
+                      : ""
+                  }`}
+                >
+                  Documentation
+                </button>
+                <button
+                  onClick={() => filterByCategory("utility")}
+                  className={`px-4 py-2 border border-cyber-blue/30 text-cyber-text rounded text-sm hover:border-cyber-blue transition-colors ${
+                    activeFilter === "utility"
+                      ? "bg-cyber-blue text-cyber-terminal"
+                      : ""
+                  }`}
+                >
+                  Utility
+                </button>
+              </div>
+
+              {/* Sort Options */}
+              <div className="flex items-center gap-4 mb-8 text-sm">
+                <span className="text-cyber-muted">Sort by:</span>
+                <button
+                  onClick={() => {
+                    handleSort("status");
+                    if (sortType === "status") {
+                      setSortAscending(!sortAscending);
+                    }
+                  }}
+                  className={`px-2 py-1 rounded transition-colors flex items-center gap-1 ${
+                    sortType === "status"
+                      ? "bg-zinc-800 text-cyber-blue"
+                      : "text-cyber-text hover:text-cyber-blue"
+                  }`}
+                >
+                  Status{" "}
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-up-down transform rotate-180 transition-transform"
+                    >
+                      {sortType === "status" && sortAscending ? (
+                        <>
+                          <path d="m21 16-4 4-4-4"></path>
+                          <path d="M17 20V4"></path>
+                          <path d="m3 8 4-4 4 4"></path>
+                          <path d="M7 4v16"></path>
+                        </>
+                      ) : (
+                        <>
+                          <path d="m21 8-4-4-4 4"></path>
+                          <path d="M17 4v16"></path>
+                          <path d="m3 16 4 4 4-4"></path>
+                          <path d="M7 20V4"></path>
+                        </>
+                      )}
+                    </svg>
+                  </span>
+                </button>
+                <button
+                  onClick={() => {
+                    handleSort("az");
+                    if (sortType === "az") {
+                      setSortAscending(!sortAscending);
+                    }
+                  }}
+                  className={`px-2 py-1 rounded transition-colors flex items-center gap-1 ${
+                    sortType === "az"
+                      ? "bg-zinc-800 text-cyber-blue"
+                      : "text-cyber-text hover:text-cyber-blue"
+                  }`}
+                >
+                  A-Z
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-up-down transform rotate-180 transition-transform"
+                    >
+                      {sortType === "az" && sortAscending ? (
+                        <>
+                          <path d="m21 16-4 4-4-4"></path>
+                          <path d="M17 20V4"></path>
+                          <path d="m3 8 4-4 4 4"></path>
+                          <path d="M7 4v16"></path>
+                        </>
+                      ) : (
+                        <>
+                          <path d="m21 8-4-4-4 4"></path>
+                          <path d="M17 4v16"></path>
+                          <path d="m3 16 4 4 4-4"></path>
+                          <path d="M7 20V4"></path>
+                        </>
+                      )}
+                    </svg>
+                  </span>
+                </button>
+                <button
+                  onClick={() => {
+                    handleSort("popularity");
+                    if (sortType === "popularity") {
+                      setSortAscending(!sortAscending);
+                    }
+                  }}
+                  className={`px-2 py-1 rounded transition-colors flex items-center gap-1 ${
+                    sortType === "popularity"
+                      ? "bg-zinc-800 text-cyber-blue"
+                      : "text-cyber-text hover:text-cyber-blue"
+                  }`}
+                >
+                  Popularity
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-up-down transform rotate-180 transition-transform"
+                    >
+                      {sortType === "popularity" && sortAscending ? (
+                        <>
+                          <path d="m21 16-4 4-4-4"></path>
+                          <path d="M17 20V4"></path>
+                          <path d="m3 8 4-4 4 4"></path>
+                          <path d="M7 4v16"></path>
+                        </>
+                      ) : (
+                        <>
+                          <path d="m21 8-4-4-4 4"></path>
+                          <path d="M17 4v16"></path>
+                          <path d="m3 16 4 4 4-4"></path>
+                          <path d="M7 20V4"></path>
+                        </>
+                      )}
+                    </svg>
+                  </span>
+                </button>
+                <button
+                  onClick={() => {
+                    handleSort("recent");
+                    if (sortType === "recent") {
+                      setSortAscending(!sortAscending);
+                    }
+                  }}
+                  className={`px-2 py-1 rounded transition-colors flex items-center gap-1 ${
+                    sortType === "recent"
+                      ? "bg-zinc-800 text-cyber-blue"
+                      : "text-cyber-text hover:text-cyber-blue"
+                  }`}
+                >
+                  Recent
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-up-down transform rotate-180 transition-transform"
+                    >
+                      {sortType === "recent" && sortAscending ? (
+                        <>
+                          <path d="m21 16-4 4-4-4"></path>
+                          <path d="M17 20V4"></path>
+                          <path d="m3 8 4-4 4 4"></path>
+                          <path d="M7 4v16"></path>
+                        </>
+                      ) : (
+                        <>
+                          <path d="m21 8-4-4-4 4"></path>
+                          <path d="M17 4v16"></path>
+                          <path d="m3 16 4 4 4-4"></path>
+                          <path d="M7 20V4"></path>
+                        </>
+                      )}
+                    </svg>
+                  </span>
+                </button>
+              </div>
+
+              {/* Commands Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredCommands.length === 0
+                  ? sortCommands(commands).map((command) => (
+                      <div
+                        key={command.name}
+                        className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group cursor-pointer"
+                        onClick={() => handleCommandClick(command)}
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-cyber-blue">$</span>
+                            <span className="text-cyber-blue font-mono font-bold">
+                              {command.name}
+                            </span>
+                          </div>
+                          <Badge
+                            className={`text-xs px-2 py-1 ${getStatusBg(
+                              command.status
+                            )} ${getStatusColor(command.status)}`}
+                          >
+                            {command.status}
+                          </Badge>
+                        </div>
+
+                        <p className="text-cyber-text text-sm mb-4 leading-relaxed">
+                          {command.description}
+                        </p>
+
+                        {command.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {command.tags.map((tag: any) => (
+                              <Badge
+                                key={tag}
+                                variant="outline"
+                                className="text-xs px-2 py-0.5 bg-cyber-terminal/50 border-cyber-blue/30 text-cyber-blue"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  : sortCommands(filteredCommands).map((command) => (
+                      <div
+                        key={command.name}
+                        className="cyber-box p-6 hover:border-cyber-blue/50 transition-all duration-300 group cursor-pointer"
+                        onClick={() => handleCommandClick(command)}
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-cyber-blue">$</span>
+                            <span className="text-cyber-blue font-mono font-bold">
+                              {command.name}
+                            </span>
+                          </div>
+                          <Badge
+                            className={`text-xs px-2 py-1 ${getStatusBg(
+                              command.status
+                            )} ${getStatusColor(command.status)}`}
+                          >
+                            {command.status}
+                          </Badge>
+                        </div>
+
+                        <p className="text-cyber-text text-sm mb-4 leading-relaxed">
+                          {command.description}
+                        </p>
+
+                        {command.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {command.tags.map((tag: any) => (
+                              <Badge
+                                key={tag}
+                                variant="outline"
+                                className="text-xs px-2 py-0.5 bg-cyber-terminal/50 border-cyber-blue/30 text-cyber-blue"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="roadmap" className="w-full">
+              <div className="text-cyber-magenta font-mono text-sm mb-6">
+                {">"} roadmap
+              </div>
+              <p className="text-cyber-text mb-8">
+                The Eigencode command system is continuously evolving. Below is
+                our development timeline and future plans.
+              </p>
+
+              {/* Completed Section */}
+              <div className="mb-12 relative">
+                <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-green rounded-full"></div>
+                <div className="pl-10 border-l border-cyber-green/30">
+                  <h3 className="text-cyber-green text-xl mb-6">Completed</h3>
+                  <p className="text-cyber-text mb-6">
+                    Core command infrastructure and essential commands
+                    completed.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-cyber-blue">$</span>
+                        <span className="text-cyber-blue font-mono font-bold">
+                          open
+                        </span>
+                      </div>
+                      <p className="text-cyber-text text-sm">
+                        Open the Eigencode in your working directory or a file
+                      </p>
+                    </div>
+                    <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-cyber-blue">$</span>
+                        <span className="text-cyber-blue font-mono font-bold">
+                          setup
+                        </span>
+                      </div>
+                      <p className="text-cyber-text text-sm">
+                        Setup the AI configuration you want Eigencode to use
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-cyber-blue">$</span>
+                      <span className="text-cyber-blue font-mono font-bold">
+                        explain
+                      </span>
+                    </div>
+                    <p className="text-cyber-text text-sm">
+                      Get AI-powered explanation of code
+                    </p>
+                  </div>
+
+                  <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-cyber-blue">$</span>
+                      <span className="text-cyber-blue font-mono font-bold">
+                        chat
+                      </span>
+                    </div>
+                    <p className="text-cyber-text text-sm">
+                      Use Eigencode without supplying additional context
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Current Development Section */}
+              <div className="mb-12 relative">
+                <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-yellow rounded-full"></div>
+                <div className="pl-10 border-l border-cyber-yellow/30">
+                  <h3 className="text-cyber-yellow text-xl mb-6">
+                    Current Development
+                  </h3>
+                  <div className="cyber-box p-4 hover:border-cyber-yellow/50 transition-all duration-300">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-cyber-blue">$</span>
+                      <span className="text-cyber-blue font-mono font-bold">
+                        dependency_graph
+                      </span>
+                    </div>
+                    <p className="text-cyber-text text-sm">
+                      Generate and visualize module dependencies
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Planned Features Section */}
+              <div className="mb-12 relative">
+                <div className="absolute left-2 top-2 w-3 h-3 bg-cyber-blue rounded-full"></div>
+                <div className="pl-10 border-l border-cyber-blue/30">
+                  <h3 className="text-cyber-blue text-xl mb-6">
+                    Planned Features
+                  </h3>
+                  <p className="text-cyber-text mb-6">
+                    Features coming in the future:
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-all duration-300">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-cyber-blue">$</span>
+                        <span className="text-cyber-blue font-mono font-bold">
+                          init
+                        </span>
+                      </div>
+                      <p className="text-cyber-text text-sm">
+                        Initialize new projects using Eigencode
+                      </p>
+                    </div>
+                    <div className="cyber-box p-4 hover:border-cyber-blue/50 transition-all duration-300">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-cyber-blue">$</span>
+                        <span className="text-cyber-blue font-mono font-bold">
+                          fix
+                        </span>
+                      </div>
+                      <p className="text-cyber-text text-sm">
+                        Analyze error and codebase to make fixes
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Future Feature Ideas Section */}
+              <div className="mb-12">
+                <h3 className="text-cyber-text text-xl mb-6">
+                  Future Feature Ideas
+                </h3>
+
+                <div className="mb-8">
+                  <div className="flex items-start gap-3 mb-2">
+                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-cyber-magenta font-bold">
+                        Eigencode Pipeline Features
+                      </h4>
+                      <p className="text-cyber-text text-sm">
+                        Features for building and managing automated code
+                        transformation pipelines
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <div className="flex items-start gap-3 mb-2">
+                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-cyber-magenta font-bold">
+                        Language-Specific Analysis Tools
+                      </h4>
+                      <p className="text-cyber-text text-sm">
+                        Deep analysis tools tailored to specific programming
+                        languages (Rust, TypeScript, Python, etc.)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <div className="flex items-start gap-3 mb-2">
+                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-cyber-magenta font-bold">
+                        Integration APIs
+                      </h4>
+                      <p className="text-cyber-text text-sm">
+                        APIs for integrating Eigencode with other development
+                        tools and environments
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <div className="flex items-start gap-3 mb-2">
+                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-cyber-magenta font-bold">
+                        Workflow Automation Scripts
+                      </h4>
+                      <p className="text-cyber-text text-sm">
+                        Scripts for automating complex development workflows
+                        using Eigencode's capabilities
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Community Contributions Section */}
+              <div className="mb-12">
+                <h3 className="text-cyber-text text-xl mb-6">
+                  Community Contributions
+                </h3>
+
+                <p className="text-cyber-text mb-8">
+                  Help shape the future of Eigencode by contributing your
+                  feature ideas. Community contributions help us understand user
+                  needs and expand Eigencode's capabilities.
+                </p>
+
+                <div className="flex flex-col md:flex-row justify-around">
+                  <div>
+                    <h4 className="text-cyber-blue font-bold mb-4 text-left">
+                      Why Contribute?
+                    </h4>
+                    <ul className="text-cyber-text text-sm text-left space-y-2 list-inside">
+                      <li>• Shape the tool to meet your specific needs</li>
+                      <li>• Get recognized in the Eigencode community</li>
+                      <li>• Help advance AI-assisted coding tools</li>
+                      <li>• Gain experience with next development</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-cyber-blue font-bold mb-4 text-left">
+                      Contribution Process
+                    </h4>
+                    <ol className="text-cyber-text text-sm text-left space-y-2 list-inside">
+                      <li>1. Submit your feature idea through this form</li>
+                      <li>2. Our team reviews the submission</li>
+                      <li>3. Approved features get added to the roadmap</li>
+                      <li>4. Features are implemented and released</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div className="flex justify-center mt-8">
+                  <button
+                    className="cyber-button-primary px-6 py-3"
+                    onClick={() => setSubmitFeatureModalVisible(true)}
+                  >
+                    <span className="relative z-10">Submit Feature</span>
+                  </button>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </section>
+
+        {/* Footer */}
+        <footer className="w-full max-w-6xl text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10">
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <span className="inline-block w-2 h-2 bg-cyber-blue animate-blink" />
+            <span>COMMANDS STATUS: ONLINE</span>
+          </div>
+          <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
+        </footer>
+        {/* Command Details Modal */}
+        <CommandDetailsModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          command={selectedCommand}
+        />
+      </div>
+    </>
+  );
 }

@@ -1580,9 +1580,6 @@ export default function CmdsPage() {
             </TabsContent>
 
             <TabsContent value="roadmap" className="w-full">
-              <div className="text-cyber-magenta font-mono text-sm mb-6">
-                {">"} roadmap
-              </div>
               <p className="text-cyber-text mb-8">
                 The Eigencode command system is continuously evolving. Below is
                 our development timeline and future plans.
@@ -1634,6 +1631,7 @@ export default function CmdsPage() {
                       Get AI-powered explanation of code
                     </p>
                   </div>
+                </div>{/* Close the pl-10 div */}
 
                 {/* Timeline Container */}
                 <div className="relative">
@@ -1796,81 +1794,8 @@ export default function CmdsPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* Feature Request CTA */}
-                <div className="mt-16 text-center">
-                  <h3 className="text-xl font-bold text-cyber-text mb-4">Have a feature request?</h3>
-                  <p className="text-cyber-muted max-w-2xl mx-auto mb-6">
-                    We're always looking for ways to improve. Let us know what features you'd like to see in future updates!
-                  </p>
-                  <button 
-                    onClick={() => setSubmitFeatureModalVisible(true)}
-                    className="px-6 py-2.5 bg-cyber-blue hover:bg-cyber-blue/90 text-cyber-terminal font-medium rounded-lg transition-colors shadow-lg hover:shadow-cyber-blue/20"
-                  >
-                    Suggest a Feature
-                  </button>
-                </div>
-                
-                <div className="flex items-start gap-3 mb-2">
-                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="text-cyber-magenta font-bold">
-                        Eigencode Pipeline Features
-                      </h4>
-                      <p className="text-cyber-text text-sm">
-                        Features for building and managing automated code
-                        transformation pipelines
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <div className="flex items-start gap-3 mb-2">
-                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="text-cyber-magenta font-bold">
-                        Language-Specific Analysis Tools
-                      </h4>
-                      <p className="text-cyber-text text-sm">
-                        Deep analysis tools tailored to specific programming
-                        languages (Rust, TypeScript, Python, etc.)
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <div className="flex items-start gap-3 mb-2">
-                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="text-cyber-magenta font-bold">
-                        Integration APIs
-                      </h4>
-                      <p className="text-cyber-text text-sm">
-                        APIs for integrating Eigencode with other development
-                        tools and environments
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <div className="flex items-start gap-3 mb-2">
-                    <div className="w-4 h-4 rounded-full bg-cyber-magenta mt-1 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="text-cyber-magenta font-bold">
-                        Workflow Automation Scripts
-                      </h4>
-                      <p className="text-cyber-text text-sm">
-                        Scripts for automating complex development workflows
-                        using Eigencode's capabilities
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
-
+              
               {/* Community Contributions Section */}
               <div className="mb-12">
                 <h3 className="text-cyber-text text-xl mb-6">

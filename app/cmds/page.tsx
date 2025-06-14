@@ -1580,9 +1580,6 @@ export default function CmdsPage() {
             </TabsContent>
 
             <TabsContent value="roadmap" className="w-full">
-              <div className="text-cyber-magenta font-mono text-sm mb-6">
-                {">"} roadmap
-              </div>
               <p className="text-cyber-text mb-8">
                 The Eigencode command system is continuously evolving. Below is
                 our development timeline and future plans.

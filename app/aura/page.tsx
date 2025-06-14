@@ -9,10 +9,43 @@ import ImageTransformer from "@/components/ImageTransformer";
 import VideoTransformer from "@/components/VideoTransformer";
 import CubeMythosBibleModal from "@/components/CubeMythosBibleModal";
 import "./aura.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+
+interface ArtGallery {
+  SacredTerminal: string[];
+  CorporatePropaganda: string[];
+  CubeMythos: string[];
+  Comics: string[];
+  CODEBro: string[];
+  CODETunes: string[];
+  OrderOfTheCube: string[];
+  TheOccultTerrorsOfCODE: string[];
+  TheScienceOfTheCube: string[];
+  CommunityArtwork: string[];
+}
+
+interface ImageGalleryProps {
+  gallery: ArtGallery;
+  block: keyof ArtGallery;
+}
 
 export default function AuraPage() {
   const [featuredVidieosVisible, setFeaturedVidieosVisible] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [currentGalleryBlock, setCurrentGalleryBlock] = useState<
+    | "SacredTerminal"
+    | "CorporatePropaganda"
+    | "CubeMythos"
+    | "Comics"
+    | "CODEBro"
+    | "CODETunes"
+    | "OrderOfTheCube"
+    | "TheOccultTerrorsOfCODE"
+    | "TheScienceOfTheCube"
+    | "CommunityArtwork"
+    | "nothing"
+  >("nothing");
 
   const tweetDetails = [
     {
@@ -31,6 +64,242 @@ export default function AuraPage() {
       date: "April 23, 2025",
     },
   ];
+
+  const artGallery = {
+    SacredTerminal: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/0aac2a87-e979-4c09-9c70-6169ee5ad283.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/4f23c62b-7428-4322-a164-8e03e4a486f1.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/4f32f36e-21c3-4efd-8f1f-fe3ccbd4591d.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/59f192fc-18ec-4fe5-9e9d-b984d656fade.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/5d08f0d8-54d0-4e09-9620-c05afb214d32.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/70f41918-1711-402a-9fe1-cc557b2a8ce4.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/91eab8d3-b5ba-466b-9c42-b6c555571a87.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/f900ec45-5453-4545-bb81-35083bf3fe4c.png",
+    ],
+    CorporatePropaganda: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_28%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_39%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_43%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_47%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_51%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_28_07%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_44%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_49%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_57%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_36_14%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_36_48%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_37_06%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_37_09%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_37_24%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_00%20AM.png",
+    ],
+    CubeMythos: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_02%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_11%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_15%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_19%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_23%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_27%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_31%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_36%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_47%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_51%20AM.png",
+    ],
+    Comics: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/04c9c3a5-ea4d-45f4-a3a5-bebbd0f0b2c9.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/1c80d110-f69f-4a97-b2b1-faf93a262f9e.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/2e7047c4-bd73-447d-b4e2-5866558b0143.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/474ebc71-7e02-404e-b5a7-d04971d5c0b7.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/76619a59-3722-4a16-962f-8093eb369c89.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/7f65a638-80b6-4645-9dd5-ecb8d8036814.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/837faf59-d0da-4074-a746-27a8c96405f8.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/be8e4721-b89b-40c3-becc-473067821338.png",
+    ],
+    CODEBro: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/89e50a0e-b0e3-475e-ba78-60fd524f4179.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/b342af92-060f-4820-aec9-efe11d9a3ae1.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/bca84496-09a5-4122-8a3f-08809b872c40.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/e2933d17-388b-4539-b677-aa52827eae7d.png",
+    ],
+    CODETunes: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-tunes/eigencode-image-1745532550366.png",
+    ],
+    OrderOfTheCube: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_17%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_30%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_34%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_39%20AM.png",
+    ],
+    TheOccultTerrorsOfCODE: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_32_41%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_32_48%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_32_56%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_33_05%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_06%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_11%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_15%20AM.png",
+    ],
+    TheScienceOfTheCube: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_21%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_25%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_29%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_34%20AM.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_39%20AM.png",
+    ],
+    CommunityArtwork: [
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/001fa90f-58b9-4c4e-9acd-b9be0106c141.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/00a2745d-f8c7-40b6-ba01-f7f54b1435db.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/0143139f-1219-4624-9d7d-da61764ac6f9.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/098d9214-a391-424d-b41a-1309b6f6704f.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/0da0d6b5-c8df-401a-a226-2cc4829ef16a.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/04f1102e-fcf8-4ad5-af75-9e1d0f722982.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/0e41bab1-6870-4ad3-937f-2f7aa39830fa.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/0f32293b-9d91-47d0-b4bf-c9ed404331e4.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/10779738-fcbf-4174-be43-70829d11f3ce.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/16e02ed2-7702-4fba-ab91-6d693d9bb9a9.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/192aaae7-26cc-4e8b-a7c6-815b57d79fdb.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/2bb7c4f2-73a8-4536-afdf-1eb8c6ca988d.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/3052e835-be83-44cb-a1c0-ac033e9e1fe7.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/3b668377-43d3-4328-9e21-9b337c2135f6.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/54072b78-021c-4223-9dda-afbbc38367fb.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/766cd859-cd7b-4904-aaf2-ede653da3fe6.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/8176bfcc-b4a3-4c95-a324-db8b5fe8818e.png",
+      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/855cd2ba-cc10-4505-96a1-39c58cc59a80.png",
+    ],
+  };
+
+  const galleryMap = {
+    "Sacred Terminal": "SacredTerminal",
+    "Corporate Propaganda": "CorporatePropaganda",
+    "Cube Mythos": "CubeMythos",
+    "Comics ": "Comics",
+    "$CODE Bro": "CODEBro",
+    "$CODE Tunes": "CODETunes",
+    "Order of the Cube": "OrderOfTheCube",
+    "The Occult Terrors of $CODE": "TheOccultTerrorsOfCODE",
+    "The Science of the Cube": "TheScienceOfTheCube",
+    "Community Artwork": "CommunityArtwork",
+  } as const;
+  
+
+  const updateCurrentGalleryBlock = (title: string) => {
+    switch (title) {
+      case "Sacred Terminal":
+        console.log("yayyyyy");
+        setCurrentGalleryBlock("SacredTerminal");
+        break;
+      case "Corporate Propaganda":
+        setCurrentGalleryBlock("CorporatePropaganda");
+        break;
+      case "Cube Mythos":
+        setCurrentGalleryBlock("CubeMythos");
+        break;
+      case "Comics":
+        setCurrentGalleryBlock("Comics");
+        break;
+      case "$CODE Bro":
+        setCurrentGalleryBlock("CODEBro");
+        break;
+      case "$CODE Tunes":
+        setCurrentGalleryBlock("CODETunes");
+        break;
+      case "Order of the Cube":
+        setCurrentGalleryBlock("OrderOfTheCube");
+        break;
+      case "The Occult Terrors of $CODE":
+        setCurrentGalleryBlock("TheOccultTerrorsOfCODE");
+        break;
+      case "The Science of the Cube":
+        setCurrentGalleryBlock("TheScienceOfTheCube");
+        break;
+      case "Community Artwork":
+        setCurrentGalleryBlock("CommunityArtwork");
+        break;
+      default:
+        setCurrentGalleryBlock("nothing");
+        break;
+    }
+  };
+
+  const ImageGallery = ({ gallery, block }: ImageGalleryProps) => {
+    const images = gallery[block];
+    const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    // Preload images
+    useEffect(() => {
+      images.forEach((_, index) => {
+        const img = new window.Image();
+        img.src = images[index];
+        img.onload = () => {
+          setLoadedImages(prev => ({
+            ...prev,
+            [index]: true
+          }));
+        };
+      });
+    }, [images]);
+
+    const handleViewFullImage = (url: string, e: React.MouseEvent) => {
+      e.stopPropagation();
+      window.open(url, '_blank', 'noopener,noreferrer');
+    };
+
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {images.map((url, index) => (
+          <div 
+            key={index} 
+            className="relative aspect-square group"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            {!loadedImages[index] ? (
+              <div className="w-full h-full bg-cyber-bg/20 animate-pulse rounded" />
+            ) : (
+              <>
+                <Image
+                  src={url}
+                  alt={`Gallery image ${index + 1}`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover rounded transition-transform duration-300 group-hover:brightness-75"
+                  loading="lazy"
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGwAKVcB5YHwAAAABJRU5ErkJggg=="
+                />
+                {hoveredIndex === index && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button
+                      onClick={(e) => handleViewFullImage(url, e)}
+                      className="px-4 py-2 bg-cyber-blue text-white rounded-md flex items-center gap-2 transition-all hover:bg-cyber-green hover:scale-105"
+                    >
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        className="h-5 w-5" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2} 
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m0 0l3-3m-3 3L7 10" 
+                        />
+                      </svg>
+                      View Full Image
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -287,27 +556,35 @@ export default function AuraPage() {
         </p>
 
         <div className="grid grid-cols-1 gap-6">
-          {[
-            "Sacred Terminal",
-            "Corporate Propaganda",
-            "Cube Mythos",
-            "Comics",
-            "$CODE Bro",
-            "$CODE Tunes",
-            "Order of the Cube",
-            "The Occult Terrors of $CODE",
-            "The Science of the Cube",
-            "Community Artwork",
-          ].map((title) => (
+          {Object.entries(galleryMap).map(([title, blockKey]) => (
             <div
-              key={title}
+              key={blockKey}
               className="cyber-box p-4 hover:border-cyber-blue/50 transition-colors cursor-pointer group"
+              onClick={() => {
+                if (currentGalleryBlock === blockKey) {
+                  setIsGalleryOpen(!isGalleryOpen);
+                } else {
+                  setCurrentGalleryBlock(blockKey);
+                  setIsGalleryOpen(true);
+                }
+              }}
             >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg text-cyber-blue font-mono group-hover:cyber-text-glow transition-colors">
                   {title}
                 </h3>
-                <button className="text-cyber-blue hover:text-cyber-green transition-colors">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (currentGalleryBlock === blockKey) {
+                      setIsGalleryOpen(!isGalleryOpen);
+                    } else {
+                      setCurrentGalleryBlock(blockKey);
+                      setIsGalleryOpen(true);
+                    }
+                  }}
+                  className="text-cyber-blue hover:text-cyber-green transition-colors"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -322,6 +599,9 @@ export default function AuraPage() {
                   </svg>
                 </button>
               </div>
+              {isGalleryOpen && currentGalleryBlock === blockKey && (
+                <ImageGallery gallery={artGallery} block={blockKey} />
+              )}
             </div>
           ))}
         </div>

@@ -335,7 +335,7 @@ export default function VideoTransformer() {
                       <path d="M9 2v2"></path>
                       <path d="M9 20v2"></path>
                     </svg>
-                    {isProcessing ? "Processing..." : "Apply Eigencode Filter"}
+                    {isProcessing ? "Processing..." : "Apply Polybiuos Filter"}
                   </button>
                 </div>
               </>

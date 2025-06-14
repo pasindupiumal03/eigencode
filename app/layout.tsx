@@ -6,10 +6,15 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Eigencode - AI-Powered Code Generation",
+  title: "POLYBIUOS - AI-Powered Code Generation",
   description:
     "An intelligent CLI tool for code generation, analysis, and optimization powered by advanced machine learning models.",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  icons: {
+    icon: '/logo.jpg',
+    apple: '/logo.jpg',
+  },
+  manifest: '/site.webmanifest'
 }
 
 export default function RootLayout({

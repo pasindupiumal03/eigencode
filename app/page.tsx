@@ -1,18 +1,14 @@
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
-import { Github, Twitter, Send, MessageCircle, Code, Zap, FileText, Puzzle } from "lucide-react"
+import { Code, Zap, FileText, Puzzle } from "lucide-react"
 import { MatrixBackground } from "@/components/matrix-background"
 import { TerminalWindow } from "@/components/terminal-window"
 import { GlitchText } from "@/components/glitch-text"
 import { TypingEffect } from "@/components/typing-effect"
-import { FaXTwitter } from "react-icons/fa6";
-import { FaChartLine } from "react-icons/fa";
-import { FaDiscord } from "react-icons/fa6";
-import { FaTelegramPlane } from "react-icons/fa";
-
-
-
-
+import { FaXTwitter } from "react-icons/fa6"
+import { FaChartLine } from "react-icons/fa"
+import { FaDiscord } from "react-icons/fa6"
+import { FaTelegramPlane } from "react-icons/fa"
 
 export default function Component() {
   return (
@@ -27,7 +23,7 @@ export default function Component() {
           <div className="w-3 h-3 bg-cyber-yellow rounded-full" />
           <div className="w-3 h-3 bg-cyber-green rounded-full" />
           <span className="text-sm font-mono text-cyber-muted">
-            <TypingEffect text="~ eigencode home" speed={80} />
+            <TypingEffect text="~ polybiuos home" speed={80} />
           </span>
         </div>
         <nav className="flex gap-6 text-sm">
@@ -48,7 +44,7 @@ export default function Component() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center mb-16 z-10">
-        {/* ASCII Art EIGENCODE */}
+        {/* ASCII Art POLYBIUOS */}
         <div className="relative mb-8 w-full max-w-6xl overflow-hidden">
           <pre
             className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-blue-500/40 whitespace-pre"
@@ -57,12 +53,12 @@ export default function Component() {
               transform: "translateX(0.5px) translateY(-0.5px)",
             }}
           >
-            {`███████╗██╗ ██████╗ ███████╗███╗   ██╗ ██████╗ ██████╗ ██████╗ ███████╗
-██╔════╝██║██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝
-█████╗  ██║██║  ███╗█████╗  ██╔██╗ ██║██║     ██║   ██║██║  ██║█████╗  
-██╔══╝  ██║██║   ██║██╔══╝  ██║╚██╗██║██║     ██║   ██║██║  ██║██╔══╝  
-███████╗██║╚██████╔╝███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
-╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝`}
+            {`██████╗  ██████╗ ██╗  ██╗   ██╗██████╗ ██╗██╗   ██╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██║██║   ██║██╔═══██╗██╔════╝
+██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝██║██║   ██║██║   ██║███████╗
+██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██║██║   ██║██║   ██║╚════██║
+██║     ╚██████╔╝███████╗██║   ██████╔╝██║╚██████╔╝╚██████╔╝███████║
+╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝`}
           </pre>
           <pre
             className="absolute inset-0 text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-sky-400/40 whitespace-pre"
@@ -71,25 +67,25 @@ export default function Component() {
               transform: "translateX(-0.5px) translateY(0.5px)",
             }}
           >
-            {`███████╗██╗ ██████╗ ███████╗███╗   ██╗ ██████╗ ██████╗ ██████╗ ███████╗
-██╔════╝██║██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝
-█████╗  ██║██║  ███╗█████╗  ██╔██╗ ██║██║     ██║   ██║██║  ██║█████╗  
-██╔══╝  ██║██║   ██║██╔══╝  ██║╚██╗██║██║     ██║   ██║██║  ██║██╔══╝  
-███████╗██║╚██████╔╝███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
-╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝`}
+            {`██████╗  ██████╗ ██╗  ██╗   ██╗██████╗ ██╗██╗   ██╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██║██║   ██║██╔═══██╗██╔════╝
+██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝██║██║   ██║██║   ██║███████╗
+██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██║██║   ██║██║   ██║╚════██║
+██║     ╚██████╔╝███████╗██║   ██████╔╝██║╚██████╔╝╚██████╔╝███████║
+╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝`}
           </pre>
           <pre className="relative text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[22px] leading-[1.1] font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyber-green via-cyber-blue to-cyber-green cyber-text-glow whitespace-pre">
-            {`███████╗██╗ ██████╗ ███████╗███╗   ██╗ ██████╗ ██████╗ ██████╗ ███████╗
-██╔════╝██║██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝
-█████╗  ██║██║  ███╗█████╗  ██╔██╗ ██║██║     ██║   ██║██║  ██║█████╗  
-██╔══╝  ██║██║   ██║██╔══╝  ██║╚██╗██║██║     ██║   ██║██║  ██║██╔══╝  
-███████╗██║╚██████╔╝███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
-╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝`}
+            {`██████╗  ██████╗ ██╗  ██╗   ██╗██████╗ ██╗██╗   ██╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██║██║   ██║██╔═══██╗██╔════╝
+██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝██║██║   ██║██║   ██║███████╗
+██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██║██║   ██║██║   ██║╚════██║
+██║     ╚██████╔╝███████╗██║   ██████╔╝██║╚██████╔╝╚██████╔╝███████║
+╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝`}
           </pre>
         </div>
 
         {/* Terminal Input Card */}
-        <TerminalWindow title="eigencode - terminal" className="w-full max-w-2xl mb-8">
+        <TerminalWindow title="polybiuos - terminal" className="w-full max-w-2xl mb-8">
           <div className="flex items-center gap-2">
             <span className="text-cyber-green">CA:</span>
             <Input
@@ -104,20 +100,24 @@ export default function Component() {
         {/* Action Buttons */}
         <div className="flex gap-4 mb-8">
           <button className="cyber-button-primary">
-          <Link href="/docs" passHref legacyBehavior>
-            <span className="relative z-10">GET_STARTED</span>
-          </Link>
+            <Link href="/docs" passHref legacyBehavior>
+              <span className="relative z-10">GET_STARTED</span>
+            </Link>
           </button>
           <button className="cyber-button-secondary">
-          <Link href="/docs/getting-started/installation" passHref legacyBehavior>
-            <span className="relative z-10">DOWNLOAD</span>
-          </Link>
+            <Link href="/docs/getting-started/installation" passHref legacyBehavior>
+              <span className="relative z-10">DOWNLOAD</span>
+            </Link>
           </button>
         </div>
 
         {/* Social Icons */}
         <div className="flex gap-6 mb-16">
-          <Link href="https://dexscreener.com/solana/drafcw4wfvstiecs3k3strqafvdfpakpxqbae7vlxwva" aria-label="FaChartLine" className="group">
+          <Link
+            href="https://dexscreener.com/solana/drafcw4wfvstiecs3k3strqafvdfpakpxqbae7vlxwva"
+            aria-label="FaChartLine"
+            className="group"
+          >
             <FaChartLine className="w-7 h-7 text-cyber-text group-hover:text-cyber-green transition-colors duration-300" />
           </Link>
           <Link href="https://x.com/eigencode_dev" aria-label="FaXTwitter" className="group">
@@ -134,9 +134,9 @@ export default function Component() {
 
       {/* Terminal Output Card */}
       <section className="w-full max-w-4xl mb-16 z-10">
-        <TerminalWindow title="eigencode">
+        <TerminalWindow title="polybiuos">
           <div className="text-sm">
-            <TypingEffect text="$ eigencode open" className="text-cyber-green" speed={30} showCursor={false} />
+            <TypingEffect text="$ polybiuos open" className="text-cyber-green" speed={30} showCursor={false} />
             <br />
             <TypingEffect
               text="✓ Project initialized successfully!"
@@ -147,7 +147,7 @@ export default function Component() {
             />
             <br />
             <TypingEffect
-              text="$ eigencode optimize src/utils/parser.js"
+              text="$ polybiuos optimize src/utils/parser.js"
               className="text-cyber-green"
               speed={30}
               delay={2000}
@@ -195,7 +195,7 @@ export default function Component() {
             />
             <br />
             <TypingEffect
-              text="$ eigencode implement 1"
+              text="$ polybiuos implement 1"
               className="text-cyber-green"
               speed={30}
               delay={9000}
@@ -294,7 +294,7 @@ export default function Component() {
               <span className="text-cyber-text">{"}"}</span>
               <br />
               <br />
-              <span className="text-cyber-green">// After eigencode optimization</span>
+              <span className="text-cyber-green">// After polybiuos optimization</span>
               <br />
               <span className="text-cyber-text">function</span> <span className="text-cyber-blue">processData</span>
               <span className="text-cyber-text">(</span>

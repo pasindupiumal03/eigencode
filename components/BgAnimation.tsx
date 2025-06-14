@@ -408,7 +408,7 @@ export default function BgAnimation() {
                   "scale(0.840429) rotate(-1.62896deg) translate(-0.989319px, -1.50816px)",
               }}
             >
-              ╔═════════════╗ ║ EIGENCODE ║ ║ █████ █ ██ ║ ║ █ █ █ ║ ║ ████ █ █
+              ╔═════════════╗ ║ Polybiuos ║ ║ █████ █ ██ ║ ║ █ █ █ ║ ║ ████ █ █
               ║ ║ █ █ █ ║ ║ █████ █ ██ ║ ╚═════════════╝
             </div>
             <div

@@ -9,7 +9,7 @@ export default function InstallationGuide() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="text-cyber-blue">{">"}</span>
-            <span className="text-cyber-blue font-mono font-bold">Eigencode Docs</span>
+            <span className="text-cyber-blue font-mono font-bold">Polybiuos Docs</span>
           </div>
           <Link href="/" className="text-cyber-text hover:text-cyber-blue transition-colors">
             Home
@@ -23,17 +23,17 @@ export default function InstallationGuide() {
           <pre className="mb-4 text-cyber-text"><strong>Getting Started</strong></pre>
           <pre className="mb-4 text-cyber-text">Installation</pre>
           <pre className="mb-4 text-cyber-text">UNIX-like Systems (Linux/macOS)</pre>
-          <p className="mb-2">To install Eigencode on a UNIX-like system (Linux or macOS), open your terminal and run the following command:</p>
-          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">curl -fsSL https://www.eigencode.dev/stable/latest/installer.sh | sudo bash</code></pre>
-          <p className="mb-4">This script will download and install the necessary Eigencode binary files.</p>
+          <p className="mb-2">To install Polybiuos on a UNIX-like system (Linux or macOS), open your terminal and run the following command:</p>
+          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">curl -fsSL https://www.polybiuos.dev/stable/latest/installer.sh | sudo bash</code></pre>
+          <p className="mb-4">This script will download and install the necessary Polybiuos binary files.</p>
           <pre className="mb-4 text-cyber-text">Windows Systems</pre>
           <p className="mb-2">For Windows users, the installation process requires running a PowerShell command. Open PowerShell and execute the following:</p>
-          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">powershell -ExecutionPolicy Bypass -Command "iex ((New-Object Net.WebClient).DownloadString('https://www.eigencode.dev/stable/latest/installer.ps1'))"</code></pre>
-          <p className="mb-4">Once the command completes, Eigencode will be installed on your system.</p>
+          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">powershell -ExecutionPolicy Bypass -Command "iex ((New-Object Net.WebClient).DownloadString('https://www.polybiuos.dev/stable/latest/installer.ps1'))"</code></pre>
+          <p className="mb-4">Once the command completes, Polybiuos will be installed on your system.</p>
           <pre className="mb-4 text-cyber-text">Verifying Installation</pre>
           <p className="mb-2">To confirm the installation was successful, run the following command in your terminal or PowerShell session:</p>
-          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">eigencode version</code></pre>
-          <p>If everything is set up correctly, the version number of Eigencode will be displayed. You might need to restart your terminal or PowerShell session before running this command.</p>
+          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">polybiuos version</code></pre>
+          <p>If everything is set up correctly, the version number of Polybiuos will be displayed. You might need to restart your terminal or PowerShell session before running this command.</p>
         </div>
       </div>
     </div>

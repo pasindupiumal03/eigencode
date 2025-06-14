@@ -43,7 +43,7 @@ const buildPromptForStylePresets = (promptParts: stylePresetsPromptParts) => {
       break;
     case "DigitalAbstract":
       stylePresetDetails =
-        "Digital Abstract - Abstract digital art with intricate data patterns, particle effects, and flowing eigencode aesthetic";
+        "Digital Abstract - Abstract digital art with intricate data patterns, particle effects, and flowing polybiuos aesthetic";
       break;
     case "CircuitPattern":
       stylePresetDetails =

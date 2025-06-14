@@ -8,10 +8,10 @@ export default function DocTry() {
         className="prose prose-invert max-w-none text-blue-400"
         style={{ opacity: 1 }}
       >
-        <h1>Getting Started with Eigencode</h1>
+        <h1>Getting Started with Polybiuos</h1>
         <p className="lead text-xl text-white">
-          Welcome to Eigencode! This guide will help you get up and running with
-          the Eigencode platform, allowing you to leverage AI-powered commands
+          Welcome to Polybiuos! This guide will help you get up and running with
+          the Polybiuos platform, allowing you to leverage AI-powered commands
           in your development workflow.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 not-prose my-8">
@@ -21,7 +21,7 @@ export default function DocTry() {
                 Installation
               </h3>
               <p className="text-sm text-zinc-400">
-                Set up Eigencode in your development environment with ease.
+                Set up Polybiuos in your development environment with ease.
               </p>
             </div>
           </a>
@@ -31,7 +31,7 @@ export default function DocTry() {
                 Quick Start
               </h3>
               <p className="text-sm text-zinc-400">
-                Learn the basics and run your first Eigencode commands.
+                Learn the basics and run your first Polybiuos commands.
               </p>
             </div>
           </a>
@@ -41,7 +41,7 @@ export default function DocTry() {
                 Open
               </h3>
               <p className="text-sm text-zinc-400">
-                Initialize Eigencode in your development environment.
+                Initialize Polybiuos in your development environment.
               </p>
             </div>
           </a>
@@ -49,7 +49,7 @@ export default function DocTry() {
         <h2>Next Steps</h2>
         <p className="text-white">
           Once you're comfortable with the basics, explore these resources to
-          get the most out of Eigencode:
+          get the most out of Polybiuos:
         </p>
         <ul>
           <li>
@@ -77,7 +77,7 @@ export default function DocTry() {
             >
               White Paper
             </a>{" "}
-            - Understand the principles behind Eigencode
+            - Understand the principles behind Polybiuos
           </li>
         </ul>
       </div>

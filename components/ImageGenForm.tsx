@@ -79,10 +79,10 @@ export default function ImageGenForm() {
     <>
       <div className="text-center mb-8">
         <h2 className="text-xl text-blue-400 font-bold mb-6 font-mono">
-          Eigencode AI Image Generator
+          Polybiuos AI Image Generator
         </h2>
         <p className="text-blue-200 mb-6 max-w-3xl mx-auto">
-          Generate unique AI images with our signature eigencode style. Create
+          Generate unique AI images with our signature polybiuos style. Create
           branded visuals for your projects, social media, or personal use.
         </p>
         <div className="flex justify-center space-x-3 mt-3">
@@ -520,7 +520,7 @@ export default function ImageGenForm() {
                         </svg>
                       ),
                       description:
-                        "Abstract digital art with intricate data patterns, particle effects, and flowing eigencode aesthetic",
+                        "Abstract digital art with intricate data patterns, particle effects, and flowing polybiuos aesthetic",
                     },
                     {
                       name: "CircuitPattern",
@@ -735,7 +735,7 @@ export default function ImageGenForm() {
                       <div className="text-center py-12 px-4">
                         <div className="w-16 h-16 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin mb-4 mx-auto"></div>
                         <p className="text-blue-300">
-                          Generating your image with eigencode style...
+                          Generating your image with polybiuos style...
                         </p>
                         <p className="text-zinc-500 text-sm mt-2">
                           This may take up to 30 seconds
@@ -747,7 +747,7 @@ export default function ImageGenForm() {
                       <div className="text-5xl mb-4">🖼️</div>
                       <p className="text-zinc-400">
                         Enter a prompt and click 'Generate Image' to create your
-                        eigencode-styled image
+                        polybiuos-styled image
                       </p>
                     </div>
                   )}

@@ -223,7 +223,7 @@ export default function ImageTransformer() {
                       <path d="M9 2v2"></path>
                       <path d="M9 20v2"></path>
                     </svg>
-                    Apply Eigencode Filter
+                    Apply Polybiuos Filter
                   </button>
                 </div>
               </>

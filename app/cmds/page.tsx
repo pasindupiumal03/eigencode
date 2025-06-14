@@ -27,27 +27,27 @@ export default function CmdsPage() {
       name: "open",
       id: 1,
       status: "complete",
-      description: "Open the Eigencode in your working directory or a file",
+      description: "Open the polybiuos in your working directory or a file",
       detailedDescription:
-        "Launch Eigencode interface in your current working directory or open a specific file for AI-assisted coding. This command starts the interactive session.",
+        "Launch polybiuos interface in your current working directory or open a specific file for AI-assisted coding. This command starts the interactive session.",
       tags: ["programming", "efficiency", "full-pack"],
       category: "analysis",
-      usage: "$ eigencode open",
+      usage: "$ polybiuos open",
       examples: [
-        "# Open Eigencode in the current directory\n$ eigencode open .",
+        "# Open polybiuos in the current directory\n$ polybiuos open .",
       ],
     },
     {
       name: "setup",
       id: 2,
       status: "complete",
-      description: "Setup the AI configuration you want Eigencode to use",
+      description: "Setup the AI configuration you want polybiuos to use",
       detailedDescription:
-        "Configure Eigencode with your preferred AI provider and settings. This command initializes the configuration file and sets up authentication for AI services.",
+        "Configure polybiuos with your preferred AI provider and settings. This command initializes the configuration file and sets up authentication for AI services.",
       tags: ["configuration"],
       category: "utility",
-      usage: "$ eigencode setup",
-      examples: ["# Start the setup process\n$ eigencode setup"],
+      usage: "$ polybiuos setup",
+      examples: ["# Start the setup process\n$ polybiuos setup"],
     },
     {
       name: "explain",
@@ -58,25 +58,25 @@ export default function CmdsPage() {
         "Generate detailed explanations of code functionality, algorithms, and design patterns. Perfect for understanding complex codebases or learning new concepts.",
       tags: [],
       category: "documentation",
-      usage: "$ eigencode explain [file-path]",
+      usage: "$ polybiuos explain [file-path]",
       examples: [
-        "# Get a detailed explanation of a complex function\n$ eigencode explain explain src/algorithm.rs:optimize_path --depth=detailed",
+        "# Get a detailed explanation of a complex function\n$ polybiuos explain explain src/algorithm.rs:optimize_path --depth=detailed",
       ],
     },
     {
       name: "chat",
       id: 4,
       status: "complete",
-      description: "Use Eigencode without supplying additional context",
+      description: "Use polybiuos without supplying additional context",
       detailedDescription:
         "Start an interactive chat session with AI for general programming questions, code reviews, and development guidance without needing to specify files or context.",
       tags: [],
       category: "analysis",
-      usage: "$ eigencode chat",
+      usage: "$ polybiuos chat",
       examples: [
-        "# Start interactive chat\n$ eigencode chat",
-        '# Chat with specific topic\n$ eigencode chat --topic "React hooks"',
-        '# Chat with code snippet\n$ eigencode chat --code "const [state, setState] = useState()"',
+        "# Start interactive chat\n$ polybiuos chat",
+        '# Chat with specific topic\n$ polybiuos chat --topic "React hooks"',
+        '# Chat with code snippet\n$ polybiuos chat --code "const [state, setState] = useState()"',
       ],
     },
     {
@@ -88,23 +88,23 @@ export default function CmdsPage() {
         "Create visual dependency graphs of your project modules and packages. Helps identify circular dependencies, unused modules, and optimization opportunities.",
       tags: [],
       category: "analysis",
-      usage: "$ eigencode dependency_graph",
-      examples: ["# Generate dependency graph\n$ eigencode dependency_graph ."],
+      usage: "$ polybiuos dependency_graph",
+      examples: ["# Generate dependency graph\n$ polybiuos dependency_graph ."],
     },
     {
       name: "init",
       id: 6,
       status: "planned",
-      description: "Initialize new projects using Eigencode",
+      description: "Initialize new projects using polybiuos",
       detailedDescription:
         "Create new projects with AI-generated boilerplate code and structure. This command will set up project templates based on your requirements.",
       tags: ["injection possibility"],
       category: "refactoring",
-      usage: "$ eigencode init [project-name]",
+      usage: "$ polybiuos init [project-name]",
       examples: [
-        "# Initialize a new project\n$ eigencode init my-app",
-        "# Initialize with specific template\n$ eigencode init my-app --template react",
-        "# Initialize with AI-generated structure\n$ eigencode init my-app --ai-generate",
+        "# Initialize a new project\n$ polybiuos init my-app",
+        "# Initialize with specific template\n$ polybiuos init my-app --template react",
+        "# Initialize with AI-generated structure\n$ polybiuos init my-app --ai-generate",
       ],
     },
     {
@@ -116,11 +116,11 @@ export default function CmdsPage() {
         "Automatically detect and fix errors in your codebase using AI analysis. This command scans for bugs, performance issues, and code quality problems.",
       tags: [],
       category: "optimization",
-      usage: "$ eigencode fix [file-path]",
+      usage: "$ polybiuos fix [file-path]",
       examples: [
-        "# Fix errors in current directory\n$ eigencode fix",
-        "# Fix specific file\n$ eigencode fix src/component.js",
-        "# Fix with specific error type\n$ eigencode fix --type syntax",
+        "# Fix errors in current directory\n$ polybiuos fix",
+        "# Fix specific file\n$ polybiuos fix src/component.js",
+        "# Fix with specific error type\n$ polybiuos fix --type syntax",
       ],
     },
   ]);
@@ -597,7 +597,7 @@ export default function CmdsPage() {
                     </label>
                     <input
                       className="w-full bg-zinc-800 border border-zinc-700 text-white p-2 rounded"
-                      placeholder="e.g., eigencode analyze_perf [file_or_dir]"
+                      placeholder="e.g., polybiuos analyze_perf [file_or_dir]"
                       type="text"
                       onChange={(e) =>
                         setNewCommand((prev) => ({
@@ -886,7 +886,7 @@ export default function CmdsPage() {
                                 <div className="px-2 text-xs">1</div>
                               </div>
                               <textarea
-                                placeholder="eigencode command --option value"
+                                placeholder="polybiuos command --option value"
                                 className="w-full h-16 bg-transparent pl-14 pr-4 pt-2 pb-2 focus:outline-none resize-none text-green-400"
                                 spellCheck="false"
                                 value={newCommand.usageExamples[0].commandCode}
@@ -1101,7 +1101,7 @@ export default function CmdsPage() {
                     </div>
                   </div>
                   <p className="text-zinc-400 text-sm mb-4">
-                    Your command submission will be reviewed by the Eigencode
+                    Your command submission will be reviewed by the polybiuos
                     team before being added to the registry. If approved, it
                     will appear in the 'planned' status until implementation is
                     complete.
@@ -1139,7 +1139,7 @@ export default function CmdsPage() {
             <div className="w-3 h-3 bg-cyber-yellow rounded-full" />
             <div className="w-3 h-3 bg-cyber-green rounded-full" />
             <span className="text-sm font-mono text-cyber-muted">
-              <TypingEffect text="~ eigencode features" speed={80} />
+              <TypingEffect text="~ polybiuos features" speed={80} />
             </span>
           </div>
           <nav className="flex gap-6 text-sm">
@@ -1173,7 +1173,7 @@ export default function CmdsPage() {
         {/* Terminal Command */}
         <div className="w-full max-w-6xl mb-8 z-10">
           <div className="text-cyber-green font-mono text-sm mb-4">
-            eigencode $ view features
+            polybiuos $ view features
           </div>
         </div>
 
@@ -1184,7 +1184,7 @@ export default function CmdsPage() {
           </h1>
 
           <p className="text-cyber-muted text-center max-w-2xl mb-12">
-            Explore Eigencode's ecosystem of commands, scripts, APIs, and AI
+            Explore polybiuos's ecosystem of commands, scripts, APIs, and AI
             integrations.
           </p>
 
@@ -1581,7 +1581,7 @@ export default function CmdsPage() {
 
             <TabsContent value="roadmap" className="w-full">
               <p className="text-cyber-text mb-8">
-                The Eigencode command system is continuously evolving. Below is
+                The polybiuos command system is continuously evolving. Below is
                 our development timeline and future plans.
               </p>
 
@@ -1604,7 +1604,7 @@ export default function CmdsPage() {
                         </span>
                       </div>
                       <p className="text-cyber-text text-sm">
-                        Open the Eigencode in your working directory or a file
+                        Open the polybiuos in your working directory or a file
                       </p>
                     </div>
                     <div className="cyber-box p-4 hover:border-cyber-green/50 transition-all duration-300">
@@ -1615,7 +1615,7 @@ export default function CmdsPage() {
                         </span>
                       </div>
                       <p className="text-cyber-text text-sm">
-                        Setup the AI configuration you want Eigencode to use
+                        Setup the AI configuration you want polybiuos to use
                       </p>
                     </div>
                   </div>
@@ -1803,9 +1803,9 @@ export default function CmdsPage() {
                 </h3>
 
                 <p className="text-cyber-text mb-8">
-                  Help shape the future of Eigencode by contributing your
+                  Help shape the future of polybiuos by contributing your
                   feature ideas. Community contributions help us understand user
-                  needs and expand Eigencode's capabilities.
+                  needs and expand polybiuos's capabilities.
                 </p>
 
                 <div className="flex flex-col md:flex-row justify-around">
@@ -1815,7 +1815,7 @@ export default function CmdsPage() {
                     </h4>
                     <ul className="text-cyber-text text-sm text-left space-y-2 list-inside">
                       <li>• Shape the tool to meet your specific needs</li>
-                      <li>• Get recognized in the Eigencode community</li>
+                      <li>• Get recognized in the polybiuos community</li>
                       <li>• Help advance AI-assisted coding tools</li>
                       <li>• Gain experience with next development</li>
                     </ul>

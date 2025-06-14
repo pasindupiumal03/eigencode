@@ -13,7 +13,7 @@ export default function DocsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="text-cyber-blue">{">"}</span>
-            <span className="text-cyber-blue font-mono font-bold">Eigencode Docs</span>
+            <span className="text-cyber-blue font-mono font-bold">Polybiuos Docs</span>
           </div>
           <Link href="/" className="text-cyber-text hover:text-cyber-blue transition-colors">
             Home
@@ -25,18 +25,18 @@ export default function DocsPage() {
         {/* Sidebar */}
         <aside className="w-80 min-h-screen border-r border-cyber-blue/20 bg-cyber-dark/50 backdrop-blur-sm p-6 z-10 relative">
           {/* Terminal Window in Sidebar */}
-          <TerminalWindow title="eigencode" className="mb-8">
+          <TerminalWindow title="polybiuos" className="mb-8">
             <div className="text-xs">
-              <div className="text-cyber-green mb-2">$ eigencode</div>
-              <div className="text-cyber-text mb-1">Eigencode CLI v0.9.0</div>
+              <div className="text-cyber-green mb-2">$ polybiuos</div>
+              <div className="text-cyber-text mb-1">Polybiuos CLI v0.9.0</div>
               <div className="text-cyber-text mb-1">Intelligent code generation and</div>
               <div className="text-cyber-text mb-3">analysis</div>
-              <div className="text-cyber-green mb-2">$ eigencode open .</div>
+              <div className="text-cyber-green mb-2">$ polybiuos open .</div>
               <div className="text-cyber-text mb-1">Analyzing project structure...</div>
               <div className="text-cyber-text mb-1">Found 127 files across 14</div>
               <div className="text-cyber-text mb-1">directories</div>
               <div className="text-cyber-green mb-3">Analysis complete ✓</div>
-              <div className="text-cyber-blue">$ eigencode help</div>
+              <div className="text-cyber-blue">$ polybiuos help</div>
             </div>
           </TerminalWindow>
 
@@ -104,7 +104,7 @@ export default function DocsPage() {
           {/* Hero Section */}
           <section className="mb-12 text-center">
             <h1 className="text-4xl font-bold mb-6 text-cyber-blue">
-              <span className="text-cyber-blue">{">"}</span> Eigencode
+              <span className="text-cyber-blue">{">"}</span> Polybiuos
             </h1>
 
             <p className="text-cyber-text text-lg mb-8 max-w-2xl mx-auto">
@@ -138,13 +138,13 @@ export default function DocsPage() {
               </h2>
 
               <p className="text-cyber-text mb-4">
-                Eigencode is an intelligent code generation CLI that helps developers analyze and optimize their
-                codebases. With powerful AI-driven features, Eigencode can assist with code analysis, refactoring, and
+                Polybiuos is an intelligent code generation CLI that helps developers analyze and optimize their
+                codebases. With powerful AI-driven features, Polybiuos can assist with code analysis, refactoring, and
                 optimization.
               </p>
 
               <p className="text-cyber-text mb-6">
-                This documentation will guide you through installation, configuration, and usage of the Eigencode CLI.
+                This documentation will guide you through installation, configuration, and usage of the Polybiuos CLI.
               </p>
 
               <Link href="/docs/getting-started" className="text-cyber-blue hover:text-cyber-green transition-colors">
@@ -160,13 +160,13 @@ export default function DocsPage() {
               </h2>
 
               <p className="text-cyber-text mb-6">
-                Paste following command in your terminal to install Eigencode on UNIX-like systems:
+                Paste following command in your terminal to install Polybiuos on UNIX-like systems:
               </p>
 
               <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4">
                 <div className="text-sm font-mono">
                   <code className="text-cyber-green">
-                    curl -fsSL https://www.eigencode.dev/stable/latest/installer.sh | sudo bash
+                    curl -fsSL https://www.polybiuos.dev/stable/latest/installer.sh | sudo bash
                   </code>
                 </div>
                 <div className="w-full h-2 bg-cyber-terminal">
@@ -177,7 +177,7 @@ export default function DocsPage() {
 
               <pre className="bg-cyber-terminal border border-cyber-blue/30 rounded p-4 overflow-x-auto mb-6">
                 <code className="text-cyber-blue">
-                  powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.eigencode.dev/stable/latest/installer.ps1')"
+                  powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.polybiuos.dev/stable/latest/installer.ps1')"
                 </code>
               </pre>
 
@@ -194,13 +194,13 @@ export default function DocsPage() {
               </h2>
 
               <p className="text-cyber-text mb-6">
-                To get started with Eigencode, initialize it in your project directory:
+                To get started with Polybiuos, initialize it in your project directory:
               </p>
 
-              <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">eigencode open .</code></pre>
+              <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">polybiuos open .</code></pre>
 
               <p className="text-cyber-text mb-6">
-                This will analyze your project and set up the necessary context for Eigencode to work effectively. You
+                This will analyze your project and set up the necessary context for Polybiuos to work effectively. You
                 can then run various commands to analyze, optimize, and transform your code.
               </p>
 
@@ -214,7 +214,7 @@ export default function DocsPage() {
 
       {/* Footer */}
       <footer className="w-full text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10 relative">
-        <p className="mb-2">Eigencode Documentation</p>
+        <p className="mb-2">Polybiuos Documentation</p>
         <p>© {new Date().getFullYear()} Polysys Inc. All rights reserved.</p>
       </footer>
     </div>

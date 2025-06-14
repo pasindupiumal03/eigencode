@@ -52,7 +52,7 @@ export default function AuraPage() {
       link: "https://t.co/XUcSZnItGX",
       pic: "http://pic.twitter.com/XUcSZnItGX",
       src: "https://twitter.com/eigencode_dev/status/1915251366416523280?ref_src=twsrc%5Etfw",
-      description: "eigencode demo v1",
+      description: "polybiuos demo v1",
       date: "April 24, 2025",
     },
     {
@@ -313,7 +313,7 @@ export default function AuraPage() {
           <div className="w-3 h-3 bg-cyber-yellow rounded-full" />
           <div className="w-3 h-3 bg-cyber-green rounded-full" />
           <span className="text-sm font-mono text-cyber-muted">
-            <TypingEffect text="~ eigencode aura" speed={80} />
+            <TypingEffect text="~ polybiuos aura" speed={80} />
           </span>
         </div>
         <nav className="flex gap-6 text-sm">
@@ -388,23 +388,23 @@ export default function AuraPage() {
 
         <p className="text-cyber-muted text-center max-w-2xl mb-12">
           The metaphysical foundation and recursive architecture of the
-          Eigencode universe.
+          Polybiuos universe.
         </p>
       </section>
 
-      {/* Eigencode Mythos Section */}
+      {/* Polybiuos Mythos Section */}
       <section className="w-full max-w-6xl mb-16">
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
           <GlitchText
-            text="Eigencode Mythos"
+            text="Polybiuos Mythos"
             className="text-cyber-blue"
             glitchInterval={7000}
           />
         </h2>
         <p className="text-cyber-text mb-8 max-w-3xl">
           The metaphysical foundation and recursive architecture of the
-          Eigencode universe.
+          Polybiuos universe.
         </p>
 
         <CubeMythosBibleModal />
@@ -421,7 +421,7 @@ export default function AuraPage() {
           />
         </h2>
         <p className="text-cyber-text mb-6 max-w-3xl">
-          Generate unique AI images with our signature eigencode style. Create
+          Generate unique AI images with our signature polybiuos style. Create
           branded visuals for your projects, social media, or personal use.
         </p>
         <div className="cyber-box p-6">
@@ -440,7 +440,7 @@ export default function AuraPage() {
           />
         </h2>
         <p className="text-cyber-text mb-6 max-w-3xl">
-          Transform your images with the eigencode aura. Upload an image and
+          Transform your images with the polybiuos aura. Upload an image and
           apply our signature blue futuristic filters with glitch effects.
         </p>
         <div className="cyber-box p-6">
@@ -459,7 +459,7 @@ export default function AuraPage() {
           />
         </h2>
         <p className="text-cyber-text mb-6 max-w-3xl">
-          Transform your videos with the eigencode aura. Upload a video and
+          Transform your videos with the polybiuos aura. Upload a video and
           apply our signature blue futuristic filters with glitch effects.
         </p>
         <VideoTransformer />
@@ -470,13 +470,13 @@ export default function AuraPage() {
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
           <GlitchText
-            text="Eigencode Video Gallery"
+            text="Polybiuos Video Gallery"
             className="text-cyber-blue"
             glitchInterval={5000}
           />
         </h2>
         <p className="text-cyber-text mb-6">
-          Watch our latest videos showcasing eigencode concepts and innovations.
+          Watch our latest videos showcasing polybiuos concepts and innovations.
         </p>
 
         <div
@@ -546,13 +546,13 @@ export default function AuraPage() {
         <h2 className="text-2xl font-bold text-cyber-blue mb-6 flex items-center gap-2">
           <span className="text-cyber-blue">{">"}</span>
           <GlitchText
-            text="Eigencode Art Gallery"
+            text="Polybiuos Art Gallery"
             className="text-cyber-blue"
             glitchInterval={4000}
           />
         </h2>
         <p className="text-cyber-text mb-8">
-          Explore our curated collections of eigencode-inspired artwork.
+          Explore our curated collections of polybiuos-inspired artwork.
         </p>
 
         <div className="grid grid-cols-1 gap-6">
@@ -608,7 +608,7 @@ export default function AuraPage() {
 
         <div className="text-center mt-8">
           <p className="text-cyber-muted text-sm py-4 font-mono">
-            ~ Eigencode Art Gallery ~
+            ~ Polybiuos Art Gallery ~
           </p>
         </div>
       </section>

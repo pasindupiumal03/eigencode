@@ -34,16 +34,16 @@ export default function AuraPage() {
   const [featuredVidieosVisible, setFeaturedVidieosVisible] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentGalleryBlock, setCurrentGalleryBlock] = useState<
-    | "SacredTerminal"
-    | "CorporatePropaganda"
-    | "CubeMythos"
-    | "Comics"
-    | "CODEBro"
-    | "CODETunes"
-    | "OrderOfTheCube"
-    | "TheOccultTerrorsOfCODE"
-    | "TheScienceOfTheCube"
-    | "CommunityArtwork"
+    | "TerminalDoctrine"
+    | "StatecraftedOptics"
+    | "GlyphLore"
+    | "VisionsPanels"
+    | "PolybiousEntities"
+    | "PolybiousEchoes"
+    | "CircleOfTheCube"
+    | "SpectersOfPolybious"
+    | "TheoreticalRelics"
+    | "OpenRelay"
     | "nothing"
   >("nothing");
 
@@ -66,9 +66,8 @@ export default function AuraPage() {
   ];
 
   const artGallery = {
-    SacredTerminal: [
+    TerminalDoctrine: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/0aac2a87-e979-4c09-9c70-6169ee5ad283.png",
-      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/4f23c62b-7428-4322-a164-8e03e4a486f1.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/4f32f36e-21c3-4efd-8f1f-fe3ccbd4591d.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/59f192fc-18ec-4fe5-9e9d-b984d656fade.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/5d08f0d8-54d0-4e09-9620-c05afb214d32.png",
@@ -76,16 +75,14 @@ export default function AuraPage() {
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/91eab8d3-b5ba-466b-9c42-b6c555571a87.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/sacred-terminal/f900ec45-5453-4545-bb81-35083bf3fe4c.png",
     ],
-    CorporatePropaganda: [
+    StatecraftedOptics: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_28%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_39%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_43%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_47%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_27_51%20AM.png",
-      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_28_07%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_44%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_49%20AM.png",
-      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_57%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_36_14%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_36_48%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_37_06%20AM.png",
@@ -93,7 +90,7 @@ export default function AuraPage() {
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_37_24%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/corporate-propaganda/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_00%20AM.png",
     ],
-    CubeMythos: [
+    GlyphLore: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_02%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_11%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_15%20AM.png",
@@ -105,7 +102,7 @@ export default function AuraPage() {
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_47%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/cube-mythos/ChatGPT%20Image%20Apr%2025,%202025,%2004_29_51%20AM.png",
     ],
-    Comics: [
+    VisionsPanels: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/04c9c3a5-ea4d-45f4-a3a5-bebbd0f0b2c9.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/1c80d110-f69f-4a97-b2b1-faf93a262f9e.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/2e7047c4-bd73-447d-b4e2-5866558b0143.png",
@@ -115,38 +112,35 @@ export default function AuraPage() {
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/837faf59-d0da-4074-a746-27a8c96405f8.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/comics/be8e4721-b89b-40c3-becc-473067821338.png",
     ],
-    CODEBro: [
+    PolybiousEntities: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/89e50a0e-b0e3-475e-ba78-60fd524f4179.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/b342af92-060f-4820-aec9-efe11d9a3ae1.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/bca84496-09a5-4122-8a3f-08809b872c40.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-guardian/e2933d17-388b-4539-b677-aa52827eae7d.png",
     ],
-    CODETunes: [
+    PolybiousEchoes: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/code-tunes/eigencode-image-1745532550366.png",
     ],
-    OrderOfTheCube: [
+    CircleOfTheCube: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_17%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_30%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_34%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/order-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_39_39%20AM.png",
     ],
-    TheOccultTerrorsOfCODE: [
+    SpectersOfPolybious: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_32_41%20AM.png",
-      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_32_48%20AM.png",
-      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_32_56%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_33_05%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_06%20AM.png",
-      "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_11%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/occult-terrors-of-code/ChatGPT%20Image%20Apr%2025,%202025,%2004_35_15%20AM.png",
     ],
-    TheScienceOfTheCube: [
+    TheoreticalRelics: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_21%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_25%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_29%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_34%20AM.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/science-of-the-cube/ChatGPT%20Image%20Apr%2025,%202025,%2004_34_39%20AM.png",
     ],
-    CommunityArtwork: [
+    OpenRelay: [
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/001fa90f-58b9-4c4e-9acd-b9be0106c141.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/00a2745d-f8c7-40b6-ba01-f7f54b1435db.png",
       "https://pfezbklcqdjnzkaykwlb.supabase.co/storage/v1/object/public/art-gallery/community-artwork/0143139f-1219-4624-9d7d-da61764ac6f9.png",
@@ -169,51 +163,51 @@ export default function AuraPage() {
   };
 
   const galleryMap = {
-    "Sacred Terminal": "SacredTerminal",
-    "Corporate Propaganda": "CorporatePropaganda",
-    "Cube Mythos": "CubeMythos",
-    "Comics ": "Comics",
-    "$CODE Bro": "CODEBro",
-    "$CODE Tunes": "CODETunes",
-    "Order of the Cube": "OrderOfTheCube",
-    "The Occult Terrors of $CODE": "TheOccultTerrorsOfCODE",
-    "The Science of the Cube": "TheScienceOfTheCube",
-    "Community Artwork": "CommunityArtwork",
+    "Terminal Doctrine": "TerminalDoctrine",
+    "Statecrafted Optics": "StatecraftedOptics",
+    "Glyph Lore": "GlyphLore",
+    "Visions & Panels": "VisionsPanels",
+    "$Polybious Entities": "PolybiousEntities",
+    "$Polybious Echoes": "PolybiousEchoes",
+    "Circle of the Cube": "CircleOfTheCube",
+    "Specters of $Polybious": "SpectersOfPolybious",
+    "Theoretical Relics": "TheoreticalRelics",
+    "Open Relay": "OpenRelay",
   } as const;
   
 
   const updateCurrentGalleryBlock = (title: string) => {
     switch (title) {
-      case "Sacred Terminal":
+      case "Terminal Doctrine":
         console.log("yayyyyy");
-        setCurrentGalleryBlock("SacredTerminal");
+        setCurrentGalleryBlock("TerminalDoctrine");
         break;
-      case "Corporate Propaganda":
-        setCurrentGalleryBlock("CorporatePropaganda");
+      case "Statecrafted Optics":
+        setCurrentGalleryBlock("StatecraftedOptics");
         break;
-      case "Cube Mythos":
-        setCurrentGalleryBlock("CubeMythos");
+      case "Glyph Lore":
+        setCurrentGalleryBlock("GlyphLore");
         break;
-      case "Comics":
-        setCurrentGalleryBlock("Comics");
+      case "Visions & Panels":
+        setCurrentGalleryBlock("VisionsPanels");
         break;
-      case "$CODE Bro":
-        setCurrentGalleryBlock("CODEBro");
+      case "$Polybious Entities":
+        setCurrentGalleryBlock("PolybiousEntities");
         break;
-      case "$CODE Tunes":
-        setCurrentGalleryBlock("CODETunes");
+      case "$Polybious Echoes":
+        setCurrentGalleryBlock("PolybiousEchoes");
         break;
-      case "Order of the Cube":
-        setCurrentGalleryBlock("OrderOfTheCube");
+      case "Circle of the Cube":
+        setCurrentGalleryBlock("CircleOfTheCube");
         break;
-      case "The Occult Terrors of $CODE":
-        setCurrentGalleryBlock("TheOccultTerrorsOfCODE");
+      case "Specters of $Polybious":
+        setCurrentGalleryBlock("SpectersOfPolybious");
         break;
-      case "The Science of the Cube":
-        setCurrentGalleryBlock("TheScienceOfTheCube");
+      case "Theoretical Relics":
+        setCurrentGalleryBlock("TheoreticalRelics");
         break;
-      case "Community Artwork":
-        setCurrentGalleryBlock("CommunityArtwork");
+      case "Open Relay":
+        setCurrentGalleryBlock("OpenRelay");
         break;
       default:
         setCurrentGalleryBlock("nothing");

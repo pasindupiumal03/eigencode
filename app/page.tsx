@@ -90,7 +90,7 @@ export default function Component() {
             <span className="text-cyber-green">CA:</span>
             <Input
               className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-blue"
-              value="Fc7tEqyfHPoWQXdiAqx62d7WeuH7Zq1DHwa2ihDpump"
+              value="Coming Soon...."
               readOnly
             />
             <span className="inline-block w-2 h-5 bg-cyber-green animate-blink" />
@@ -114,19 +114,19 @@ export default function Component() {
         {/* Social Icons */}
         <div className="flex gap-6 mb-16">
           <Link
-            href="https://dexscreener.com/solana/drafcw4wfvstiecs3k3strqafvdfpakpxqbae7vlxwva"
+            href="#"
             aria-label="FaChartLine"
             className="group"
           >
             <FaChartLine className="w-7 h-7 text-cyber-text group-hover:text-cyber-green transition-colors duration-300" />
           </Link>
-          <Link href="https://x.com/eigencode_dev" aria-label="FaXTwitter" className="group">
+          <Link href="#" aria-label="FaXTwitter" className="group">
             <FaXTwitter className="w-7 h-7 text-cyber-text group-hover:text-cyber-blue transition-colors duration-300" />
           </Link>
-          <Link href="https://discord.com/invite/eigencode" aria-label="FaDiscord" className="group">
+          <Link href="#" aria-label="FaDiscord" className="group">
             <FaDiscord className="w-7 h-7 text-cyber-text group-hover:text-cyber-magenta transition-colors duration-300" />
           </Link>
-          <Link href="https://t.me/eigencode" aria-label="FaTelegramPlane" className="group">
+          <Link href="#" aria-label="FaTelegramPlane" className="group">
             <FaTelegramPlane className="w-7 h-7 text-cyber-text group-hover:text-cyber-yellow transition-colors duration-300" />
           </Link>
         </div>

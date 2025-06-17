@@ -86,14 +86,18 @@ export default function Component() {
 
         {/* Terminal Input Card */}
         <TerminalWindow title="polybiuos - terminal" className="w-full max-w-2xl mb-8">
-          <div className="flex items-center gap-2">
+          <div className="relative flex items-center gap-2 w-full">
             <span className="text-cyber-green">CA:</span>
-            <Input
-              className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-blue"
-              value="Coming Soon...."
-              readOnly
-            />
-            <span className="inline-block w-2 h-5 bg-cyber-green animate-blink" />
+            <div className="relative flex-1 flex items-center">
+              <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center pointer-events-none">
+                <div className="relative flex-1 h-full flex items-center pl-3 pr-4">
+                  <span className="relative bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-blue">
+                    Coming Soon....
+                    <span className="absolute -right-2 top-1/2 -translate-y-1/2 w-2 h-5 bg-cyber-green animate-blink" />
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </TerminalWindow>
 

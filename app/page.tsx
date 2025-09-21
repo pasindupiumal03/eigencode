@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Code, Zap, FileText, Puzzle } from "lucide-react"
@@ -9,8 +11,11 @@ import { FaXTwitter } from "react-icons/fa6"
 import { FaChartLine } from "react-icons/fa"
 import { FaDiscord } from "react-icons/fa6"
 import { FaTelegramPlane } from "react-icons/fa"
+import { useCaData } from "@/hooks/use-ca-data"
 
 export default function Component() {
+  const { caData, isLoading } = useCaData()
+
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <MatrixBackground />
@@ -92,7 +97,7 @@ export default function Component() {
               <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center pointer-events-none">
                 <div className="relative flex-1 h-full flex items-center pl-3 pr-4">
                   <span className="relative bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-blue">
-                    Coming Soon....
+                    {isLoading ? 'Loading...' : caData}
                     <span className="absolute -right-2 top-1/2 -translate-y-1/2 w-2 h-5 bg-cyber-green animate-blink" />
                   </span>
                 </div>
@@ -126,12 +131,6 @@ export default function Component() {
           </Link>
           <Link href="#" aria-label="FaXTwitter" className="group">
             <FaXTwitter className="w-7 h-7 text-cyber-text group-hover:text-cyber-blue transition-colors duration-300" />
-          </Link>
-          <Link href="#" aria-label="FaDiscord" className="group">
-            <FaDiscord className="w-7 h-7 text-cyber-text group-hover:text-cyber-magenta transition-colors duration-300" />
-          </Link>
-          <Link href="#" aria-label="FaTelegramPlane" className="group">
-            <FaTelegramPlane className="w-7 h-7 text-cyber-text group-hover:text-cyber-yellow transition-colors duration-300" />
           </Link>
         </div>
       </section>

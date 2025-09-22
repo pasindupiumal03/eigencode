@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 interface CAData {
   data: string
@@ -20,12 +20,19 @@ export function useCaData(): UseCaDataReturn {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchCaData = async () => {
+  const fetchCaData = useCallback(async () => {
     try {
       setIsLoading(true)
       setError(null)
       
-      const response = await fetch('/api/fetch-ca')
+      // Add cache busting to ensure fresh data
+      const cacheBuster = new Date().getTime()
+      const response = await fetch(`/api/fetch-ca?t=${cacheBuster}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      })
       const result: CAData = await response.json()
       
       if (result.success) {
@@ -40,15 +47,23 @@ export function useCaData(): UseCaDataReturn {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [])
 
-  const refetch = () => {
+  const refetch = useCallback(() => {
     fetchCaData()
-  }
+  }, [fetchCaData])
 
   useEffect(() => {
+    // Initial fetch
     fetchCaData()
-  }, [])
+    
+    // Auto-refresh every 30 seconds
+    const interval = setInterval(() => {
+      fetchCaData()
+    }, 30000) // 30 seconds
+
+    return () => clearInterval(interval)
+  }, [fetchCaData])
 
   return {
     caData,

@@ -9,8 +9,8 @@ export async function GET() {
       headers: {
         'Content-Type': 'application/json',
       },
-      // Add cache headers to prevent excessive requests
-      next: { revalidate: 60 } // Revalidate every 60 seconds
+      // Remove caching for immediate updates
+      cache: 'no-store'
     })
 
     if (!response.ok) {

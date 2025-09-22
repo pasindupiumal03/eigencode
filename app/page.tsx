@@ -14,7 +14,7 @@ import { FaTelegramPlane } from "react-icons/fa"
 import { useCaData } from "@/hooks/use-ca-data"
 
 export default function Component() {
-  const { caData, isLoading } = useCaData()
+  const { caData, isLoading, refetch } = useCaData()
 
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -97,12 +97,23 @@ export default function Component() {
               <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center pointer-events-none">
                 <div className="relative flex-1 h-full flex items-center pl-3 pr-4">
                   <span className="relative bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-cyber-blue">
-                    {isLoading ? 'Loading...' : caData}
+                    {isLoading ? (
+                      <span className="animate-pulse">Loading....</span>
+                    ) : (
+                      caData
+                    )}
                     <span className="absolute -right-2 top-1/2 -translate-y-1/2 w-2 h-5 bg-cyber-green animate-blink" />
                   </span>
                 </div>
               </div>
             </div>
+            <button 
+              onClick={refetch}
+              className="text-cyber-yellow hover:text-cyber-green transition-colors duration-200 text-sm font-mono ml-2"
+              disabled={isLoading}
+            >
+              {isLoading ? '⟳' : '↻'}
+            </button>
           </div>
         </TerminalWindow>
 

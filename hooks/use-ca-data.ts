@@ -27,12 +27,7 @@ export function useCaData(): UseCaDataReturn {
       
       // Add cache busting to ensure fresh data
       const cacheBuster = new Date().getTime()
-      const response = await fetch(`/api/fetch-ca?t=${cacheBuster}`, {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache',
-        },
-      })
+      const response = await fetch(`/api/fetch-ca?t=${cacheBuster}`)
       const result: CAData = await response.json()
       
       if (result.success) {

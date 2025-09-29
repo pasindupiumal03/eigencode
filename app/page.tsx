@@ -140,7 +140,7 @@ export default function Component() {
           >
             <FaChartLine className="w-7 h-7 text-cyber-text group-hover:text-cyber-green transition-colors duration-300" />
           </Link>
-          <Link href="#" aria-label="FaXTwitter" className="group">
+          <Link href="https://x.com/polybiuos" aria-label="FaXTwitter" className="group">
             <FaXTwitter className="w-7 h-7 text-cyber-text group-hover:text-cyber-blue transition-colors duration-300" />
           </Link>
         </div>

@@ -24,11 +24,11 @@ export default function InstallationGuide() {
           <pre className="mb-4 text-cyber-text">Installation</pre>
           <pre className="mb-4 text-cyber-text">UNIX-like Systems (Linux/macOS)</pre>
           <p className="mb-2">To install Polybiuos on a UNIX-like system (Linux or macOS), open your terminal and run the following command:</p>
-          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">curl -fsSL https://www.polybiuos.dev/stable/latest/installer.sh | sudo bash</code></pre>
+          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">curl -fsSL https://www.polybiuos.io /stable/latest/installer.sh | sudo bash</code></pre>
           <p className="mb-4">This script will download and install the necessary Polybiuos binary files.</p>
           <pre className="mb-4 text-cyber-text">Windows Systems</pre>
           <p className="mb-2">For Windows users, the installation process requires running a PowerShell command. Open PowerShell and execute the following:</p>
-          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">powershell -ExecutionPolicy Bypass -Command "iex ((New-Object Net.WebClient).DownloadString('https://www.polybiuos.dev/stable/latest/installer.ps1'))"</code></pre>
+          <pre className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4"><code className="text-cyber-green">powershell -ExecutionPolicy Bypass -Command "iex ((New-Object Net.WebClient).DownloadString('https://www.polybiuos.io /stable/latest/installer.ps1'))"</code></pre>
           <p className="mb-4">Once the command completes, Polybiuos will be installed on your system.</p>
           <pre className="mb-4 text-cyber-text">Verifying Installation</pre>
           <p className="mb-2">To confirm the installation was successful, run the following command in your terminal or PowerShell session:</p>

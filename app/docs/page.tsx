@@ -1,9 +1,14 @@
+"use client"
+
 import Link from "next/link"
 import { TerminalWindow } from "@/components/terminal-window"
 import { Button } from "@/components/ui/button"
 import { FileText, Zap, Download, Code2 } from "lucide-react"
+import { useState } from "react"
 
 export default function DocsPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+
   return (
     <div className="min-h-screen bg-cyber-black">
       <div className="scanline" />
@@ -15,124 +20,138 @@ export default function DocsPage() {
             <span className="text-cyber-blue">{">"}</span>
             <span className="text-cyber-blue font-mono font-bold">Polybiuos Docs</span>
           </div>
-          <Link href="/" className="text-cyber-text hover:text-cyber-blue transition-colors">
+          <button
+            className="lg:hidden text-cyber-text hover:text-cyber-blue transition-colors"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            {isSidebarOpen ? "Close Menu" : "Open Menu"}
+          </button>
+          <Link href="/" className="hidden lg:block text-cyber-text hover:text-cyber-blue transition-colors">
             Home
           </Link>
         </div>
       </header>
 
-      <div className="flex max-w-7xl mx-auto">
+      <div className="flex max-w-7xl mx-auto flex-col lg:flex-row">
         {/* Sidebar */}
-        <aside className="w-80 min-h-screen border-r border-cyber-blue/20 bg-cyber-dark/50 backdrop-blur-sm p-6 z-10 relative">
-          {/* Terminal Window in Sidebar */}
-          <TerminalWindow title="polybiuos" className="mb-8">
-            <div className="text-xs">
-              <div className="text-cyber-green mb-2">$ polybiuos</div>
-              <div className="text-cyber-text mb-1">Polybiuos CLI v0.9.0</div>
-              <div className="text-cyber-text mb-1">Intelligent code generation and</div>
-              <div className="text-cyber-text mb-3">analysis</div>
-              <div className="text-cyber-green mb-2">$ polybiuos open .</div>
-              <div className="text-cyber-text mb-1">Analyzing project structure...</div>
-              <div className="text-cyber-text mb-1">Found 127 files across 14</div>
-              <div className="text-cyber-text mb-1">directories</div>
-              <div className="text-cyber-green mb-3">Analysis complete ✓</div>
-              <div className="text-cyber-blue">$ polybiuos help</div>
-            </div>
-          </TerminalWindow>
+        {isSidebarOpen && (
+          <aside className="w-full lg:w-80 min-h-screen border-r border-cyber-blue/20 bg-cyber-dark/50 backdrop-blur-sm p-6 z-10 relative">
+            {/* Terminal Window in Sidebar */}
+            <TerminalWindow title="polybiuos" className="mb-8">
+              <div className="text-xs">
+                <div className="text-cyber-green mb-2">$ polybiuos</div>
+                <div className="text-cyber-text mb-1">Polybiuos CLI v0.9.0</div>
+                <div className="text-cyber-text mb-1">Intelligent code generation and</div>
+                <div className="text-cyber-text mb-3">analysis</div>
+                <div className="text-cyber-green mb-2">$ polybiuos open .</div>
+                <div className="text-cyber-text mb-1">Analyzing project structure...</div>
+                <div className="text-cyber-text mb-1">Found 127 files across 14</div>
+                <div className="text-cyber-text mb-1">directories</div>
+                <div className="text-cyber-green mb-3">Analysis complete ✓</div>
+                <div className="text-cyber-blue">$ polybiuos help</div>
+              </div>
+            </TerminalWindow>
 
-          {/* Documentation Section */}
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <FileText className="w-4 h-4 text-cyber-blue" />
-              <h3 className="text-cyber-blue font-bold">Documentation</h3>
+            {/* Documentation Section */}
+            <div className="mb-8">
+              <div className="flex items-center gap-2 mb-4">
+                <FileText className="w-4 h-4 text-cyber-blue" />
+                <h3 className="text-cyber-blue font-bold">Documentation</h3>
+              </div>
+              <nav className="space-y-2">
+                <Link
+                  href="/docs/getting-started"
+                  className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  Getting Started
+                </Link>
+                <Link
+                  href="/docs/getting-started/terms-and-usage"
+                  className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  Terms and Usage
+                </Link>
+                <Link
+                  href="/docs/getting-started/installation"
+                  className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  Installation Guide
+                </Link>
+                <Link
+                  href="/docs/getting-started/quick-start"
+                  className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  Quick Start
+                </Link>
+                <Link
+                  href="/docs/getting-started/open"
+                  className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  Open
+                </Link>
+              </nav>
             </div>
-            <nav className="space-y-2">
-              <Link
-                href="/docs/getting-started"
-                className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
-              >
-                Getting Started
-              </Link>
-              <Link
-                href="/docs/getting-started/installation"
-                className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
-              >
-                Installation Guide
-              </Link>
-              <Link
-                href="/docs/getting-started/quick-start"
-                className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
-              >
-                Quick Start
-              </Link>
-              <Link
-                href="/docs/getting-started/open"
-                className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
-              >
-                Open
-              </Link>
-            </nav>
-          </div>
 
-          {/* Quick Links Section */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Zap className="w-4 h-4 text-cyber-magenta" />
-              <h3 className="text-cyber-magenta font-bold">Quick Links</h3>
+            {/* Quick Links Section */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Zap className="w-4 h-4 text-cyber-magenta" />
+                <h3 className="text-cyber-magenta font-bold">Quick Links</h3>
+              </div>
+              <nav className="space-y-2">
+                <Link
+                  href="/cmds"
+                  className="flex items-center gap-2 text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  <span className="text-cyber-magenta">⚡</span>
+                  Command Registry
+                </Link>
+                <Link
+                  href="/aura"
+                  className="flex items-center gap-2 text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  <span className="text-cyber-blue">🔮</span>
+                  Aura Components
+                </Link>
+              </nav>
             </div>
-            <nav className="space-y-2">
-              <Link
-                href="/cmds"
-                className="flex items-center gap-2 text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
-              >
-                <span className="text-cyber-magenta">⚡</span>
-                Command Registry
-              </Link>
-              <Link
-                href="/aura"
-                className="flex items-center gap-2 text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
-              >
-                <span className="text-cyber-blue">🔮</span>
-                Aura Components
-              </Link>
-            </nav>
-          </div>
-        </aside>
+          </aside>
+        )}
 
         {/* Main Content */}
-        <main className="flex-1 p-8 z-10 relative">
+        <main className="flex-1 p-4 sm:p-8 z-10 relative">
           {/* Hero Section */}
           <section className="mb-12 text-center">
-            <h1 className="text-4xl font-bold mb-6 text-cyber-blue">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-6 text-cyber-blue">
               <span className="text-cyber-blue">{">"}</span> Polybiuos
             </h1>
 
-            <p className="text-cyber-text text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-cyber-text text-base sm:text-lg mb-8 max-w-2xl mx-auto">
               An intelligent CLI tool for code generation, analysis, and optimization powered by advanced machine
               learning models.
             </p>
 
-            <div className="flex gap-4 justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Link href="/docs/getting-started/installation" passHref legacyBehavior>
-  <Button className="cyber-button-primary flex items-center gap-2">
-    <Download className="w-4 h-4" />
-    <span className="relative z-10">Get Started</span>
-  </Button>
-</Link>
+                <Button className="cyber-button-primary flex items-center gap-2">
+                  <Download className="w-4 h-4" />
+                  <span className="relative z-10">Get Started</span>
+                </Button>
+              </Link>
               <Button variant="outline" className="cyber-button-secondary flex items-center gap-2">
                 <Code2 className="w-4 h-4" />
                 <Link href="/cmds" passHref legacyBehavior>
-                <span className="relative z-10">Commands</span>
+                  <span className="relative z-10">Commands</span>
                 </Link>
               </Button>
             </div>
           </section>
 
           {/* Content Cards */}
-          <div className="grid gap-8">
+          <div className="grid gap-8 sm:grid-cols-2">
             {/* Getting Started Card */}
             <div className="bg-cyber-dark/50 border border-cyber-blue/20 rounded-lg p-6 backdrop-blur-sm">
-              <h2 className="text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
                 <span className="text-cyber-blue">{">"}</span>
                 Getting Started
               </h2>
@@ -154,7 +173,7 @@ export default function DocsPage() {
 
             {/* Installation Card */}
             <div className="bg-cyber-dark/50 border border-cyber-blue/20 rounded-lg p-6 backdrop-blur-sm">
-              <h2 className="text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
                 <Download className="w-5 h-5 text-cyber-blue" />
                 Installation
               </h2>
@@ -166,7 +185,7 @@ export default function DocsPage() {
               <div className="bg-cyber-terminal border border-cyber-green/30 rounded p-4 overflow-x-auto mb-4">
                 <div className="text-sm font-mono">
                   <code className="text-cyber-green">
-                    curl -fsSL https://www.polybiuos.dev/stable/latest/installer.sh | sudo bash
+                    curl -fsSL https://www.polybiuos.io /stable/latest/installer.sh | sudo bash
                   </code>
                 </div>
                 <div className="w-full h-2 bg-cyber-terminal">
@@ -177,7 +196,7 @@ export default function DocsPage() {
 
               <pre className="bg-cyber-terminal border border-cyber-blue/30 rounded p-4 overflow-x-auto mb-6">
                 <code className="text-cyber-blue">
-                  powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.polybiuos.dev/stable/latest/installer.ps1')"
+                  powershell -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://www.polybiuos.io /stable/latest/installer.ps1')"
                 </code>
               </pre>
 
@@ -188,7 +207,7 @@ export default function DocsPage() {
 
             {/* Usage Card */}
             <div className="bg-cyber-dark/50 border border-cyber-blue/20 rounded-lg p-6 backdrop-blur-sm">
-              <h2 className="text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-cyber-blue mb-4 flex items-center gap-2">
                 <Code2 className="w-5 h-5 text-cyber-blue" />
                 Usage
               </h2>

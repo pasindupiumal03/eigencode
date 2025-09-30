@@ -140,9 +140,6 @@ export default function TermsOfUsePage() {
                 services, or content (collectively, the “Services”). By using the Services, you agree to
                 these Terms. If you do not agree, do not use the Services.
               </p>
-              <p className="text-cyber-muted text-xs mt-2">
-                Note: This is a GPT-generated template adapted for the Polybiuos project. It is not legal advice.
-              </p>
             </section>
 
             {/* Eligibility */}

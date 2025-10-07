@@ -608,12 +608,27 @@ export default function AuraPage() {
       </section>
 
       {/* Footer */}
-      <footer className="w-full max-w-6xl text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 ">
+      <footer className="w-full max-w-6xl text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10 relative">
         <div className="flex justify-center items-center gap-2 mb-4">
           <span className="inline-block w-2 h-2 bg-cyber-blue animate-blink" />
-          <span>AURA STATUS: ONLINE</span>
+          <span className="text-gray-500">hello@polybiuos.io</span>
         </div>
-        <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Polybiuos. All rights reserved.</p>
+        <div className="mt-2 text-xs flex justify-center items-center gap-2 relative z-20">
+          <Link 
+            href="/docs/getting-started/privacy-policy" 
+            className="text-cyber-blue hover:text-cyber-green transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          <span className="text-cyber-muted">|</span>
+          <Link 
+            href="/docs/getting-started/terms-and-usage" 
+            className="text-cyber-blue hover:text-cyber-green transition-colors"
+          >
+            Terms and Usage
+          </Link>
+        </div>
       </footer>
     </div>
   );

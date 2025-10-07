@@ -322,7 +322,7 @@ export default function TermsOfUsePage() {
       {/* Footer */}
       <footer className="w-full text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10 relative">
         <p className="mb-2">Polybiuos Documentation</p>
-        <p>© {new Date().getFullYear()} Polysys Inc. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Polybiuos. All rights reserved.</p>
       </footer>
     </div>
   )

@@ -72,6 +72,12 @@ export default function DocsPage() {
                   Terms and Usage
                 </Link>
                 <Link
+                  href="/docs/getting-started/privacy-policy"
+                  className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
                   href="/docs/getting-started/installation"
                   className="block text-cyber-text hover:text-cyber-blue transition-colors text-sm py-1"
                 >
@@ -234,7 +240,7 @@ export default function DocsPage() {
       {/* Footer */}
       <footer className="w-full text-center text-sm text-cyber-muted py-8 border-t border-cyber-blue/10 z-10 relative">
         <p className="mb-2">Polybiuos Documentation</p>
-        <p>© {new Date().getFullYear()} Polysys Inc. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Polybiuos. All rights reserved.</p>
       </footer>
     </div>
   )

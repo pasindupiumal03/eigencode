@@ -16,9 +16,7 @@ export default function ImageGenForm() {
   const [imageSize, setImageSize] = useState<
     "Square" | "Landscape" | "Portrait"
   >("Square");
-  const [imageUrl, setImageUrl] = useState<string | null>(
-    "https://www.youtube.com/"
-  );
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showExamplePrompts, setShowExamplePrompts] = useState(false);
 
@@ -723,32 +721,63 @@ export default function ImageGenForm() {
             </h3>
             <div className="flex-grow flex items-center justify-center rounded-md overflow-hidden bg-zinc-800/50 border border-zinc-700/50">
               {imageUrl ? (
-                <img
-                  src={`${imageUrl}`}
-                  alt="Generated Image"
-                  className="max-w-full max-h-full object-contain"
-                />
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img
+                    src={`${imageUrl}`}
+                    alt="Generated Images"
+                    className="max-w-full max-h-full object-contain"
+                  />
+                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-white">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="font-medium">Generated Image</span>
+                    </div>
+                    <div className="text-zinc-300">
+                      <p>Style: {styleMethod === "StylePresets" ? stylePreset : "Custom Filters"}</p>
+                      <p>Size: {imageSize}</p>
+                      <p>Blue: {blueIntensity}% • Glitch: {glitchLevel}% • Circuit: {circuitDensity}%</p>
+                    </div>
+                  </div>
+                </div>
               ) : (
-                <div>
+                <div className="w-full h-full flex items-center justify-center">
                   {loading ? (
-                    <div className="flex-grow flex items-center justify-center rounded-md overflow-hidden">
-                      <div className="text-center py-12 px-4">
-                        <div className="w-16 h-16 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin mb-4 mx-auto"></div>
-                        <p className="text-blue-300">
-                          Generating your image with polybiuos style...
-                        </p>
-                        <p className="text-zinc-500 text-sm mt-2">
-                          This may take up to 30 seconds
-                        </p>
-                      </div>
+                    <div className="text-center py-12 px-4">
+                      <div className="w-16 h-16 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin mb-4 mx-auto"></div>
+                      <p className="text-blue-300">
+                        Generating your image with polybiuos style...
+                      </p>
+                      <p className="text-zinc-500 text-sm mt-2">
+                        This may take up to 30 seconds
+                      </p>
                     </div>
                   ) : (
-                    <div className="text-center py-12 px-4">
-                      <div className="text-5xl mb-4">🖼️</div>
-                      <p className="text-zinc-400">
-                        Enter a prompt and click 'Generate Image' to create your
-                        polybiuos-styled image
-                      </p>
+                    <div className="text-center py-8 px-6 max-w-md">
+                      <div className="text-4xl mb-4">🎨</div>
+                      <h4 className="text-blue-300 font-semibold mb-3">
+                        Polybiuos AI Image Generator
+                      </h4>
+                      <div className="space-y-3 text-sm text-zinc-400">
+                        <div className="bg-zinc-800/60 p-3 rounded-lg border border-zinc-700/40">
+                          <p className="font-medium text-blue-400 mb-1">✨ What you can create:</p>
+                          <p>• Code visualizations & tech concepts</p>
+                          <p>• Digital abstract art with circuit patterns</p>
+                          <p>• Futuristic designs with polybiuos aesthetics</p>
+                        </div>
+                        <div className="bg-zinc-800/60 p-3 rounded-lg border border-zinc-700/40">
+                          <p className="font-medium text-emerald-400 mb-1">🚀 Features:</p>
+                          <p>• Multiple style presets available</p>
+                          <p>• Customizable parameters (Blue, Glitch, Circuit)</p>
+                          <p>• Various aspect ratios supported</p>
+                        </div>
+                        <div className="bg-zinc-800/60 p-3 rounded-lg border border-zinc-700/40">
+                          <p className="font-medium text-purple-400 mb-1">💡 Getting started:</p>
+                          <p>1. Enter your concept description</p>
+                          <p>2. Choose a style preset or custom filters</p>
+                          <p>3. Adjust parameters to your liking</p>
+                          <p>4. Click "Generate Image" to create</p>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

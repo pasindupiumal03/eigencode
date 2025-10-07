@@ -44,6 +44,9 @@ export default function Component() {
           <Link href="/docs" className="text-cyber-magenta hover:cyber-text-glow transition-colors">
             $ docs
           </Link>
+          <Link href="https://x.com/polybiuos" aria-label="FaXTwitter">
+            <FaXTwitter className="w-7 h-7 text-cyber-text hover:text-cyber-blue transition-colors" />
+          </Link>
         </nav>
       </header>
 
@@ -132,7 +135,7 @@ export default function Component() {
         </div>
 
         {/* Social Icons */}
-        <div className="flex gap-6 mb-16">
+        {/* <div className="flex gap-6 mb-16">
           <Link
             href="#"
             aria-label="FaChartLine"
@@ -143,7 +146,7 @@ export default function Component() {
           <Link href="https://x.com/polybiuos" aria-label="FaXTwitter" className="group">
             <FaXTwitter className="w-7 h-7 text-cyber-text group-hover:text-cyber-blue transition-colors duration-300" />
           </Link>
-        </div>
+        </div> */}
       </section>
 
       {/* Terminal Output Card */}
@@ -331,9 +334,24 @@ export default function Component() {
       <footer className="w-full max-w-4xl text-center text-sm text-cyber-muted py-8 border-t border-cyber-green/10 z-10">
         <div className="flex justify-center items-center gap-2 mb-4">
           <span className="inline-block w-2 h-2 bg-cyber-green animate-blink" />
-          <span>SYSTEM STATUS: ONLINE</span>
+          <span className="text-gray-500">hello@polybiuos.io</span>
         </div>
-        <p>© {new Date().getFullYear()} Polysys.Inc. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Polybiuos. All rights reserved.</p>
+        <div className="mt-2 text-xs flex justify-center items-center gap-2">
+          <Link 
+            href="/docs/getting-started/privacy-policy" 
+            className="text-cyber-blue hover:text-cyber-green transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          <span className="text-cyber-muted">|</span>
+          <Link 
+            href="/docs/getting-started/terms-and-usage" 
+            className="text-cyber-blue hover:text-cyber-green transition-colors"
+          >
+            Terms and Usage
+          </Link>
+        </div>
         <p className="mt-2 text-xs">
           <span className="text-cyber-green">{">"}</span> Optimizing code since 2023
         </p>
